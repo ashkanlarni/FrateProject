@@ -5,6 +5,7 @@ import Animated, { Easing } from 'react-native-reanimated';
 import { TapGestureHandler, State } from 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import axios from 'axios';
 // import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
 
 const { width, height } = Dimensions.get('window');
@@ -43,6 +44,8 @@ class Frate extends React.Component {
     constructor(props) {
         super(props);
 
+        this.email = "";
+        this.password = "";
         this.buttonOpacity = new Value(1);
 
         this.onStateChange = event([
@@ -105,6 +108,36 @@ class Frate extends React.Component {
             extrapolate: Extrapolate.CLAMP
         });
     }
+    onPressSigninButton() {
+        if (this.password == "" || this.email == "") {
+            alert('Please fill all the fields')
+            return
+        }
+
+        var correct = false
+
+        axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/login/'
+        )
+        .then(res => {
+            // console.log(res);
+            console.log(res.data);
+            for (var u in res.data) {
+                var obj = res.data[u]
+                if (obj.Email == this.email && obj.Password == this.password) {
+                    console.log('hey')
+                    correct = true;
+                }
+            }
+            console.log(correct)
+            if (correct)
+                alert('Hoora');
+            else
+                alert('Email or password is wrong')
+
+        })
+        
+
+    }
 
     render() {
         return (
@@ -163,11 +196,15 @@ class Frate extends React.Component {
                             </Animated.View>
                         </TapGestureHandler>
                         {/* <tboardAwareScrollView style={styles.container}> */}
-                        <TextInput placeholder='EMAIL' style={styles.textInput} placeholderTextColor='rgba(0, 0, 0, 0.6)' />
-                        <TextInput placeholder='PASSWORD' style={styles.textInput} placeholderTextColor='rgba(0, 0, 0, 0.6)' secureTextEntry={true} />
+                        <TextInput onChangeText = {(text) => this.email = text}
+                        placeholder='EMAIL' style={styles.textInput} placeholderTextColor='rgba(0, 0, 0, 0.6)' />
+                        <TextInput onChangeText = {(text) => this.password = text}
+                        placeholder='PASSWORD' style={styles.textInput} placeholderTextColor='rgba(0, 0, 0, 0.6)' secureTextEntry={true} />
                         {/* </KeyboardAwareScrollView> */}
                         <Animated.View style={{ marginVertical: 50 }}>
-                            <Button rounded style={{ ...styles.button, backgroundColor: 'white' }}>
+                            <Button rounded 
+                            onPress={() => this.onPressSigninButton()}
+                            style={{ ...styles.button, backgroundColor: 'white' }}>
                                 <Text style={{ fontSize: 20, fontFamily: 'OpenSans_Bold', color: 'black' }}>
                                     SIGN IN
                                 </Text>

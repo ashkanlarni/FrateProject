@@ -2,12 +2,72 @@
 import * as React from 'react';
 import { View, Text, StyleSheet, Image, Dimensions, TextInput } from 'react-native';
 import { Button } from 'native-base';
+import axios from 'axios';
 
 const { width, height } = Dimensions.get('window');
 
 class SignUp extends React.Component {
     constructor(props) {
         super(props);
+        this.username = "";
+        this.email = "";
+        this.password = "";
+        this.passwordsmatch = false;
+
+    }
+
+    onPasswordChange(text) {
+        if (text == this.password)
+            this.passwordsmatch = true
+        else
+            this.passwordsmatch = false
+    }
+
+    onPressSignupButton() {
+        if (this.username == "" || this.password == "" || this.email == "") {
+            alert('Please fill all the fields')
+            return
+        }
+
+        if (!this.passwordsmatch) {
+            alert('Passwords do not match')
+            return
+        }
+        var user = {
+            Username: this.username,
+            Email: this.email,
+            Password: this.password
+        }
+        var correct = true;
+        var users;
+
+        console.log(user);
+
+        axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/login/'
+        )
+        .then(res => {
+            // console.log(res);
+            console.log(res.data);
+            for (var u in res.data) {
+                var obj = res.data[u]
+                if (obj.Username == user.Username || obj.Email == user.Email)
+                    correct = false
+            }
+            console.log(correct)
+            if (correct) {
+                axios.post('https://nameless-tor-88964.herokuapp.com/api/fusers/login/', user )
+                  .then(res => {
+                    // console.log(res);
+                    console.log(res.data.Status);
+                  })
+            }
+            console.log(correct)
+            if (correct == true)
+                alert('Hoora');
+            else
+                alert('You already have an account')
+        })
+        
 
     }
     render() {
@@ -21,11 +81,17 @@ class SignUp extends React.Component {
                     />
                 </View>
                 <View style={{ height: height, justifyContent: 'center' }}>
-                    <TextInput placeholder='USERNAME' style={styles.textInput} placeholderTextColor='rgba(0, 0, 0, 0.6)' />
-                    <TextInput placeholder='EMAIL' style={styles.textInput} placeholderTextColor='rgba(0, 0, 0, 0.6)' />
-                    <TextInput placeholder='PASSWORD' style={styles.textInput} placeholderTextColor='rgba(0, 0, 0, 0.6)' secureTextEntry={true} />
-                    <TextInput placeholder='RE-ENTER PASSWORD' style={styles.textInput} placeholderTextColor='rgba(0, 0, 0, 0.6)' secureTextEntry={true} />
-                    <Button rounded style={{ ...styles.button, marginVertical: 50, backgroundColor: 'rgb(85, 205, 95)' }}>
+                    <TextInput onChangeText = {(text) => this.username = text}
+                    placeholder='USERNAME' style={styles.textInput} placeholderTextColor='rgba(0, 0, 0, 0.6)' />
+                    <TextInput onChangeText = {(text) => this.email = text}
+                    placeholder='EMAIL' style={styles.textInput} placeholderTextColor='rgba(0, 0, 0, 0.6)' />
+                    <TextInput onChangeText = {(text) => this.password = text}
+                    placeholder='PASSWORD' style={styles.textInput} placeholderTextColor='rgba(0, 0, 0, 0.6)' secureTextEntry={true} />
+                    <TextInput onChangeText = {(text) => this.onPasswordChange(text)}
+                    placeholder='RE-ENTER PASSWORD' style={styles.textInput} placeholderTextColor='rgba(0, 0, 0, 0.6)' secureTextEntry={true} />
+                    <Button rounded 
+                    onPress={() => this.onPressSignupButton()}
+                    style={{ ...styles.button, marginVertical: 50, backgroundColor: 'rgb(85, 205, 95)' }}>
                         <Text style={{ fontSize: 20, fontFamily: 'OpenSans_Bold' }}>
                             SIGN UP
                         </Text>
