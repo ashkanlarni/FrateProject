@@ -3,6 +3,8 @@ import * as React from 'react';
 import { View, Text, StyleSheet, Image, Dimensions, TextInput } from 'react-native';
 import { Button } from 'native-base';
 import axios from 'axios';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
 
 const { width, height } = Dimensions.get('window');
 
@@ -73,7 +75,8 @@ class SignUp extends React.Component {
     render() {
         // const { navigate } = this.props.navigation;
         return (
-            <View style={{ flex: 1, backgroundColor: '#f2f2f2', justifyContent: 'flex-end' }}>
+            <KeyboardAwareScrollView>
+                <View style={{ flex: 1, backgroundColor: '#f2f2f2', justifyContent: 'flex-end' }}>
                 <View style={StyleSheet.absoluteFill}>
                     <Image
                         source={require('../assets/images/bg2.png')}
@@ -95,9 +98,10 @@ class SignUp extends React.Component {
                         <Text style={{ fontSize: 20, fontFamily: 'OpenSans_Bold' }}>
                             SIGN UP
                         </Text>
-                    </Button>
+                        </Button>
+                    </View>
                 </View>
-            </View>
+            </KeyboardAwareScrollView>
         );
     }
 }
