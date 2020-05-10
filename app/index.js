@@ -5,6 +5,7 @@ import Animated, { Easing } from 'react-native-reanimated';
 import { TapGestureHandler, State } from 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 // import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
 
 const { width, height } = Dimensions.get('window');
@@ -108,6 +109,7 @@ class Frate extends React.Component {
 
     render() {
         return (
+            <KeyboardAwareScrollView>
             <View style={{ flex: 1, backgroundColor: '#f2f2f2', justifyContent: 'flex-end' }}>
                 <Animated.View style={{ ...StyleSheet.absoluteFill, transform: [{ translateY: this.bgY }] }}>
                     <Image
@@ -115,7 +117,7 @@ class Frate extends React.Component {
                         style={{ flex: 1, height: null, width: null }}
                     />
                 </Animated.View>
-                <Animated.View style={{ height: height / 2 - 85, justifyContent: 'center', alignItems: 'center', transform: [{ translateY: this.logoY }] }}>
+                <Animated.View style={{ height: height / 2 + 85, justifyContent: 'center', alignItems: 'center', transform: [{ translateY: this.logoY }] }}>
                     <Text style={{ fontSize: 65, fontFamily: 'OpenSans_Bold', color: 'white' }}>
                         F  R  A  T  E
                     </Text>
@@ -162,10 +164,8 @@ class Frate extends React.Component {
                                 </Button>
                             </Animated.View>
                         </TapGestureHandler>
-                        {/* <tboardAwareScrollView style={styles.container}> */}
                         <TextInput placeholder='EMAIL' style={styles.textInput} placeholderTextColor='rgba(0, 0, 0, 0.6)' />
                         <TextInput placeholder='PASSWORD' style={styles.textInput} placeholderTextColor='rgba(0, 0, 0, 0.6)' secureTextEntry={true} />
-                        {/* </KeyboardAwareScrollView> */}
                         <Animated.View style={{ marginVertical: 50 }}>
                             <Button rounded style={{ ...styles.button, backgroundColor: 'white' }}>
                                 <Text style={{ fontSize: 20, fontFamily: 'OpenSans_Bold', color: 'black' }}>
@@ -176,6 +176,7 @@ class Frate extends React.Component {
                     </Animated.View>
                 </View>
             </View >
+            </KeyboardAwareScrollView>
         );
     }
 }
