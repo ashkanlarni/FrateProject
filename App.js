@@ -1,16 +1,18 @@
 import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Asset } from 'expo-asset';
-import { AppLoading } from 'expo';
-import { Container } from 'native-base';
 import * as Font from 'expo-font';
 import { FontAwesome } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import Frate from './app/index';
-import SignUp from './app/signup'
+import Login from './app/Login';
+import SignUp from './app/Signup';
+import Home from './app/Home';
+import Profile from './app/Profile';
 
 
 function cacheImages(images) {
@@ -26,34 +28,39 @@ function cacheImages(images) {
 function cacheFonts(fonts) {
   return fonts.map(font => Font.loadAsync(font));
 }
-// export default class App extends React.Component {
-//   constructor() {
-//     super();
-//     this.state = {
-//       isReady: false
-//     };
-//   }
 
-//   async _loadAssetsAsync() {
-//     const imageAssets = cacheImages([require('./assets/images/bg.jpg')]);
+function HomeStack() {
+  return (
+    <Stack.Navigator initialRouteName='Home' >
+      <Stack.Screen
+        options={{
+          title: 'Home',
+        }}
+        name='Home'
+        component={Home}
+      />
+      <Stack.Screen /*options={{ headerShown: false }}*/ name='Profile' component={Profile} />
+    </Stack.Navigator>
+  );
+}
 
-//     await Promise.all([...imageAssets]);
-//   }
+function ProfileStack() {
+  return (
+    <Stack.Navigator initialRouteName='Profile' >
+      <Stack.Screen
+        options={{
+          title: 'Profile',
+        }}
+        name='Profile'
+        component={Profile}
+      />
+      <Stack.Screen /*options={{ headerShown: false }}*/ name='Home' component={Home} />
+    </Stack.Navigator>
+  );
+}
 
-//   render() {
-//     if (!this.state.isReady) {
-//       return (
-//         <AppLoading
-//           startAsync={this._loadAssetsAsync}
-//           onFinish={() => this.setState({ isReady: true })}
-//           onError={console.warn}
-//         />
-//       );
-//     }
-//     return <Frate />;
-//   }
-// }
 const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
 export default class App extends React.Component {
   constructor(props) {
@@ -65,8 +72,8 @@ export default class App extends React.Component {
 
   async componentDidMount() {
     const imageAssets = cacheImages([
-      require('./assets/images/bg.jpg'),
-      require('./assets/images/bg2.png'),
+      require('./assets/images/LoginBackground.jpg'),
+      require('./assets/images/SignUpBackground.png'),
     ]);
 
     const fontAssets = cacheFonts([FontAwesome.font]);
@@ -75,30 +82,37 @@ export default class App extends React.Component {
       OpenSans_Bold: require("./assets/fonts/Open_Sans/OpenSans-Bold.ttf"),
       OpenSans_SemiBoldItalic: require("./assets/fonts/Open_Sans/OpenSans-SemiBoldItalic.ttf"),
       OpenSans_SemiBold: require("./assets/fonts/Open_Sans/OpenSans-SemiBold.ttf"),
+      OpenSans_Regular: require("./assets/fonts/Open_Sans/OpenSans-Regular.ttf"),
+      Roboto_Light: require("./assets/fonts/Roboto/Roboto-Light.ttf"),
+      Roboto_Regular: require("./assets/fonts/Roboto/Roboto-Regular.ttf"),
       ...Ionicons.font,
     });
 
     await Promise.all([...imageAssets, ...fontAssets]);
-    // await Font.loadAsync({
-    //   IRANSans: require('./assets/fonts/IRANSansMobile.ttf'),
-    //   IRANSans_bold: require('./assets/fonts/IRANSansMobile_Bold.ttf'),
-    //   IRANSans_medium: require('./assets/fonts/IRANSansMobile_Medium.ttf'),
-    // })
     this.setState({ isReady: true });
   }
 
 
   render() {
     if (!this.state.isReady) {
-      return <Frate />;
+      return <Login />;
     }
-
     return (
       <NavigationContainer>
-        <Stack.Navigator initialRouteName='Login'>
-          <Stack.Screen name='Sign Up' component={SignUp} />
-          <Stack.Screen name='Login' component={Frate} />
-        </Stack.Navigator>
+        <Tab.Navigator initialRouteName='Home' tabBarOptions={{ activeTintColor: '#e91e63' }}>
+          <Tab.Screen name="HomeStack" component={HomeStack} options={{
+            tabBarLabel: 'Home',
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="home" color={color} size={size} />
+            ),
+          }} />
+          <Tab.Screen name="ProfileStack" component={ProfileStack} options={{
+            tabBarLabel: 'Profile',
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="account" color={color} size={size} />
+            ),
+          }} />
+        </Tab.Navigator>
       </NavigationContainer>
     );
   }
@@ -113,3 +127,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   }
 });
+

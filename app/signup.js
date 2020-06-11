@@ -47,29 +47,29 @@ class SignUp extends React.Component {
 
         axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/login/'
         )
-        .then(res => {
-            // console.log(res);
-            console.log(res.data);
-            for (var u in res.data) {
-                var obj = res.data[u]
-                if (obj.Username == user.Username || obj.Email == user.Email)
-                    correct = false
-            }
-            console.log(correct)
-            if (correct) {
-                axios.post('https://nameless-tor-88964.herokuapp.com/api/fusers/login/', user )
-                  .then(res => {
-                    // console.log(res);
-                    console.log(res.data.Status);
-                  })
-            }
-            console.log(correct)
-            if (correct == true)
-                alert('Hoora');
-            else
-                alert('You already have an account')
-        })
-        
+            .then(res => {
+                // console.log(res);
+                console.log(res.data);
+                for (var u in res.data) {
+                    var obj = res.data[u]
+                    if (obj.Username == user.Username || obj.Email == user.Email)
+                        correct = false
+                }
+                console.log(correct)
+                if (correct) {
+                    axios.post('https://nameless-tor-88964.herokuapp.com/api/fusers/login/', user)
+                        .then(res => {
+                            // console.log(res);
+                            console.log(res.data.Status);
+                        })
+                }
+                console.log(correct)
+                if (correct == true)
+                    alert('Hoora');
+                else
+                    alert('You already have an account')
+            })
+
 
     }
     render() {
@@ -77,26 +77,26 @@ class SignUp extends React.Component {
         return (
             <KeyboardAwareScrollView>
                 <View style={{ flex: 1, backgroundColor: '#f2f2f2', justifyContent: 'flex-end' }}>
-                <View style={StyleSheet.absoluteFill}>
-                    <Image
-                        source={require('../assets/images/bg2.png')}
-                        style={{ flex: 1, height: null, width: null }}
-                    />
-                </View>
-                <View style={{ height: height, justifyContent: 'center' }}>
-                    <TextInput onChangeText = {(text) => this.username = text}
-                    placeholder='USERNAME' style={styles.textInput} placeholderTextColor='rgba(0, 0, 0, 0.6)' />
-                    <TextInput onChangeText = {(text) => this.email = text}
-                    placeholder='EMAIL' style={styles.textInput} placeholderTextColor='rgba(0, 0, 0, 0.6)' />
-                    <TextInput onChangeText = {(text) => this.password = text}
-                    placeholder='PASSWORD' style={styles.textInput} placeholderTextColor='rgba(0, 0, 0, 0.6)' secureTextEntry={true} />
-                    <TextInput onChangeText = {(text) => this.onPasswordChange(text)}
-                    placeholder='RE-ENTER PASSWORD' style={styles.textInput} placeholderTextColor='rgba(0, 0, 0, 0.6)' secureTextEntry={true} />
-                    <Button rounded 
-                    onPress={() => this.onPressSignupButton()}
-                    style={{ ...styles.button, marginVertical: 50, backgroundColor: 'rgb(85, 205, 95)' }}>
-                        <Text style={{ fontSize: 20, fontFamily: 'OpenSans_Bold' }}>
-                            SIGN UP
+                    <View style={StyleSheet.absoluteFill}>
+                        <Image
+                            source={require('../assets/images/SignUpBackground.png')}
+                            style={{ flex: 1, height: null, width: null }}
+                        />
+                    </View>
+                    <View style={{ height: height, justifyContent: 'center' }}>
+                        <TextInput onChangeText={(text) => this.username = text}
+                            placeholder='USERNAME' style={styles.textInput} placeholderTextColor='rgba(0, 0, 0, 0.6)' />
+                        <TextInput onChangeText={(text) => this.email = text}
+                            placeholder='EMAIL' style={styles.textInput} placeholderTextColor='rgba(0, 0, 0, 0.6)' />
+                        <TextInput onChangeText={(text) => this.password = text}
+                            placeholder='PASSWORD' style={styles.textInput} placeholderTextColor='rgba(0, 0, 0, 0.6)' secureTextEntry={true} />
+                        <TextInput onChangeText={(text) => this.onPasswordChange(text)}
+                            placeholder='RE-ENTER PASSWORD' style={styles.textInput} placeholderTextColor='rgba(0, 0, 0, 0.6)' secureTextEntry={true} />
+                        <Button rounded
+                            onPress={() => this.onPressSignupButton()}
+                            style={{ ...styles.button, marginVertical: 50, backgroundColor: 'rgb(85, 205, 95)' }}>
+                            <Text style={{ fontSize: 20, fontFamily: 'OpenSans_Bold' }}>
+                                SIGN UP
                         </Text>
                         </Button>
                     </View>
