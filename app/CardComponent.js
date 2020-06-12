@@ -22,6 +22,9 @@ class CardComponent extends Component {
                             <Text note style={{ fontFamily: 'Roboto_Light' }}>{this.props.date}</Text>
                         </Body>
                     </Left>
+                    <Right>
+                        <Text style={{ fontFamily: 'Roboto_Regular' }}>{this.props.category}</Text>
+                    </Right>
                 </CardItem>
                 <CardItem cardBody>
                     <Image

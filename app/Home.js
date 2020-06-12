@@ -35,7 +35,7 @@ class Home extends Component {
                         date="Jun 9, 2020"
                         profilePicSource={profilePic[1]}
                         imageSource={images[1]}
-                        category="lifestyle"
+                        category="Lifestyle"
                         rate={[1.5, 2.5, 3.5, 4.5]}
                         caption={caption[1]}
                     />
@@ -44,7 +44,7 @@ class Home extends Component {
                         date="Feb 14, 2020"
                         profilePicSource={profilePic[2]}
                         imageSource={images[2]}
-                        category="photography"
+                        category="Photography"
                         rate={[1.7, 2.7, 3.7, 4.7]}
                         caption={caption[2]}
                     />
@@ -53,7 +53,7 @@ class Home extends Component {
                         date="Aug 2, 2019"
                         profilePicSource={profilePic[3]}
                         imageSource={images[3]}
-                        category="art"
+                        category="Art"
                         rate={[1.9, 2.9, 3.9, 4.9]}
                         caption={caption[3]}
                     />
