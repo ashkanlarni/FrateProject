@@ -7,6 +7,12 @@ import ProgressCircle from 'react-native-progress-circle'
 
 const { width, height } = Dimensions.get('window');
 
+const colors = {
+    "Lifestyle": '#3cb371',
+    "Art": '#1b7ced',
+    "Photography": '#e0115f',
+}
+
 // create a component
 class CardComponent extends Component {
     render() {
@@ -35,21 +41,57 @@ class CardComponent extends Component {
                 <CardItem style={{ height: 50 }}>
                     <Right>
                         <ProgressCircle
-                            percent={30}
+                            percent={this.props.rate[0] / 5 * 100}
                             radius={18}
                             borderWidth={4}
-                            color="#3399FF"
+                            color={colors[this.props.category]}
                             shadowColor="#d3d3d3"
                             bgColor="white"
                         >
-                            <Text style={{ fontSize: 12, fontFamily: 'Roboto_Light' }} >{[this.props.rate[1]]}</Text>
+                            <Text style={{ fontSize: 12, fontFamily: 'Roboto_Regular' }} >{[this.props.rate[0]]}</Text>
+                        </ProgressCircle>
+                    </Right>
+                    <Right>
+                        <ProgressCircle
+                            percent={this.props.rate[1] / 5 * 100}
+                            radius={18}
+                            borderWidth={4}
+                            color={colors[this.props.category]}
+                            shadowColor="#d3d3d3"
+                            bgColor="white"
+                        >
+                            <Text style={{ fontSize: 12, fontFamily: 'Roboto_Regular' }} >{[this.props.rate[1]]}</Text>
+                        </ProgressCircle>
+                    </Right>
+                    <Right>
+                        <ProgressCircle
+                            percent={this.props.rate[2] / 5 * 100}
+                            radius={18}
+                            borderWidth={4}
+                            color={colors[this.props.category]}
+                            shadowColor="#d3d3d3"
+                            bgColor="white"
+                        >
+                            <Text style={{ fontSize: 12, fontFamily: 'Roboto_Regular' }} >{[this.props.rate[2]]}</Text>
+                        </ProgressCircle>
+                    </Right>
+                    <Right>
+                        <ProgressCircle
+                            percent={this.props.rate[3] / 5 * 100}
+                            radius={18}
+                            borderWidth={4}
+                            color={colors[this.props.category]}
+                            shadowColor="#d3d3d3"
+                            bgColor="white"
+                        >
+                            <Text style={{ fontSize: 12, fontFamily: 'Roboto_Regular' }} >{[this.props.rate[3]]}</Text>
                         </ProgressCircle>
                     </Right>
                 </CardItem>
                 <CardItem>
                     <Body>
                         <Text>
-                            <Text style={{ fontWeight: "900" }}>{this.props.name}</Text>
+                            {/* <Text style={{ fontWeight: "900" }}>{this.props.name}</Text> */}
                             {this.props.caption}
                         </Text>
                     </Body>

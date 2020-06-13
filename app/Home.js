@@ -5,22 +5,34 @@ import { Container, Content } from 'native-base';
 
 import CardComponent from './CardComponent';
 
-const images = {
-    "1": require('../assets/images/feed/1.jpg'),
-    "2": require('../assets/images/feed/2.jpg'),
-    "3": require('../assets/images/feed/3.jpg')
+const ashkanPost1 = {
+    "name": 'Ashkan',
+    "date": 'Jun 9, 2020',
+    "profilePic": require('../assets/images/profile/Ashkan.png'),
+    "image": require('../assets/images/feed/1.jpg'),
+    "category": 'Lifestyle',
+    "rate": [1.5, 2.5, 3.5, 4.5],
+    "caption": 'Ea do Lorem occaecat laborum do. Minim ullamco ipsum minim eiusmod dolore cupidatat magna exercitation amet proident qui. Est do irure magna dolor adipisicing do quis labore excepteur.',
 }
 
-const profilePic = {
-    "1": require('../assets/images/profile/Ashkan.png'),
-    "2": require('../assets/images/profile/Ali.jpg'),
-    "3": require('../assets/images/profile/Shayesteh.jpg'),
+const aliPost1 = {
+    "name": 'Ali',
+    "date": 'Feb 14, 2020',
+    "profilePic": require('../assets/images/profile/Ali.jpg'),
+    "image": require('../assets/images/feed/2.jpg'),
+    "category": 'Photography',
+    "rate": [1.7, 2.7, 3.7, 4.7],
+    "caption": 'Minim ullamco ipsum minim eiusmod dolore cupidatat magna exercitation amet proident qui. Est do irure magna dolor adipisicing do quis labore excepteur.',
 }
 
-const caption = {
-    "1": ' Ea do Lorem occaecat laborum do. Minim ullamco ipsum minim eiusmod dolore cupidatat magna exercitation amet proident qui. Est do irure magna dolor adipisicing do quis labore excepteur.',
-    "2": ' Minim ullamco ipsum minim eiusmod dolore cupidatat magna exercitation amet proident qui. Est do irure magna dolor adipisicing do quis labore excepteur.',
-    "3": ' Est do irure magna dolor adipisicing do quis labore excepteur.'
+const shayestehPost1 = {
+    "name": 'Shayesteh',
+    "date": 'Aug 2, 2019',
+    "profilePic": require('../assets/images/profile/Shayesteh.jpg'),
+    "image": require('../assets/images/feed/3.jpg'),
+    "category": 'Art',
+    "rate": [1.9, 2.9, 3.9, 4.9],
+    "caption": 'Est do irure magna dolor adipisicing do quis labore excepteur.'
 }
 
 // create a component
@@ -31,31 +43,31 @@ class Home extends Component {
             <Container style={styles.container}>
                 <Content>
                     <CardComponent
-                        name="Ashkan"
-                        date="Jun 9, 2020"
-                        profilePicSource={profilePic[1]}
-                        imageSource={images[1]}
-                        category="Lifestyle"
-                        rate={[1.5, 2.5, 3.5, 4.5]}
-                        caption={caption[1]}
+                        name={ashkanPost1['name']}
+                        date={ashkanPost1['date']}
+                        profilePicSource={ashkanPost1['profilePic']}
+                        imageSource={ashkanPost1['image']}
+                        category={ashkanPost1['category']}
+                        rate={ashkanPost1['rate']}
+                        caption={ashkanPost1['caption']}
                     />
                     <CardComponent
-                        name="Ali"
-                        date="Feb 14, 2020"
-                        profilePicSource={profilePic[2]}
-                        imageSource={images[2]}
-                        category="Photography"
-                        rate={[1.7, 2.7, 3.7, 4.7]}
-                        caption={caption[2]}
+                        name={aliPost1['name']}
+                        date={aliPost1['date']}
+                        profilePicSource={aliPost1['profilePic']}
+                        imageSource={aliPost1['image']}
+                        category={aliPost1['category']}
+                        rate={aliPost1['rate']}
+                        caption={aliPost1['caption']}
                     />
                     <CardComponent
-                        name="Shayesteh"
-                        date="Aug 2, 2019"
-                        profilePicSource={profilePic[3]}
-                        imageSource={images[3]}
-                        category="Art"
-                        rate={[1.9, 2.9, 3.9, 4.9]}
-                        caption={caption[3]}
+                        name={shayestehPost1['name']}
+                        date={shayestehPost1['date']}
+                        profilePicSource={shayestehPost1['profilePic']}
+                        imageSource={shayestehPost1['image']}
+                        category={shayestehPost1['category']}
+                        rate={shayestehPost1['rate']}
+                        caption={shayestehPost1['caption']}
                     />
                 </Content>
             </Container>
