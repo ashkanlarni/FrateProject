@@ -24,8 +24,8 @@ class CardComponent extends Component {
                             source={this.props.profilePicSource}
                         />
                         <Body>
-                            <Text style={{ fontFamily: 'Roboto_Regular' }}>{this.props.name}</Text>
-                            <Text note style={{ fontFamily: 'Roboto_Light' }}>{this.props.date}</Text>
+                            <Text style={{ fontFamily: 'Roboto_Black', fontSize: 16 }}>{this.props.name}</Text>
+                            <Text note style={{ fontFamily: 'Roboto_Light', fontSize: 12 }}>{this.props.date}</Text>
                         </Body>
                     </Left>
                     <Right>
@@ -38,7 +38,7 @@ class CardComponent extends Component {
                         style={{ height: width, width: null, flex: 1 }}
                     />
                 </CardItem>
-                <CardItem style={{ height: 50 }}>
+                <CardItem style={{ height: width / 6.5 }}>
                     <Right>
                         <ProgressCircle
                             percent={this.props.rate[0] / 5 * 100}
@@ -50,6 +50,7 @@ class CardComponent extends Component {
                         >
                             <Text style={{ fontSize: 12, fontFamily: 'Roboto_Regular' }} >{[this.props.rate[0]]}</Text>
                         </ProgressCircle>
+                        <Text style={{ fontSize: 12, fontFamily: 'Roboto_Regular' }}>{this.props.category[2]}</Text>
                     </Right>
                     <Right>
                         <ProgressCircle
@@ -90,7 +91,7 @@ class CardComponent extends Component {
                 </CardItem>
                 <CardItem>
                     <Body>
-                        <Text>
+                        <Text style={{ fontFamily: 'Roboto_Regular' }}>
                             {/* <Text style={{ fontWeight: "900" }}>{this.props.name}</Text> */}
                             {this.props.caption}
                         </Text>
@@ -109,6 +110,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: 'white',
     },
+    roboto: {
+        fontFamily: 'Roboto_Regular',
+        fontSize: 12
+    }
 });
 
 //make this component available to the app
