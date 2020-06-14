@@ -15,7 +15,21 @@ const colors = {
 
 // create a component
 class CardComponent extends Component {
+
+    subrate = [];
+
     render() {
+        switch (this.props.category) {
+            case 'Lifestyle':
+                this.subrate = ['Beauty', 'Attractive', 'Quality', 'Overall'];
+                break;
+            case 'Art':
+                this.subrate = ['Creativity', 'Spirit', 'Quality', 'Harmony'];
+                break;
+            case 'Photography':
+                this.subrate = ['Framing', 'Lightning', 'Harmony', 'Overall'];
+                break;
+        }
         return (
             <Card>
                 <CardItem>
@@ -38,7 +52,7 @@ class CardComponent extends Component {
                         style={{ height: width, width: null, flex: 1 }}
                     />
                 </CardItem>
-                <CardItem style={{ height: width / 6.5 }}>
+                <CardItem style={{ height: width / 6 }}>
                     <Right>
                         <ProgressCircle
                             percent={this.props.rate[0] / 5 * 100}
@@ -50,7 +64,9 @@ class CardComponent extends Component {
                         >
                             <Text style={{ fontSize: 12, fontFamily: 'Roboto_Regular' }} >{[this.props.rate[0]]}</Text>
                         </ProgressCircle>
-                        <Text style={{ fontSize: 12, fontFamily: 'Roboto_Regular' }}>{this.props.category[2]}</Text>
+                        <Text style={{ fontSize: 12, fontFamily: 'Roboto_Regular' }}>
+                            {this.subrate[0]}
+                        </Text>
                     </Right>
                     <Right>
                         <ProgressCircle
@@ -63,6 +79,9 @@ class CardComponent extends Component {
                         >
                             <Text style={{ fontSize: 12, fontFamily: 'Roboto_Regular' }} >{[this.props.rate[1]]}</Text>
                         </ProgressCircle>
+                        <Text style={{ fontSize: 12, fontFamily: 'Roboto_Regular' }}>
+                            {this.subrate[1]}
+                        </Text>
                     </Right>
                     <Right>
                         <ProgressCircle
@@ -75,6 +94,9 @@ class CardComponent extends Component {
                         >
                             <Text style={{ fontSize: 12, fontFamily: 'Roboto_Regular' }} >{[this.props.rate[2]]}</Text>
                         </ProgressCircle>
+                        <Text style={{ fontSize: 12, fontFamily: 'Roboto_Regular' }}>
+                            {this.subrate[2]}
+                        </Text>
                     </Right>
                     <Right>
                         <ProgressCircle
@@ -87,6 +109,9 @@ class CardComponent extends Component {
                         >
                             <Text style={{ fontSize: 12, fontFamily: 'Roboto_Regular' }} >{[this.props.rate[3]]}</Text>
                         </ProgressCircle>
+                        <Text style={{ fontSize: 12, fontFamily: 'Roboto_Regular' }}>
+                            {this.subrate[3]}
+                        </Text>
                     </Right>
                 </CardItem>
                 <CardItem>
