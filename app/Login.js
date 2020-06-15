@@ -133,8 +133,6 @@ class Login extends React.Component {
                     alert('Email or password is wrong')
 
             })
-
-
     }
 
     render() {
@@ -171,11 +169,6 @@ class Login extends React.Component {
                                     SIGN IN WITH GOOGLE
                             </Text>
                             </Button>
-                            {/* <Button rounded style={{ ...styles.button, marginVertical: 50, backgroundColor: 'rgb(85, 205, 95)' }}>
-                        <Text style={{ fontSize: 20, fontFamily: 'OpenSans_Bold', cl }}>
-                            SIGN UP
-                        </Text>
-                    </Button> */}
                         </Animated.View>
                         <Animated.View style={{ justifyContent: 'center', alignItems: 'center', marginVertical: 25, opacity: this.buttonOpacity, transform: [{ translateY: this.buttonY }] }}>
                             <Button transparent style={{ justifyContent: 'center', alignItems: 'center' }} onPress={() => this.props.navigation.navigate('Sign Up')}>

@@ -16,9 +16,13 @@ const colors = {
 // create a component
 class CardComponent extends Component {
 
-    subrate = [];
 
-    render() {
+
+    constructor(props) {
+        super(props);
+
+        this.subrate = [];
+
         switch (this.props.category) {
             case 'Lifestyle':
                 this.subrate = ['Beauty', 'Attractive', 'Quality', 'Overall'];
@@ -30,6 +34,9 @@ class CardComponent extends Component {
                 this.subrate = ['Framing', 'Lightning', 'Harmony', 'Overall'];
                 break;
         }
+    }
+
+    render() {
         return (
             <Card>
                 <CardItem>
@@ -53,7 +60,7 @@ class CardComponent extends Component {
                     />
                 </CardItem>
                 <CardItem style={{ height: width / 6 }}>
-                    <Right>
+                    <Body style={styles.body}>
                         <ProgressCircle
                             percent={this.props.rate[0] / 5 * 100}
                             radius={18}
@@ -64,11 +71,11 @@ class CardComponent extends Component {
                         >
                             <Text style={{ fontSize: 12, fontFamily: 'Roboto_Regular' }} >{[this.props.rate[0]]}</Text>
                         </ProgressCircle>
-                        <Text style={{ fontSize: 12, fontFamily: 'Roboto_Regular' }}>
+                        <Text style={styles.roboto}>
                             {this.subrate[0]}
                         </Text>
-                    </Right>
-                    <Right>
+                    </Body>
+                    <Body style={styles.body}>
                         <ProgressCircle
                             percent={this.props.rate[1] / 5 * 100}
                             radius={18}
@@ -79,11 +86,11 @@ class CardComponent extends Component {
                         >
                             <Text style={{ fontSize: 12, fontFamily: 'Roboto_Regular' }} >{[this.props.rate[1]]}</Text>
                         </ProgressCircle>
-                        <Text style={{ fontSize: 12, fontFamily: 'Roboto_Regular' }}>
-                            {this.subrate[1]}
-                        </Text>
-                    </Right>
-                    <Right>
+                            <Text style={styles.roboto}>
+                                {this.subrate[1]}
+                            </Text>
+                    </Body>
+                    <Body style={styles.body}>
                         <ProgressCircle
                             percent={this.props.rate[2] / 5 * 100}
                             radius={18}
@@ -94,11 +101,11 @@ class CardComponent extends Component {
                         >
                             <Text style={{ fontSize: 12, fontFamily: 'Roboto_Regular' }} >{[this.props.rate[2]]}</Text>
                         </ProgressCircle>
-                        <Text style={{ fontSize: 12, fontFamily: 'Roboto_Regular' }}>
+                        <Text style={styles.roboto}>
                             {this.subrate[2]}
                         </Text>
-                    </Right>
-                    <Right>
+                    </Body>
+                    <Body style={styles.body}>
                         <ProgressCircle
                             percent={this.props.rate[3] / 5 * 100}
                             radius={18}
@@ -109,15 +116,14 @@ class CardComponent extends Component {
                         >
                             <Text style={{ fontSize: 12, fontFamily: 'Roboto_Regular' }} >{[this.props.rate[3]]}</Text>
                         </ProgressCircle>
-                        <Text style={{ fontSize: 12, fontFamily: 'Roboto_Regular' }}>
+                        <Text style={styles.roboto}>
                             {this.subrate[3]}
                         </Text>
-                    </Right>
+                    </Body>
                 </CardItem>
                 <CardItem>
                     <Body>
                         <Text style={{ fontFamily: 'Roboto_Regular' }}>
-                            {/* <Text style={{ fontWeight: "900" }}>{this.props.name}</Text> */}
                             {this.props.caption}
                         </Text>
                     </Body>
@@ -138,6 +144,9 @@ const styles = StyleSheet.create({
     roboto: {
         fontFamily: 'Roboto_Regular',
         fontSize: 12
+    },
+    body: {
+        alignItems: 'center'
     }
 });
 
