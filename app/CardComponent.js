@@ -41,8 +41,8 @@ class CardComponent extends Component {
             <Card>
                 <CardItem style={{ justifyContent: 'center', alignItems: 'center', width: width }}>
                     <View style={{ width: width / 3, alignItems: 'flex-start' }}>
-                        <Text style={{ fontFamily: 'Roboto_Black', fontSize: 16, left: 15 }}>{this.props.name}</Text>
-                        <Text note style={{ fontFamily: 'Roboto_Light', fontSize: 12, left: 15 }}>{this.props.date}</Text>
+                        <Text style={{ fontFamily: 'Vision_Bold', fontSize: 18, left: 15 }}>{this.props.name}</Text>
+                        <Text note style={{ fontFamily: 'Vision_Light', fontSize: 12, left: 15, color: '#333333' }}>{this.props.date}</Text>
                     </View>
                     <View style={{ width: width / 3, alignItems: 'center' }}>
                         <Thumbnail
@@ -50,7 +50,7 @@ class CardComponent extends Component {
                         />
                     </View>
                     <View style={{ width: width / 3, alignItems: 'flex-end' }}>
-                        <Text style={{ fontFamily: 'Roboto_Regular', right: 15 }}>{this.props.category}</Text>
+                        <Text style={{ ...styles.vision, fontSize: 16, right: 15 }}>{this.props.category}</Text>
                     </View>
                 </CardItem>
                 <CardItem cardBody>
@@ -69,9 +69,9 @@ class CardComponent extends Component {
                             shadowColor="#d3d3d3"
                             bgColor="white"
                         >
-                            <Text style={{ fontSize: 12, fontFamily: 'Roboto_Regular' }} >{[this.props.rate[0]]}</Text>
+                            <Text style={styles.vision} >{[this.props.rate[0]]}</Text>
                         </ProgressCircle>
-                        <Text style={styles.roboto}>
+                        <Text style={{ ...styles.vision, paddingTop: 5 }}>
                             {this.subrate[0]}
                         </Text>
                     </Body>
@@ -84,9 +84,9 @@ class CardComponent extends Component {
                             shadowColor="#d3d3d3"
                             bgColor="white"
                         >
-                            <Text style={{ fontSize: 12, fontFamily: 'Roboto_Regular' }} >{[this.props.rate[1]]}</Text>
+                            <Text style={styles.vision} >{[this.props.rate[1]]}</Text>
                         </ProgressCircle>
-                        <Text style={styles.roboto}>
+                        <Text style={{ ...styles.vision, paddingTop: 5 }}>
                             {this.subrate[1]}
                         </Text>
                     </Body>
@@ -99,9 +99,9 @@ class CardComponent extends Component {
                             shadowColor="#d3d3d3"
                             bgColor="white"
                         >
-                            <Text style={{ fontSize: 12, fontFamily: 'Roboto_Regular' }} >{[this.props.rate[2]]}</Text>
+                            <Text style={styles.vision} >{[this.props.rate[2]]}</Text>
                         </ProgressCircle>
-                        <Text style={styles.roboto}>
+                        <Text style={{ ...styles.vision, paddingTop: 5 }}>
                             {this.subrate[2]}
                         </Text>
                     </Body>
@@ -114,16 +114,16 @@ class CardComponent extends Component {
                             shadowColor="#d3d3d3"
                             bgColor="white"
                         >
-                            <Text style={{ fontSize: 12, fontFamily: 'Roboto_Regular' }} >{[this.props.rate[3]]}</Text>
+                            <Text style={styles.vision} >{[this.props.rate[3]]}</Text>
                         </ProgressCircle>
-                        <Text style={styles.roboto}>
+                        <Text style={{ ...styles.vision, paddingTop: 5 }}>
                             {this.subrate[3]}
                         </Text>
                     </Body>
                 </CardItem>
                 <CardItem>
                     <Body>
-                        <Text style={{ fontFamily: 'Roboto_Regular' }}>
+                        <Text style={{ fontFamily: 'Vision_Regular', fontSize: 14, textAlign: 'left', textAlignVertical: 'auto' }}>
                             {this.props.caption}
                         </Text>
                     </Body>
@@ -141,9 +141,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: 'white',
     },
-    roboto: {
-        fontFamily: 'Roboto_Regular',
-        fontSize: 12
+    vision: {
+        fontFamily: 'Vision_Bold',
+        fontSize: 13
     },
     body: {
         alignItems: 'center',

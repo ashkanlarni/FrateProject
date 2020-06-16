@@ -1,12 +1,9 @@
 //import liraries
 import React, { Component } from 'react';
-import { StyleSheet, Text, Dimensions } from 'react-native';
-import { Container, Content, Header, Body, Title, Left, Right, Button } from 'native-base';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { StyleSheet, Dimensions } from 'react-native';
+import { Container, Content, Header, Title } from 'native-base';
 
 import CardComponent from './CardComponent';
-
-const { width, height } = Dimensions.get('window');
 
 const ashkanPost1 = {
     "name": 'Ashkan',
@@ -102,9 +99,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffffff',
     },
     title: {
-        fontFamily: 'Roboto_Black',
-        fontSize: 20,
-        color: '#afafaf',
+        fontFamily: 'Vision_Black',
+        fontSize: 22,
+        color: '#bfbfbf',
         alignContent: 'center'
     }
 });

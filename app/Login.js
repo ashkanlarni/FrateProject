@@ -106,9 +106,9 @@ class Login extends React.Component {
             extrapolate: Extrapolate.CLAMP
         });
     }
-    onPressSigninButton() {
+    onPressSignInButton() {
         if (this.password == "" || this.email == "") {
-            alert('Please fill all the fields')
+            alert('Please fill out all the fields.')
             return
         }
 
@@ -117,20 +117,16 @@ class Login extends React.Component {
         axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/login/'
         )
             .then(res => {
-                // console.log(res);
-                console.log(res.data);
                 for (var u in res.data) {
                     var obj = res.data[u]
                     if (obj.Email == this.email && obj.Password == this.password) {
-                        console.log('hey')
                         correct = true;
                     }
                 }
-                console.log(correct)
                 if (correct)
-                    alert('Hoora');
+                    alert('Hooray.');
                 else
-                    alert('Email or password is wrong')
+                    alert('The email or password did not match our records. Please try again.')
 
             })
     }
@@ -138,7 +134,7 @@ class Login extends React.Component {
     render() {
         return (
             <KeyboardAwareScrollView>
-                <View style={{ flex: 1, backgroundColor: '#f2f2f2', justifyContent: 'flex-end' }}>
+                <View style={{ flex: 1, backgroundColor: '#f6f6f6', justifyContent: 'flex-end' }}>
                     <Animated.View style={{ ...StyleSheet.absoluteFill, transform: [{ translateY: this.bgY }] }}>
                         <Image
                             source={require('../assets/images/LoginBackground.jpg')}
@@ -146,62 +142,58 @@ class Login extends React.Component {
                         />
                     </Animated.View>
                     <Animated.View style={{ height: height / 2 + 85, justifyContent: 'center', alignItems: 'center', transform: [{ translateY: this.logoY }] }}>
-                        <Text style={{ fontSize: 65, fontFamily: 'OpenSans_Bold', color: 'white' }}>
-                            F  R  A  T  E
-                    </Text>
-                        <Text style={{ fontSize: 20, color: 'white', fontFamily: 'OpenSans_SemiBold', marginVertical: 20 }}>
-                            A Rating Social Media
-                    </Text>
+                        <Text style={{ fontSize: 66, fontFamily: 'Vision_Black', color: 'white', marginVertical: 30 }}>
+                            {'F  R  A  T  E'}
+                        </Text>
+                        <Text style={{ ...styles.vision, fontFamily: 'Vision_BoldItalic' }}>
+                            {'A Rating Social Media'}
+                        </Text>
                     </Animated.View>
                     <View style={{ height: height / 3, justifyContent: 'center' }}>
                         <TapGestureHandler onHandlerStateChange={this.onStateChange}>
                             <Animated.View style={{ opacity: this.buttonOpacity, transform: [{ translateY: this.buttonY }] }}>
                                 <Button rounded style={{ ...styles.button, marginVertical: 7.5, backgroundColor: 'white' }}>
-                                    <Text style={{ fontSize: 20, fontFamily: 'OpenSans_Bold', color: 'black' }}>
-                                        SIGN IN
-                                </Text>
+                                    <Text style={{ ...styles.vision, color: 'black' }}>
+                                        {'SIGN IN'}
+                                    </Text>
                                 </Button>
                             </Animated.View>
                         </TapGestureHandler>
                         <Animated.View style={{ opacity: this.buttonOpacity, transform: [{ translateY: this.buttonY }] }}>
                             <Button rounded style={{ ...styles.button, marginVertical: 7.5, backgroundColor: 'rgb(217, 44, 35)' }}>
-                                <Text style={{ fontSize: 20, fontFamily: 'OpenSans_Bold', color: 'white' }}>
-                                    SIGN IN WITH GOOGLE
-                            </Text>
+                                <Text style={styles.vision}>
+                                    {'SIGN IN WITH GOOGLE'}
+                                </Text>
                             </Button>
                         </Animated.View>
-                        <Animated.View style={{ justifyContent: 'center', alignItems: 'center', marginVertical: 25, opacity: this.buttonOpacity, transform: [{ translateY: this.buttonY }] }}>
+                        <Animated.View style={{ justifyContent: 'center', alignItems: 'center', marginVertical: 30, opacity: this.buttonOpacity, transform: [{ translateY: this.buttonY }] }}>
                             <Button transparent style={{ justifyContent: 'center', alignItems: 'center' }} onPress={() => this.props.navigation.navigate('Sign Up')}>
-                                <Text style={{ fontSize: 17, fontFamily: 'OpenSans_SemiBoldItalic', color: 'white' }}>
-                                    Don't have an account yet?
-                            </Text>
+                                <Text style={{ ...styles.vision, fontSize: 18 }}>
+                                    {"Don't have an account yet?"}
+                                </Text>
                             </Button>
                         </Animated.View>
                         <Animated.View style={{ zIndex: this.textInputZindex, opacity: this.textInputOpacity, transform: [{ translateY: this.textInputY }], height: height / 2, ...StyleSheet.absoluteFill, top: null, justifyContent: 'center' }}>
                             <TapGestureHandler onHandlerStateChange={this.onCloseState}>
                                 <Animated.View style={{ top: 0, position: 'absolute', justifyContent: 'center', alignItems: 'center' }}>
                                     <Button rounded style={styles.closeButton}>
-                                        <Animated.Text style={{ fontSize: 15, fontWeight: 'bold', color: 'black' }}>
-                                            X
-                                    </Animated.Text>
+                                        <Animated.Text style={{ ...styles.vision, fontSize: 18, color: 'black' }}>
+                                            {'X'}
+                                        </Animated.Text>
                                     </Button>
                                 </Animated.View>
                             </TapGestureHandler>
-
-                            {/* <tboardAwareScrollView style={styles.container}> */}
                             <TextInput onChangeText={(text) => this.email = text}
                                 placeholder='EMAIL' style={styles.textInput} placeholderTextColor='rgba(0, 0, 0, 0.6)' />
                             <TextInput onChangeText={(text) => this.password = text}
                                 placeholder='PASSWORD' style={styles.textInput} placeholderTextColor='rgba(0, 0, 0, 0.6)' secureTextEntry={true} />
-                            {/* </KeyboardAwareScrollView> */}
-
                             <Animated.View style={{ marginVertical: 50 }}>
                                 <Button rounded
-                                    onPress={() => this.onPressSigninButton()}
+                                    onPress={() => this.onPressSignInButton()}
                                     style={{ ...styles.button, backgroundColor: 'white' }}>
-                                    <Text style={{ fontSize: 20, fontFamily: 'OpenSans_Bold', color: 'black' }}>
-                                        SIGN IN
-                                </Text>
+                                    <Text style={{ ...styles.vision, color: 'black' }}>
+                                        {'SIGN IN'}
+                                    </Text>
                                 </Button>
                             </Animated.View>
                         </Animated.View>
@@ -248,14 +240,19 @@ const styles = StyleSheet.create({
     textInput: {
         height: 50,
         borderRadius: 25,
-        // borderWidth: 0.5,
+        borderWidth: 0.3,
         backgroundColor: 'white',
-        // borderColor: 'rgba(0, 0, 0, 0.5)',
+        borderColor: 'rgba(0, 0, 0, 0.5)',
         marginHorizontal: 50,
         marginVertical: 7.5,
         paddingLeft: 20,
-        fontWeight: 'bold',
+        fontFamily: 'Vision_Bold',
         shadowColor: 'black',
         shadowOpacity: 0.2
+    },
+    vision: {
+        fontFamily: 'Vision_Heavy',
+        fontSize: 20,
+        color: 'white'
     }
 });

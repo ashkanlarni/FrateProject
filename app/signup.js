@@ -25,14 +25,14 @@ class SignUp extends React.Component {
             this.passwordsmatch = false
     }
 
-    onPressSignupButton() {
+    onPressSignUpButton() {
         if (this.username == "" || this.password == "" || this.email == "") {
-            alert('Please fill all the fields')
+            alert('Please fill out all the fields.')
             return
         }
 
         if (!this.passwordsmatch) {
-            alert('Passwords do not match')
+            alert("Passwords didn't match.")
             return
         }
         var user = {
@@ -41,39 +41,30 @@ class SignUp extends React.Component {
             Password: this.password
         }
         var correct = true;
-        var users;
-
-        console.log(user);
 
         axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/login/'
         )
             .then(res => {
-                // console.log(res);
-                console.log(res.data);
                 for (var u in res.data) {
                     var obj = res.data[u]
                     if (obj.Username == user.Username || obj.Email == user.Email)
                         correct = false
                 }
-                console.log(correct)
                 if (correct) {
                     axios.post('https://nameless-tor-88964.herokuapp.com/api/fusers/login/', user)
                         .then(res => {
-                            // console.log(res);
-                            console.log(res.data.Status);
                         })
                 }
-                console.log(correct)
                 if (correct == true)
-                    alert('Hoora');
+                    alert('Hooray.');
                 else
-                    alert('You already have an account')
+                    alert('There is already an account with this email address.')
+                // TODO
             })
 
 
     }
     render() {
-        // const { navigate } = this.props.navigation;
         return (
             <KeyboardAwareScrollView>
                 <View style={{ flex: 1, backgroundColor: '#f2f2f2', justifyContent: 'flex-end' }}>
@@ -93,11 +84,11 @@ class SignUp extends React.Component {
                         <TextInput onChangeText={(text) => this.onPasswordChange(text)}
                             placeholder='RE-ENTER PASSWORD' style={styles.textInput} placeholderTextColor='rgba(0, 0, 0, 0.6)' secureTextEntry={true} />
                         <Button rounded
-                            onPress={() => this.onPressSignupButton()}
+                            onPress={() => this.onPressSignUpButton()}
                             style={{ ...styles.button, marginVertical: 50, backgroundColor: 'rgb(85, 205, 95)' }}>
-                            <Text style={{ fontSize: 20, fontFamily: 'OpenSans_Bold' }}>
-                                SIGN UP
-                        </Text>
+                            <Text style={{ fontFamily: 'Vision_Heavy', fontSize: 20 }}>
+                                {'SIGN UP'}
+                            </Text>
                         </Button>
                     </View>
                 </View>
@@ -131,13 +122,13 @@ const styles = StyleSheet.create({
     textInput: {
         height: 50,
         borderRadius: 25,
-        // borderWidth: 0.5,
+        borderWidth: 0.3,
         backgroundColor: 'white',
-        // borderColor: 'rgba(0, 0, 0, 0.5)',
+        borderColor: 'rgba(0, 0, 0, 0.5)',
         marginHorizontal: 50,
-        marginVertical: 15,
+        marginVertical: 7.5,
         paddingLeft: 20,
-        fontWeight: 'bold',
+        fontFamily: 'Vision_Bold',
         shadowColor: 'black',
         shadowOpacity: 0.2
     }
