@@ -41,8 +41,8 @@ class CardComponent extends Component {
             <Card>
                 <CardItem style={{ justifyContent: 'center', alignItems: 'center', width: width }}>
                     <View style={{ width: width / 3, alignItems: 'flex-start' }}>
-                        <Text style={{ fontFamily: 'Roboto_Black', fontSize: 16, left: 10 }}>{this.props.name}</Text>
-                        <Text note style={{ fontFamily: 'Roboto_Light', fontSize: 12, left: 10 }}>{this.props.date}</Text>
+                        <Text style={{ fontFamily: 'Roboto_Black', fontSize: 16, left: 15 }}>{this.props.name}</Text>
+                        <Text note style={{ fontFamily: 'Roboto_Light', fontSize: 12, left: 15 }}>{this.props.date}</Text>
                     </View>
                     <View style={{ width: width / 3, alignItems: 'center' }}>
                         <Thumbnail
@@ -50,7 +50,7 @@ class CardComponent extends Component {
                         />
                     </View>
                     <View style={{ width: width / 3, alignItems: 'flex-end' }}>
-                        <Text style={{ fontFamily: 'Roboto_Regular', right: 10 }}>{this.props.category}</Text>
+                        <Text style={{ fontFamily: 'Roboto_Regular', right: 15 }}>{this.props.category}</Text>
                     </View>
                 </CardItem>
                 <CardItem cardBody>

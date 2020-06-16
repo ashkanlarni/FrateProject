@@ -44,7 +44,7 @@ class Home extends Component {
     render() {
         return (
             <Container style={styles.container}>
-                <Header style={{ height: height / 18, backgroundColor: 'white', alignItems: 'flex-start', justifyContent: 'space-around' }}>
+                <Header style={{ height: 50, backgroundColor: 'white', alignItems: 'center', justifyContent: 'space-around' }}>
                     <Title style={styles.title}>
                         F
                     </Title>
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Roboto_Black',
         fontSize: 20,
         color: '#afafaf',
-        alignContent: 'stretch'
+        alignContent: 'center'
     }
 });
 
