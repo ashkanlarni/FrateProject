@@ -8,7 +8,7 @@ import CardComponent from './CardComponent';
 const ashkanPost1 = {
     "name": 'Ashkan',
     "date": 'Jun 9, 2020',
-    "profilePic": require('../assets/images/profile/Ashkan.png'),
+    "profilePic": require('../assets/images/profile/Ashkan.jpg'),
     "image": require('../assets/images/feed/1.jpg'),
     "category": 'Lifestyle',
     "rate": [1.5, 2.5, 3.5, 4.5],

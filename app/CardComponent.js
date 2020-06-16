@@ -39,19 +39,19 @@ class CardComponent extends Component {
     render() {
         return (
             <Card>
-                <CardItem>
-                    <Left>
+                <CardItem style={{ justifyContent: 'center', alignItems: 'center', width: width }}>
+                    <View style={{ width: width / 3, alignItems: 'flex-start' }}>
+                        <Text style={{ fontFamily: 'Roboto_Black', fontSize: 16, left: 10 }}>{this.props.name}</Text>
+                        <Text note style={{ fontFamily: 'Roboto_Light', fontSize: 12, left: 10 }}>{this.props.date}</Text>
+                    </View>
+                    <View style={{ width: width / 3, alignItems: 'center' }}>
                         <Thumbnail
                             source={this.props.profilePicSource}
                         />
-                        <Body>
-                            <Text style={{ fontFamily: 'Roboto_Black', fontSize: 16 }}>{this.props.name}</Text>
-                            <Text note style={{ fontFamily: 'Roboto_Light', fontSize: 12 }}>{this.props.date}</Text>
-                        </Body>
-                    </Left>
-                    <Right>
-                        <Text style={{ fontFamily: 'Roboto_Regular' }}>{this.props.category}</Text>
-                    </Right>
+                    </View>
+                    <View style={{ width: width / 3, alignItems: 'flex-end' }}>
+                        <Text style={{ fontFamily: 'Roboto_Regular', right: 10 }}>{this.props.category}</Text>
+                    </View>
                 </CardItem>
                 <CardItem cardBody>
                     <Image
@@ -59,7 +59,7 @@ class CardComponent extends Component {
                         style={{ height: width, width: null, flex: 1 }}
                     />
                 </CardItem>
-                <CardItem style={{ height: width / 6 }}>
+                <CardItem style={{ height: 70 }}>
                     <Body style={styles.body}>
                         <ProgressCircle
                             percent={this.props.rate[0] / 5 * 100}
@@ -86,9 +86,9 @@ class CardComponent extends Component {
                         >
                             <Text style={{ fontSize: 12, fontFamily: 'Roboto_Regular' }} >{[this.props.rate[1]]}</Text>
                         </ProgressCircle>
-                            <Text style={styles.roboto}>
-                                {this.subrate[1]}
-                            </Text>
+                        <Text style={styles.roboto}>
+                            {this.subrate[1]}
+                        </Text>
                     </Body>
                     <Body style={styles.body}>
                         <ProgressCircle
@@ -146,7 +146,8 @@ const styles = StyleSheet.create({
         fontSize: 12
     },
     body: {
-        alignItems: 'center'
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 });
 

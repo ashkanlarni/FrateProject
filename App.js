@@ -85,6 +85,7 @@ export default class App extends React.Component {
       OpenSans_Regular: require("./assets/fonts/Open_Sans/OpenSans-Regular.ttf"),
       Roboto_Light: require("./assets/fonts/Roboto/Roboto-Light.ttf"),
       Roboto_Regular: require("./assets/fonts/Roboto/Roboto-Regular.ttf"),
+      Roboto_Bold: require("./assets/fonts/Roboto/Roboto-Bold.ttf"),
       Roboto_Black: require("./assets/fonts/Roboto/Roboto-Black.ttf"),
       ...Ionicons.font,
     });
