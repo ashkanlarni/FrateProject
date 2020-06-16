@@ -1,9 +1,12 @@
 //import liraries
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
-import { Container, Content } from 'native-base';
+import { StyleSheet, Text, Dimensions } from 'react-native';
+import { Container, Content, Header, Body, Title, Left, Right, Button } from 'native-base';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import CardComponent from './CardComponent';
+
+const { width, height } = Dimensions.get('window');
 
 const ashkanPost1 = {
     "name": 'Ashkan',
@@ -41,6 +44,23 @@ class Home extends Component {
     render() {
         return (
             <Container style={styles.container}>
+                <Header style={{ height: height / 18, backgroundColor: 'white', alignItems: 'flex-start', justifyContent: 'space-around' }}>
+                    <Title style={styles.title}>
+                        F
+                    </Title>
+                    <Title style={styles.title}>
+                        R
+                    </Title>
+                    <Title style={styles.title}>
+                        A
+                    </Title>
+                    <Title style={styles.title}>
+                        T
+                    </Title>
+                    <Title style={styles.title}>
+                        E
+                    </Title>
+                </Header>
                 <Content>
                     <CardComponent
                         name={ashkanPost1['name']}
@@ -81,6 +101,12 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#ffffff',
     },
+    title: {
+        fontFamily: 'Roboto_Black',
+        fontSize: 20,
+        color: '#afafaf',
+        alignContent: 'stretch'
+    }
 });
 
 //make this component available to the app

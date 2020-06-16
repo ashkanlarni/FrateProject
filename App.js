@@ -34,12 +34,12 @@ function HomeStack() {
     <Stack.Navigator initialRouteName='Home' >
       <Stack.Screen
         options={{
-          title: 'Home',
+          headerShown: false
         }}
         name='Home'
         component={Home}
       />
-      <Stack.Screen /*options={{ headerShown: false }}*/ name='Profile' component={Profile} />
+      <Stack.Screen options={{ headerShown: false }} name='Profile' component={Profile} />
     </Stack.Navigator>
   );
 }
@@ -49,12 +49,12 @@ function ProfileStack() {
     <Stack.Navigator initialRouteName='Profile' >
       <Stack.Screen
         options={{
-          title: 'Profile',
+          headerShown: false
         }}
         name='Profile'
         component={Profile}
       />
-      <Stack.Screen /*options={{ headerShown: false }}*/ name='Home' component={Home} />
+      <Stack.Screen options={{ headerShown: false }} name='Home' component={Home} />
     </Stack.Navigator>
   );
 }

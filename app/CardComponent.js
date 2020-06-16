@@ -25,7 +25,7 @@ class CardComponent extends Component {
 
         switch (this.props.category) {
             case 'Lifestyle':
-                this.subrate = ['Beauty', 'Attractive', 'Quality', 'Overall'];
+                this.subrate = ['Beauty', 'Appeal', 'Quality', 'Overall'];
                 break;
             case 'Art':
                 this.subrate = ['Creativity', 'Spirit', 'Quality', 'Harmony'];
