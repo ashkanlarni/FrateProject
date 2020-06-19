@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         borderColor: 'rgba(0, 0, 0, 0.5)',
         marginHorizontal: 50,
-        marginVertical: 7.5,
+        marginVertical: 10,
         paddingLeft: 20,
         fontFamily: 'Vision_Bold',
         shadowColor: 'black',
