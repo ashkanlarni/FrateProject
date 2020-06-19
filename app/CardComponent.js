@@ -8,9 +8,9 @@ import ProgressCircle from 'react-native-progress-circle'
 const { width, height } = Dimensions.get('window');
 
 const colors = {
-    "Lifestyle": '#3cb371',
-    "Art": '#1b7ced',
-    "Photography": '#e0115f',
+    "Lifestyle": '#00a572',
+    "Art": '#2196f3',
+    "Photography": '#e91e63',
 }
 
 // create a component

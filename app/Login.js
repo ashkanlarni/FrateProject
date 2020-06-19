@@ -1,10 +1,12 @@
 import * as React from 'react';
-import { View, Text, StyleSheet, Image, Dimensions, TextInput } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, TextInput } from 'react-native';
 import { Button } from 'native-base';
 import Animated, { Easing } from 'react-native-reanimated';
 import { TapGestureHandler, State } from 'react-native-gesture-handler';
+import Svg, { Image } from 'react-native-svg';
 import axios from 'axios';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
 
 const { width, height } = Dimensions.get('window');
 const { Value, event, block, cond, eq, set, Clock, startClock, stopClock, debug, timing, clockRunning, interpolate, Extrapolate } = Animated;
@@ -45,6 +47,10 @@ class Login extends React.Component {
         this.email = "";
         this.password = "";
         this.buttonOpacity = new Value(1);
+
+        this.state = {
+            isDisabled: true
+        };
 
         this.onStateChange = event([
             {
@@ -123,8 +129,9 @@ class Login extends React.Component {
                         correct = true;
                     }
                 }
-                if (correct)
+                if (correct) {
                     alert('Hooray.');
+                }
                 else
                     alert('The email or password did not match our records. Please try again.')
 
@@ -136,12 +143,16 @@ class Login extends React.Component {
             <KeyboardAwareScrollView>
                 <View style={{ flex: 1, backgroundColor: '#f6f6f6', justifyContent: 'flex-end' }}>
                     <Animated.View style={{ ...StyleSheet.absoluteFill, transform: [{ translateY: this.bgY }] }}>
-                        <Image
-                            source={require('../assets/images/LoginBackground.jpg')}
-                            style={{ flex: 1, height: null, width: null }}
-                        />
+                        <Svg height={height} width={width}>
+                            <Image
+                                href={require('../assets/images/LoginBackground.jpg')}
+                                height={height}
+                                width={width}
+                                preserveAspectRatio='xMidYMid slice'
+                            />
+                        </Svg>
                     </Animated.View>
-                    <Animated.View style={{ height: height / 2 + 85, justifyContent: 'center', alignItems: 'center', transform: [{ translateY: this.logoY }] }}>
+                    <Animated.View style={{ height: 2 * height / 3, justifyContent: 'center', alignItems: 'center', transform: [{ translateY: this.logoY }] }}>
                         <Text style={{ fontSize: 66, fontFamily: 'Vision_Black', color: 'white', marginVertical: 30 }}>
                             {'F  R  A  T  E'}
                         </Text>
@@ -152,20 +163,13 @@ class Login extends React.Component {
                     <View style={{ height: height / 3, justifyContent: 'center' }}>
                         <TapGestureHandler onHandlerStateChange={this.onStateChange}>
                             <Animated.View style={{ opacity: this.buttonOpacity, transform: [{ translateY: this.buttonY }] }}>
-                                <Button rounded style={{ ...styles.button, marginVertical: 7.5, backgroundColor: 'white' }}>
+                                <Button rounded style={styles.button} >
                                     <Text style={{ ...styles.vision, color: 'black' }}>
                                         {'SIGN IN'}
                                     </Text>
                                 </Button>
                             </Animated.View>
                         </TapGestureHandler>
-                        <Animated.View style={{ opacity: this.buttonOpacity, transform: [{ translateY: this.buttonY }] }}>
-                            <Button rounded style={{ ...styles.button, marginVertical: 7.5, backgroundColor: 'rgb(217, 44, 35)' }}>
-                                <Text style={styles.vision}>
-                                    {'SIGN IN WITH GOOGLE'}
-                                </Text>
-                            </Button>
-                        </Animated.View>
                         <Animated.View style={{ justifyContent: 'center', alignItems: 'center', marginVertical: 30, opacity: this.buttonOpacity, transform: [{ translateY: this.buttonY }] }}>
                             <Button transparent style={{ justifyContent: 'center', alignItems: 'center' }} onPress={() => this.props.navigation.navigate('Sign Up')}>
                                 <Text style={{ ...styles.vision, fontSize: 18 }}>
@@ -190,7 +194,7 @@ class Login extends React.Component {
                             <Animated.View style={{ marginVertical: 50 }}>
                                 <Button rounded
                                     onPress={() => this.onPressSignInButton()}
-                                    style={{ ...styles.button, backgroundColor: 'white' }}>
+                                    style={styles.button}>
                                     <Text style={{ ...styles.vision, color: 'black' }}>
                                         {'SIGN IN'}
                                     </Text>

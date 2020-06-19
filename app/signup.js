@@ -1,10 +1,12 @@
 //This is an example code for Navigator// 
 import * as React from 'react';
-import { View, Text, StyleSheet, Image, Dimensions, TextInput } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, TextInput } from 'react-native';
+import Svg, { Image } from 'react-native-svg';
 import { Button } from 'native-base';
 import axios from 'axios';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
+import { isSignedIn } from '../App';
 
 const { width, height } = Dimensions.get('window');
 
@@ -55,8 +57,11 @@ class SignUp extends React.Component {
                         .then(res => {
                         })
                 }
-                if (correct == true)
+                if (correct == true) {
                     alert('Hooray.');
+                    isSignedIn = true;
+                    // TODO
+                }
                 else
                     alert('There is already an account with this email address.')
                 // TODO
@@ -69,12 +74,16 @@ class SignUp extends React.Component {
             <KeyboardAwareScrollView>
                 <View style={{ flex: 1, backgroundColor: '#f2f2f2', justifyContent: 'flex-end' }}>
                     <View style={StyleSheet.absoluteFill}>
-                        <Image
-                            source={require('../assets/images/SignUpBackground.png')}
-                            style={{ flex: 1, height: null, width: null }}
-                        />
+                        <Svg height={height} width={width}>
+                            <Image
+                                href={require('../assets/images/SignUpBackground.png')}
+                                height={height}
+                                width={width}
+                                preserveAspectRatio='xMidYMid slice'
+                            />
+                        </Svg>
                     </View>
-                    <View style={{ height: height, justifyContent: 'center' }}>
+                    <View style={{ height: height + height / 10, justifyContent: 'center', alignContent: 'center' }}>
                         <TextInput onChangeText={(text) => this.username = text}
                             placeholder='USERNAME' style={styles.textInput} placeholderTextColor='rgba(0, 0, 0, 0.6)' />
                         <TextInput onChangeText={(text) => this.email = text}

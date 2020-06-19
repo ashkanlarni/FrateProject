@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
+import { AppLoading } from 'expo';
 import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
 import { FontAwesome } from '@expo/vector-icons';
@@ -11,9 +12,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Login from './app/Login';
 import SignUp from './app/SignUp';
 import Home from './app/Home';
-import Profile from './app/Profile';
-
-var isSignedIn = true;
+import Upload from './app/Upload';
 
 function cacheImages(images) {
   return images.map(image => {
@@ -39,24 +38,30 @@ function HomeStack() {
         name='Home'
         component={Home}
       />
-      <Stack.Screen options={{ headerShown: false }} name='Profile' component={Profile} />
+      <Stack.Screen options={{ headerShown: false }} name='Upload' component={Upload} />
     </Stack.Navigator>
   );
 }
 
-function ProfileStack() {
+function UploadStack() {
   return (
-    <Stack.Navigator initialRouteName='Profile' >
+    <Stack.Navigator initialRouteName='Upload' >
       <Stack.Screen
         options={{
           headerShown: false
         }}
-        name='Profile'
-        component={Profile}
+        name='Upload'
+        component={Upload}
       />
       <Stack.Screen options={{ headerShown: false }} name='Home' component={Home} />
     </Stack.Navigator>
   );
+}
+
+function isSignedInHandler() {
+  this.setState({
+    isSignedIn: !isSignedIn,
+  });
 }
 
 const Stack = createStackNavigator();
@@ -67,7 +72,8 @@ export default class App extends React.Component {
     super(props);
 
     this.state = {
-      isReady: false
+      isReady: false,
+      isSignedIn: true
     };
   }
 
@@ -98,23 +104,24 @@ export default class App extends React.Component {
 
   render() {
     if (!this.state.isReady) {
-      return <Login />;
+      return <AppLoading />;
+      // TODO
     }
     return (
-      isSignedIn ? (
+      this.state.isSignedIn ? (
         <>
           <NavigationContainer>
             <Tab.Navigator initialRouteName='Home' tabBarOptions={{ activeTintColor: '#e91e63' }}>
               <Tab.Screen name="HomeStack" component={HomeStack} options={{
                 tabBarLabel: 'Home',
-                tabBarIcon: ({ color, size }) => (
-                  <MaterialCommunityIcons name="home" color={color} size={size} />
+                tabBarIcon: ({ color }) => (
+                  <MaterialCommunityIcons name="home" style={{ padding: 10 }} color={color} size={26} font={'Vision_Bold'} />
                 ),
               }} />
-              <Tab.Screen name="ProfileStack" component={ProfileStack} options={{
-                tabBarLabel: 'Profile',
-                tabBarIcon: ({ color, size }) => (
-                  <MaterialCommunityIcons name="account" color={color} size={size} />
+              <Tab.Screen name="UploadStack" component={UploadStack} options={{
+                tabBarLabel: 'Upload',
+                tabBarIcon: ({ color }) => (
+                  <MaterialCommunityIcons name="upload" style={{ padding: 10 }} color={color} size={26} font={'Vision_Bold'} />
                 ),
               }} />
             </Tab.Navigator>
@@ -124,14 +131,14 @@ export default class App extends React.Component {
           <NavigationContainer>
             <Stack.Navigator initialRouteName='Login' >
               <Stack.Screen
-                // options={{
-                //   headerShown: false
-                // }}
+                options={{
+                  headerShown: false
+                }}
                 name='Login'
                 component={Login}
               />
               <Stack.Screen
-                // options={{ headerShown: false }}
+                options={{ headerShown: false }}
                 name='Sign Up'
                 component={SignUp} />
             </Stack.Navigator>
@@ -140,7 +147,6 @@ export default class App extends React.Component {
     );
   }
 }
-
 
 const styles = StyleSheet.create({
   container: {
