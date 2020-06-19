@@ -111,7 +111,6 @@ export default function Upload() {
                                 buttonSize={10}
                                 buttonOuterSize={26}
                                 labelStyle={{ fontFamily: 'Vision_Regular', fontSize: 16 }}
-                                animation={false}
                             />
                         </View>
                         <View style={{ justifyContent: 'center', height: height / 3 }}>
