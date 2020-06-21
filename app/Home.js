@@ -38,7 +38,7 @@ const shayestehPost1 = {
 }
 
 var posts = []
-var user = 'Shay'
+var user = 'Sha'
 
 function wait(timeout) {
     return new Promise(resolve => {
