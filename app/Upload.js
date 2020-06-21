@@ -1,6 +1,6 @@
 //import liraries
 import React, { useState, useEffect } from 'react';
-import { Image, View, Text, StyleSheet, TextInput, Dimensions } from 'react-native';
+import { Image, View, Text, StyleSheet, TextInput, Dimensions, AsyncStorage } from 'react-native';
 import { Button } from 'native-base';
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
@@ -21,7 +21,8 @@ var radio_props = [
 var checked = 0;
 var captionText = '';
 var pickedImage;
-var user = 'Shayesteh'
+var user = 'Ashkan';
+var dbReady = false
 
 
 export default function Upload() {
@@ -60,14 +61,22 @@ export default function Upload() {
     };
 
     function OnPressUpButton() {
+        if (! dbReady) {
+            AsyncStorage.getItem('username', (err, result) => {
+            if (result != null) {
+              user = result;
+            }
+            dbReady = true;
+          }); 
+        }
         var rate = ''
         for (var i = 0; i < 4; i++) {
-            var rand1 = Math.ceil(Math.random()*5)
+            var rand1 = Math.floor(Math.random()*5)
             var rand2 = Math.floor(Math.random()*10)
             rate += rand1 + '.' + rand2 + '-'
         }
         rate = rate.substring(0, rate.length - 1)
-        console.log(captionText)
+
         var post = {
             Username: user,
             Filename: image,
@@ -77,11 +86,10 @@ export default function Upload() {
 
         }
 
-
-        axios.post('https://nameless-tor-88964.herokuapp.com/api/fusers/posts/', post)
-                        .then(res => {
-                            console.log(res)
-                        })
+        // axios.post('https://nameless-tor-88964.herokuapp.com/api/fusers/posts/', post)
+        //                 .then(res => {
+        //                     console.log(res)
+        //                 })
     };
 
 

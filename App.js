@@ -71,15 +71,20 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
 
+    this.dbReady = false;
+
     this.state = {
       isReady: false,
       isSignedIn: false
     };
+
     AsyncStorage.getItem('username', (err, result) => {
         if (result != null) {
-          console.log('lay')
+          this.state.isSignedIn = true;
         }
+        this.dbReady = true;
       });
+    
     console.log(this.state)
 
   }
@@ -107,6 +112,8 @@ export default class App extends React.Component {
 
     await Promise.all([...imageAssets, ...fontAssets]);
     this.setState({ isReady: true });
+
+    
   }
 
 
@@ -114,6 +121,9 @@ export default class App extends React.Component {
     if (!this.state.isReady) {
       return <AppLoading />;
       // TODO
+    }
+    while (!this.dbReady) {
+
     }
     return (
       this.state.isSignedIn ? (

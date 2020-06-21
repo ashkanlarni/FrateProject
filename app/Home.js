@@ -1,6 +1,6 @@
 //import liraries
 import React, { Component } from 'react';
-import { RefreshControl, SafeAreaView, ScrollView, StyleSheet, Dimensions } from 'react-native';
+import { RefreshControl, SafeAreaView, ScrollView, StyleSheet, Dimensions, AsyncStorage } from 'react-native';
 import { Container, Content, Header, Title } from 'native-base';
 import Constants from 'expo-constants';
 import axios from 'axios';
@@ -38,7 +38,8 @@ const shayestehPost1 = {
 }
 
 var posts = []
-var user = 'Sha'
+var user = 'Ashkan';
+var dbReady = false;
 
 function wait(timeout) {
     return new Promise(resolve => {
@@ -49,8 +50,17 @@ function wait(timeout) {
 export default function Home() {
     const [refreshing, setRefreshing] = React.useState(false);
 
-    const onRefresh = React.useCallback(() => {
+    onRefresh = React.useCallback(() => {
         setRefreshing(true);
+        if (! dbReady) {
+            AsyncStorage.getItem('username', (err, result) => {
+            if (result != null) {
+              user = result;
+            }
+            dbReady = true;
+          }); 
+        }
+
         axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/posts/'
         )
             .then(res => {
@@ -71,8 +81,8 @@ export default function Home() {
                         posts.push(p)
 
                     }
-                    console.log(posts[0].name)
                 }
+
             })
 
         wait(2000).then(() => setRefreshing(false));

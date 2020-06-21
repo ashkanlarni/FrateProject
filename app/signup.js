@@ -6,7 +6,7 @@ import Svg, { Image } from 'react-native-svg';
 import { Button } from 'native-base';
 import axios from 'axios';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import PassMeter from "react-native-passmeter";
+import PassMeter from 'react-native-passmeter';
 
 import { isSignedIn } from '../App';
 
