@@ -21,7 +21,7 @@ var radio_props = [
 var checked = 0;
 var captionText = '';
 var pickedImage;
-var user = 'Shay'
+var user = 'Shayesteh'
 
 
 function Caption(props) {
@@ -89,10 +89,10 @@ export default function Upload() {
         }
 
 
-        // axios.post('https://nameless-tor-88964.herokuapp.com/api/fusers/posts/', post)
-        //                 .then(res => {
-        //                     console.log(res)
-        //                 })
+        axios.post('https://nameless-tor-88964.herokuapp.com/api/fusers/posts/', post)
+                        .then(res => {
+                            console.log(res)
+                        })
     };
 
 

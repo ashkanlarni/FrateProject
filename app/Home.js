@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { RefreshControl, SafeAreaView, ScrollView, StyleSheet, Dimensions } from 'react-native';
 import { Container, Content, Header, Title } from 'native-base';
 import Constants from 'expo-constants';
+import axios from 'axios';
 
 import CardComponent from './CardComponent';
 
@@ -36,6 +37,9 @@ const shayestehPost1 = {
     "caption": 'Est do irure magna dolor adipisicing do quis labore excepteur.'
 }
 
+var posts = []
+var user = 'Shay'
+
 function wait(timeout) {
     return new Promise(resolve => {
         setTimeout(resolve, timeout);
@@ -47,6 +51,29 @@ export default function Home() {
 
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
+        axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/posts/'
+        )
+            .then(res => {
+                for (var u in res.data) {
+                    var obj = res.data[u]
+                    if (obj.Username == user) {
+                        var r = obj.Ratings.split('-')
+
+                        var p = {
+                            "name": obj.Username,
+                            "date": obj.Date,
+                            "profilePic": require('../assets/images/profile/Ashkan.jpg'),
+                            "image": obj.Filename,
+                            "category": obj.Category,
+                            "rate": r,
+                            "caption": obj.Caption
+                        }
+                        posts.push(p)
+
+                    }
+                    console.log(posts[0].name)
+                }
+            })
 
         wait(2000).then(() => setRefreshing(false));
     }, [refreshing]);
