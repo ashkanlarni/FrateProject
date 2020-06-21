@@ -1,7 +1,8 @@
 //import liraries
 import React, { Component } from 'react';
-import { StyleSheet, Dimensions } from 'react-native';
+import { RefreshControl, SafeAreaView, ScrollView, StyleSheet, Dimensions } from 'react-native';
 import { Container, Content, Header, Title } from 'native-base';
+import Constants from 'expo-constants';
 
 import CardComponent from './CardComponent';
 
@@ -35,61 +36,80 @@ const shayestehPost1 = {
     "caption": 'Est do irure magna dolor adipisicing do quis labore excepteur.'
 }
 
-// create a component
-class Home extends Component {
+function wait(timeout) {
+    return new Promise(resolve => {
+        setTimeout(resolve, timeout);
+    });
+}
 
-    render() {
-        return (
-            <Container style={styles.container}>
-                <Header style={{ height: 50, backgroundColor: 'white', alignItems: 'center', justifyContent: 'space-around' }}>
-                    <Title style={styles.title}>
-                        F
-                    </Title>
-                    <Title style={styles.title}>
-                        R
-                    </Title>
-                    <Title style={styles.title}>
-                        A
-                    </Title>
-                    <Title style={styles.title}>
-                        T
-                    </Title>
-                    <Title style={styles.title}>
-                        E
-                    </Title>
-                </Header>
-                <Content>
-                    <CardComponent
-                        name={ashkanPost1['name']}
-                        date={ashkanPost1['date']}
-                        profilePicSource={ashkanPost1['profilePic']}
-                        imageSource={ashkanPost1['image']}
-                        category={ashkanPost1['category']}
-                        rate={ashkanPost1['rate']}
-                        caption={ashkanPost1['caption']}
-                    />
-                    <CardComponent
-                        name={aliPost1['name']}
-                        date={aliPost1['date']}
-                        profilePicSource={aliPost1['profilePic']}
-                        imageSource={aliPost1['image']}
-                        category={aliPost1['category']}
-                        rate={aliPost1['rate']}
-                        caption={aliPost1['caption']}
-                    />
-                    <CardComponent
-                        name={shayestehPost1['name']}
-                        date={shayestehPost1['date']}
-                        profilePicSource={shayestehPost1['profilePic']}
-                        imageSource={shayestehPost1['image']}
-                        category={shayestehPost1['category']}
-                        rate={shayestehPost1['rate']}
-                        caption={shayestehPost1['caption']}
-                    />
-                </Content>
-            </Container>
-        );
-    }
+export default function Home() {
+    const [refreshing, setRefreshing] = React.useState(false);
+
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+
+        wait(2000).then(() => setRefreshing(false));
+    }, [refreshing]);
+
+    return (
+        <Container style={styles.container}>
+            <Header style={{ height: 50, backgroundColor: 'white', alignItems: 'center', justifyContent: 'space-around' }}>
+                <Title style={styles.title}>
+                    F
+                </Title>
+                <Title style={styles.title}>
+                    R
+                </Title>
+                <Title style={styles.title}>
+                    A
+                </Title>
+                <Title style={styles.title}>
+                    T
+                </Title>
+                <Title style={styles.title}>
+                    E
+                </Title>
+            </Header>
+            <SafeAreaView style={{ flex: 1 }}>
+                <ScrollView
+                    contentContainerStyle={{ flex: 1 }}
+                    refreshControl={
+                        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+                    }
+                >
+                    <Content>
+                        <CardComponent
+                            name={ashkanPost1['name']}
+                            date={ashkanPost1['date']}
+                            profilePicSource={ashkanPost1['profilePic']}
+                            imageSource={ashkanPost1['image']}
+                            category={ashkanPost1['category']}
+                            rate={ashkanPost1['rate']}
+                            caption={ashkanPost1['caption']}
+                        />
+                        <CardComponent
+                            name={aliPost1['name']}
+                            date={aliPost1['date']}
+                            profilePicSource={aliPost1['profilePic']}
+                            imageSource={aliPost1['image']}
+                            category={aliPost1['category']}
+                            rate={aliPost1['rate']}
+                            caption={aliPost1['caption']}
+                        />
+                        <CardComponent
+                            name={shayestehPost1['name']}
+                            date={shayestehPost1['date']}
+                            profilePicSource={shayestehPost1['profilePic']}
+                            imageSource={shayestehPost1['image']}
+                            category={shayestehPost1['category']}
+                            rate={shayestehPost1['rate']}
+                            caption={shayestehPost1['caption']}
+                        />
+                    </Content>
+                </ScrollView>
+            </SafeAreaView>
+        </Container>
+    );
 }
 
 // define your styles
@@ -105,6 +125,3 @@ const styles = StyleSheet.create({
         alignContent: 'center'
     }
 });
-
-//make this component available to the app
-export default Home;
