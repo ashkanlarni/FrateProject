@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, AsyncStorage } from 'react-native';
 import { AppLoading } from 'expo';
 import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
@@ -73,8 +73,15 @@ export default class App extends React.Component {
 
     this.state = {
       isReady: false,
-      isSignedIn: true
+      isSignedIn: false
     };
+    AsyncStorage.getItem('username', (err, result) => {
+        if (result != null) {
+          console.log('lay')
+        }
+      });
+    console.log(this.state)
+
   }
 
   async componentDidMount() {

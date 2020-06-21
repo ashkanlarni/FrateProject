@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, StyleSheet, Dimensions, TextInput } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, TextInput, AsyncStorage } from 'react-native';
 import { Button } from 'native-base';
 import Animated, { Easing } from 'react-native-reanimated';
 import { TapGestureHandler, State } from 'react-native-gesture-handler';
@@ -123,14 +123,28 @@ class Login extends React.Component {
         axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/login/'
         )
             .then(res => {
+                var user
                 for (var u in res.data) {
                     var obj = res.data[u]
                     if (obj.Email == this.email && obj.Password == this.password) {
                         correct = true;
+                        user = obj
                     }
                 }
                 if (correct) {
                     alert('Hooray.');
+                    try {
+                        AsyncStorage.setItem(
+                          'username',
+                          user.Username
+                        );
+                        AsyncStorage.setItem(
+                          'email',
+                          user.Email
+                        );
+                      } catch (error) {
+                      }
+                                
                 }
                 else
                     alert('The email or password did not match our records. Please try again.')

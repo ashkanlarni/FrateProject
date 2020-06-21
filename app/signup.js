@@ -1,6 +1,6 @@
 //This is an example code for Navigator// 
 import * as React from 'react';
-import { View, Text, StyleSheet, Dimensions, TextInput } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, TextInput, AsyncStorage } from 'react-native';
 import Svg, { Image } from 'react-native-svg';
 import { Button } from 'native-base';
 import axios from 'axios';
@@ -58,6 +58,17 @@ class SignUp extends React.Component {
                         })
                 }
                 if (correct == true) {
+                    try {
+                        AsyncStorage.setItem(
+                          'username',
+                          user.Username
+                        );
+                        AsyncStorage.setItem(
+                          'email',
+                          user.Email
+                        );
+                      } catch (error) {
+                      }
                     alert('Hooray.');
                     isSignedIn = true;
                     // TODO
