@@ -45,6 +45,10 @@ export default function Upload() {
         })();
     }, []);
 
+    onPasswordChange() => {
+        
+    };
+
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -124,7 +128,9 @@ export default function Upload() {
                                 />
                             </View>
                             <View style={{ justifyContent: 'center' }}>
-                                <Button rounded style={styles.button}>
+                                <Button rounded
+                                onPress={() => this.onPressUploadButton()}
+                                style={styles.button}>
                                     <Text style={styles.vision}>
                                         {'UPLOAD'}
                                     </Text>
