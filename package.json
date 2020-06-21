@@ -17,6 +17,7 @@
     "expo-asset": "~8.1.4",
     "expo-constants": "^9.0.0",
     "expo-image-picker": "^8.1.0",
+    "image-data-uri": "^2.0.1",
     "native-base": "^2.13.12",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",

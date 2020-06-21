@@ -8,6 +8,7 @@ import { Container, Content, Header, Title } from 'native-base';
 import RadioForm from 'react-native-simple-radio-button';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import axios from 'axios';
 
 const { width, height } = Dimensions.get('window');
 
@@ -18,6 +19,10 @@ var radio_props = [
 ];
 
 var checked = 0;
+var captionText = '';
+var pickedImage;
+var user = 'Shay'
+
 
 function Caption(props) {
     return (
@@ -45,10 +50,6 @@ export default function Upload() {
         })();
     }, []);
 
-    onPasswordChange() => {
-        
-    };
-
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -63,6 +64,37 @@ export default function Upload() {
             setImage(result.uri);
         }
     };
+
+    function OnChangeCaption(text) {
+        onChangeText(text)
+        captionText = text
+    };
+
+    function OnPressUpButton() {
+        var rate = ''
+        for (var i = 0; i < 4; i++) {
+            var rand1 = Math.ceil(Math.random()*5)
+            var rand2 = Math.floor(Math.random()*10)
+            rate += rand1 + '.' + rand2 + '-'
+        }
+        rate = rate.substring(0, rate.length - 1)
+        console.log(captionText)
+        var post = {
+            Username: user,
+            Filename: image,
+            Category: checked,
+            Ratings: rate,
+            Caption: captionText
+
+        }
+
+
+        // axios.post('https://nameless-tor-88964.herokuapp.com/api/fusers/posts/', post)
+        //                 .then(res => {
+        //                     console.log(res)
+        //                 })
+    };
+
 
     return (
         <Container style={styles.container}>
@@ -125,14 +157,14 @@ export default function Upload() {
                                     placeholder={'caption'}
                                     multiline
                                     numberOfLines={4}
-                                    onChangeText={text => onChangeText(text)}
+                                    onChangeText={text => OnChangeCaption(text)}
                                     value={value}
                                     style={{ ...styles.textInput, fontFamily: 'Vision_Light' }}
                                 />
                             </View>
                             <View style={{ justifyContent: 'center' }}>
                                 <Button rounded
-                                onPress={() => this.onPressUploadButton()}
+                                onPress={() => OnPressUpButton()}
                                 style={styles.button}>
                                     <Text style={styles.vision}>
                                         {'UPLOAD'}
