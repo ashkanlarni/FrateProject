@@ -119,7 +119,10 @@ export default function Upload() {
                         </View>
                         <View style={{ justifyContent: 'center', height: height / 3 }}>
                             <View style={{ justifyContent: 'center', fontFamily: 'Vision_Bold' }}>
-                                <Caption
+                                <TextInput
+                                    editable
+                                    maxLength={100}
+                                    placeholder={'caption'}
                                     multiline
                                     numberOfLines={4}
                                     onChangeText={text => onChangeText(text)}
