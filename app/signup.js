@@ -1,10 +1,11 @@
 //This is an example code for Navigator// 
 import * as React from 'react';
-import { View, Text, StyleSheet, Dimensions, TextInput } from 'react-native';
+import { SafeAreaView, View, Text, StyleSheet, Dimensions, TextInput } from 'react-native';
 import Svg, { Image } from 'react-native-svg';
 import { Button } from 'native-base';
 import axios from 'axios';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import PassMeter from "react-native-passmeter";
 
 import { isSignedIn } from '../App';
 
@@ -84,14 +85,48 @@ class SignUp extends React.Component {
                         </Svg>
                     </View>
                     <View style={{ height: height + height / 10, justifyContent: 'center', alignContent: 'center' }}>
-                        <TextInput onChangeText={(text) => this.username = text}
-                            placeholder='USERNAME' style={styles.textInput} placeholderTextColor='rgba(0, 0, 0, 0.6)' />
-                        <TextInput onChangeText={(text) => this.email = text}
-                            placeholder='EMAIL' style={styles.textInput} placeholderTextColor='rgba(0, 0, 0, 0.6)' />
+                        <TextInput
+                            onChangeText={(text) => this.username = text}
+                            placeholder='USERNAME'
+                            style={styles.textInput}
+                            placeholderTextColor='rgba(0, 0, 0, 0.6)'
+                            textContentType={'emailAddress'}
+                            clearButtonMode={'while-editing'}
+                        // returnKeyType={'next'}
+                        />
+                        <TextInput
+                            onChangeText={(text) => this.email = text}
+                            placeholder='EMAIL'
+                            style={styles.textInput}
+                            placeholderTextColor='rgba(0, 0, 0, 0.6)'
+                            textContentType={'emailAddress'}
+                            clearButtonMode={'while-editing'}
+                            keyboardType={'email-address'}
+                        // returnKeyType={'next'}
+                        />
                         <TextInput onChangeText={(text) => this.password = text}
-                            placeholder='PASSWORD' style={styles.textInput} placeholderTextColor='rgba(0, 0, 0, 0.6)' secureTextEntry={true} />
-                        <TextInput onChangeText={(text) => this.onPasswordChange(text)}
-                            placeholder='RE-ENTER PASSWORD' style={styles.textInput} placeholderTextColor='rgba(0, 0, 0, 0.6)' secureTextEntry={true} />
+                            placeholder='PASSWORD'
+                            style={styles.textInput}
+                            placeholderTextColor='rgba(0, 0, 0, 0.6)'
+                            secureTextEntry={true}
+                            autoCorrect={false}
+                            spellCheck={false}
+                            textContentType={'password'}
+                            clearButtonMode={'while-editing'}
+                        // returnKeyType={'next'}
+                        />
+                        <TextInput
+                            onChangeText={(text) => this.onPasswordChange(text)}
+                            placeholder='RE-ENTER PASSWORD'
+                            style={styles.textInput}
+                            placeholderTextColor='rgba(0, 0, 0, 0.6)'
+                            secureTextEntry={true}
+                            autoCorrect={false}
+                            spellCheck={false}
+                            textContentType={'password'}
+                            clearButtonMode={'while-editing'}
+                            returnKeyType={'done'}
+                        />
                         <Button rounded
                             onPress={() => this.onPressSignUpButton()}
                             style={{ ...styles.button, marginVertical: 50, backgroundColor: 'rgb(85, 205, 95)' }}>

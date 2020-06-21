@@ -13,17 +13,20 @@ const colors = {
     "Photography": '#e91e63',
 }
 
+const category = {
+    0: 'Photography',
+    1: 'Art',
+    2: 'Lifestyle'
+}
+
 // create a component
 class CardComponent extends Component {
-
-
-
     constructor(props) {
         super(props);
 
         this.subrate = [];
 
-        switch (this.props.category) {
+        switch (category[this.props.category]) {
             case 'Lifestyle':
                 this.subrate = ['Beauty', 'Appeal', 'Quality', 'Overall'];
                 break;
@@ -50,7 +53,7 @@ class CardComponent extends Component {
                         />
                     </View>
                     <View style={{ width: width / 3, alignItems: 'flex-end' }}>
-                        <Text style={{ ...styles.vision, fontSize: 16, right: 15 }}>{this.props.category}</Text>
+                        <Text style={{ ...styles.vision, fontSize: 16, right: 15 }}>{category[this.props.category]}</Text>
                     </View>
                 </CardItem>
                 <CardItem cardBody>
@@ -65,7 +68,7 @@ class CardComponent extends Component {
                             percent={this.props.rate[0] / 5 * 100}
                             radius={18}
                             borderWidth={4}
-                            color={colors[this.props.category]}
+                            color={colors[category[this.props.category]]}
                             shadowColor="#d3d3d3"
                             bgColor="white"
                         >
@@ -80,7 +83,7 @@ class CardComponent extends Component {
                             percent={this.props.rate[1] / 5 * 100}
                             radius={18}
                             borderWidth={4}
-                            color={colors[this.props.category]}
+                            color={colors[category[this.props.category]]}
                             shadowColor="#d3d3d3"
                             bgColor="white"
                         >
@@ -95,7 +98,7 @@ class CardComponent extends Component {
                             percent={this.props.rate[2] / 5 * 100}
                             radius={18}
                             borderWidth={4}
-                            color={colors[this.props.category]}
+                            color={colors[category[this.props.category]]}
                             shadowColor="#d3d3d3"
                             bgColor="white"
                         >
@@ -110,7 +113,7 @@ class CardComponent extends Component {
                             percent={this.props.rate[3] / 5 * 100}
                             radius={18}
                             borderWidth={4}
-                            color={colors[this.props.category]}
+                            color={colors[category[this.props.category]]}
                             shadowColor="#d3d3d3"
                             bgColor="white"
                         >

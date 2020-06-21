@@ -24,17 +24,6 @@ var pickedImage;
 var user = 'Shayesteh'
 
 
-function Caption(props) {
-    return (
-        <TextInput
-            {...props} // Inherit any props passed to it; e.g., multiline, numberOfLines below
-            editable
-            maxLength={100}
-            placeholder={'caption'}
-        />
-    );
-}
-
 export default function Upload() {
     const [image, setImage] = useState(null);
     const [value, onChangeText] = React.useState('');

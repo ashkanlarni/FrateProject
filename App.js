@@ -60,7 +60,7 @@ function UploadStack() {
 
 function isSignedInHandler() {
   this.setState({
-    isSignedIn: !isSignedIn,
+    isSignedIn: true,
   });
 }
 
@@ -73,7 +73,7 @@ export default class App extends React.Component {
 
     this.state = {
       isReady: false,
-      isSignedIn: true
+      isSignedIn: false
     };
   }
 
@@ -86,6 +86,7 @@ export default class App extends React.Component {
     const fontAssets = cacheFonts([FontAwesome.font]);
 
     await Font.loadAsync({
+      Roboto_medium: require("./assets/fonts/Vision/Vision-Black.ttf"),
       Vision_Black: require("./assets/fonts/Vision/Vision-Black.ttf"),
       Vision_Heavy: require("./assets/fonts/Vision/Vision-Heavy.ttf"),
       Vision_Bold: require("./assets/fonts/Vision/Vision-Bold.ttf"),
@@ -140,7 +141,13 @@ export default class App extends React.Component {
               <Stack.Screen
                 options={{ headerShown: false }}
                 name='Sign Up'
-                component={SignUp} />
+                component={SignUp}
+              />
+              <Stack.Screen
+                options={{ headerShown: false }}
+                name='Home'
+                component={Home}
+              />
             </Stack.Navigator>
           </NavigationContainer>
         )

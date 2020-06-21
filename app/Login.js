@@ -131,6 +131,7 @@ class Login extends React.Component {
                 }
                 if (correct) {
                     alert('Hooray.');
+                    this.props.navigation.navigate('Home');
                 }
                 else
                     alert('The email or password did not match our records. Please try again.')
@@ -187,10 +188,28 @@ class Login extends React.Component {
                                     </Button>
                                 </Animated.View>
                             </TapGestureHandler>
-                            <TextInput onChangeText={(text) => this.email = text}
-                                placeholder='EMAIL' style={styles.textInput} placeholderTextColor='rgba(0, 0, 0, 0.6)' />
-                            <TextInput onChangeText={(text) => this.password = text}
-                                placeholder='PASSWORD' style={styles.textInput} placeholderTextColor='rgba(0, 0, 0, 0.6)' secureTextEntry={true} />
+                            <TextInput
+                                onChangeText={(text) => this.email = text}
+                                placeholder='EMAIL'
+                                style={styles.textInput}
+                                placeholderTextColor='rgba(0, 0, 0, 0.6)'
+                                textContentType={'emailAddress'}
+                                clearButtonMode={'while-editing'}
+                                keyboardType={'email-address'}
+                            // returnKeyType={'next'}
+                            />
+                            <TextInput
+                                onChangeText={(text) => this.password = text}
+                                placeholder='PASSWORD'
+                                style={styles.textInput}
+                                placeholderTextColor='rgba(0, 0, 0, 0.6)'
+                                secureTextEntry={true}
+                                autoCorrect={false}
+                                spellCheck={false}
+                                textContentType={'password'}
+                                clearButtonMode={'while-editing'}
+                                returnKeyType={'done'}
+                            />
                             <Animated.View style={{ marginVertical: 50 }}>
                                 <Button rounded
                                     onPress={() => this.onPressSignInButton()}
