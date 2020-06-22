@@ -52,14 +52,16 @@ export default function Home() {
 
     onRefresh = React.useCallback(() => {
         setRefreshing(true);
-        if (! dbReady) {
-            AsyncStorage.getItem('username', (err, result) => {
-            if (result != null) {
-              user = result;
-            }
-            dbReady = true;
-          }); 
-        }
+        // if (! dbReady) {
+        //     AsyncStorage.getItem('username', (err, result) => {
+        //     if (result != null) {
+        //       user = result;
+        //     }
+        //     dbReady = true;
+        //   }); 
+        // }
+
+        posts = []
 
         axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/posts/'
         )
@@ -78,14 +80,14 @@ export default function Home() {
                             "rate": r,
                             "caption": obj.Caption
                         }
-                        posts.push(p)
+                        posts.unshift(p)
 
                     }
                 }
 
             })
 
-        wait(2000).then(() => setRefreshing(false));
+        wait(1000).then(() => setRefreshing(false));
     }, [refreshing]);
 
     return (

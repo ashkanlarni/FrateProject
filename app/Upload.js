@@ -61,14 +61,14 @@ export default function Upload() {
     };
 
     function OnPressUpButton() {
-        if (! dbReady) {
-            AsyncStorage.getItem('username', (err, result) => {
-            if (result != null) {
-              user = result;
-            }
-            dbReady = true;
-          }); 
-        }
+        // if (! dbReady) {
+        //     AsyncStorage.getItem('username', (err, result) => {
+        //     if (result != null) {
+        //       user = result;
+        //     }
+        //     dbReady = true;
+        //   }); 
+        // }
         var rate = ''
         for (var i = 0; i < 4; i++) {
             var rand1 = Math.floor(Math.random()*5)
@@ -86,10 +86,10 @@ export default function Upload() {
 
         }
 
-        // axios.post('https://nameless-tor-88964.herokuapp.com/api/fusers/posts/', post)
-        //                 .then(res => {
-        //                     console.log(res)
-        //                 })
+        axios.post('https://nameless-tor-88964.herokuapp.com/api/fusers/posts/', post)
+                        .then(res => {
+                            // console.log(res)
+                        })
     };
 
 
