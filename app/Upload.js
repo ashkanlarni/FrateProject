@@ -83,13 +83,13 @@ export default function Upload() {
             Category: checked,
             Ratings: rate,
             Caption: captionText
-
         }
 
-        // axios.post('https://nameless-tor-88964.herokuapp.com/api/fusers/posts/', post)
-        //                 .then(res => {
-        //                     console.log(res)
-        //                 })
+
+        axios.post('https://nameless-tor-88964.herokuapp.com/api/fusers/posts/', post)
+            .then(res => {
+                console.log(res)
+            })
     };
 
 
@@ -161,8 +161,8 @@ export default function Upload() {
                             </View>
                             <View style={{ justifyContent: 'center' }}>
                                 <Button rounded
-                                onPress={() => OnPressUpButton()}
-                                style={styles.button}>
+                                    onPress={() => OnPressUpButton()}
+                                    style={styles.button}>
                                     <Text style={styles.vision}>
                                         {'UPLOAD'}
                                     </Text>
