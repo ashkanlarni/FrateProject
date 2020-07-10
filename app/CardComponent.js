@@ -4,6 +4,7 @@ import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
 import { Button, Icon, Card, CardItem, Thumbnail, Body, Left, Right } from 'native-base';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import ProgressCircle from 'react-native-progress-circle'
+import Slider from "react-native-slider";
 
 const { width, height } = Dimensions.get('window');
 
@@ -24,6 +25,7 @@ class CardComponent extends Component {
     constructor(props) {
         super(props);
 
+        this.openRating = false;
         this.subrate = [];
 
         switch (category[this.props.category]) {
@@ -39,9 +41,18 @@ class CardComponent extends Component {
         }
     }
 
+    state = {
+        value: 0.2
+    };
+
+    RatingChanger() {
+        // this.Ratings = !this.Ratings;
+        console.log(this.Ratings);
+    };
+
     render() {
         return (
-            <Card>
+            <Card transparent={true}>
                 <CardItem style={{ justifyContent: 'center', alignItems: 'center', width: width }}>
                     <View style={{ width: width / 3, alignItems: 'flex-start' }}>
                         <Text style={{ fontFamily: 'Vision_Bold', fontSize: 18, left: 15 }}>{this.props.name}</Text>
@@ -62,6 +73,23 @@ class CardComponent extends Component {
                         style={{ height: width, width: null, flex: 1 }}
                     />
                 </CardItem>
+                {
+                    this.openRating
+                    &&
+                    <CardItem style={{ height: 100, backgroundColor: 'white', borderColor: 'black', borderWidth: '2' }}>
+                        <Body style={{ justifyContent: 'center', width: width }}>
+                            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'stretch', marginLeft: 0, marginRight: 100, width: width / 2 }}>
+                                <Slider
+                                    value={this.state.value}
+                                    onValueChange={value => this.setState({ value })}
+                                />
+                                <Text>
+                                    Value: {this.state.value}
+                                </Text>
+                            </View>
+                        </Body>
+                    </CardItem>
+                }
                 <CardItem style={{ height: 70 }}>
                     <Body style={styles.body}>
                         <ProgressCircle

@@ -135,16 +135,17 @@ class Login extends React.Component {
                     alert('Hooray.');
                     try {
                         AsyncStorage.setItem(
-                          'username',
-                          user.Username
+                            'username',
+                            user.Username
                         );
                         AsyncStorage.setItem(
-                          'email',
-                          user.Email
+                            'email',
+                            user.Email
                         );
-                      } catch (error) {
-                      }
-                                
+                        console.log(user.Username);
+                    } catch (error) {
+                    }
+
                     this.props.navigation.navigate('Home');
                 }
                 else

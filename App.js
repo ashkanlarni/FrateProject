@@ -13,6 +13,7 @@ import Login from './app/Login';
 import SignUp from './app/SignUp';
 import Home from './app/Home';
 import Upload from './app/Upload';
+import Search from './app/Search';
 
 function cacheImages(images) {
   return images.map(image => {
@@ -38,6 +39,7 @@ function HomeStack() {
         name='Home'
         component={Home}
       />
+      <Stack.Screen options={{ headerShown: false }} name='Search' component={Search} />
       <Stack.Screen options={{ headerShown: false }} name='Upload' component={Upload} />
     </Stack.Navigator>
   );
@@ -54,14 +56,25 @@ function UploadStack() {
         component={Upload}
       />
       <Stack.Screen options={{ headerShown: false }} name='Home' component={Home} />
+      <Stack.Screen options={{ headerShown: false }} name='Search' component={Search} />
     </Stack.Navigator>
   );
 }
 
-function isSignedInHandler() {
-  this.setState({
-    isSignedIn: true,
-  });
+function SearchStack() {
+  return (
+    <Stack.Navigator initialRouteName='Search' >
+      <Stack.Screen
+        options={{
+          headerShown: false
+        }}
+        name='Search'
+        component={Search}
+      />
+      <Stack.Screen options={{ headerShown: false }} name='Home' component={Home} />
+      <Stack.Screen options={{ headerShown: false }} name='Upload' component={Upload} />
+    </Stack.Navigator>
+  );
 }
 
 const Stack = createStackNavigator();
@@ -79,12 +92,12 @@ export default class App extends React.Component {
     };
 
     AsyncStorage.getItem('username', (err, result) => {
-        if (result != null) {
-          this.state.isSignedIn = true;
-        }
-        this.dbReady = true;
-      });
-    
+      if (result != null) {
+        this.state.isSignedIn = true;
+      }
+      this.dbReady = true;
+    });
+
     console.log(this.state)
 
   }
@@ -113,7 +126,7 @@ export default class App extends React.Component {
     await Promise.all([...imageAssets, ...fontAssets]);
     this.setState({ isReady: true });
 
-    
+
   }
 
 
@@ -134,6 +147,12 @@ export default class App extends React.Component {
                 tabBarLabel: 'Home',
                 tabBarIcon: ({ color }) => (
                   <MaterialCommunityIcons name="home" style={{ padding: 10 }} color={color} size={26} font={'Vision_Bold'} />
+                ),
+              }} />
+              <Tab.Screen name="SearchStack" component={SearchStack} options={{
+                tabBarLabel: 'Search',
+                tabBarIcon: ({ color }) => (
+                  <MaterialCommunityIcons name="magnify" style={{ padding: 10 }} color={color} size={26} font={'Vision_Bold'} />
                 ),
               }} />
               <Tab.Screen name="UploadStack" component={UploadStack} options={{

@@ -2,43 +2,12 @@
 import React, { Component } from 'react';
 import { RefreshControl, SafeAreaView, ScrollView, StyleSheet, Dimensions, AsyncStorage } from 'react-native';
 import { Container, Content, Header, Title } from 'native-base';
-import Constants from 'expo-constants';
 import axios from 'axios';
-
-
 
 import CardComponent from './CardComponent';
 
-// var post = [{
-//     "name": 'Ashkan',
-//     "date": 'Jun 9, 2020',
-//     "profilePic": require('../assets/images/profile/Ashkan.jpg'),
-//     "image": require('../assets/images/feed/1.jpg'),
-//     "category": 2,
-//     "rate": [1.5, 2.5, 3.5, 4.5],
-//     "caption": 'Ea do Lorem occaecat laborum do. Minim ullamco ipsum minim eiusmod dolore cupidatat magna exercitation amet proident qui. Est do irure magna dolor adipisicing do quis labore excepteur.',
-// },
-// {
-//     "name": 'Ali',
-//     "date": 'Feb 14, 2020',
-//     "profilePic": require('../assets/images/profile/Ali.jpg'),
-//     "image": require('../assets/images/feed/2.jpg'),
-//     "category": 0,
-//     "rate": [1.7, 2.7, 3.7, 4.7],
-//     "caption": 'Minim ullamco ipsum minim eiusmod dolore cupidatat magna exercitation amet proident qui. Est do irure magna dolor adipisicing do quis labore excepteur.',
-// },
-// {
-//     "name": 'Shayesteh',
-//     "date": 'Aug 2, 2019',
-//     "profilePic": require('../assets/images/profile/Shayesteh.jpg'),
-//     "image": require('../assets/images/feed/3.jpg'),
-//     "category": 1,
-//     "rate": [1.9, 2.9, 3.9, 4.9],
-//     "caption": 'Est do irure magna dolor adipisicing do quis labore excepteur.'
-// }];
-
 var posts = []
-var user = 'Ashkan';
+var user = 'Ali';
 var dbReady = false;
 
 function wait(timeout) {
@@ -52,14 +21,14 @@ export default function Home() {
 
     onRefresh = React.useCallback(() => {
         setRefreshing(true);
-        // if (! dbReady) {
-        //     AsyncStorage.getItem('username', (err, result) => {
-        //     if (result != null) {
-        //       user = result;
-        //     }
-        //     dbReady = true;
-        //   }); 
-        // }
+        if (!dbReady) {
+            AsyncStorage.getItem('username', (err, result) => {
+                if (result != null) {
+                    user = result;
+                }
+                dbReady = true;
+            });
+        }
 
         posts = []
 

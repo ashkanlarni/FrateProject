@@ -21,7 +21,7 @@ var radio_props = [
 var checked = 0;
 var captionText = '';
 var pickedImage;
-var user = 'Ashkan';
+var user = 'Ali';
 var dbReady = false
 
 
@@ -61,18 +61,18 @@ export default function Upload() {
     };
 
     function OnPressUpButton() {
-        // if (! dbReady) {
-        //     AsyncStorage.getItem('username', (err, result) => {
-        //     if (result != null) {
-        //       user = result;
-        //     }
-        //     dbReady = true;
-        //   }); 
-        // }
+        if (!dbReady) {
+            AsyncStorage.getItem('username', (err, result) => {
+                if (result != null) {
+                    user = result;
+                }
+                dbReady = true;
+            });
+        }
         var rate = ''
         for (var i = 0; i < 4; i++) {
-            var rand1 = Math.floor(Math.random()*5)
-            var rand2 = Math.floor(Math.random()*10)
+            var rand1 = Math.floor(Math.random() * 5)
+            var rand2 = Math.floor(Math.random() * 10)
             rate += rand1 + '.' + rand2 + '-'
         }
         rate = rate.substring(0, rate.length - 1)
@@ -85,18 +85,10 @@ export default function Upload() {
             Caption: captionText
         }
 
-<<<<<<< HEAD
-        axios.post('https://nameless-tor-88964.herokuapp.com/api/fusers/posts/', post)
-                        .then(res => {
-                            // console.log(res)
-                        })
-=======
-
         axios.post('https://nameless-tor-88964.herokuapp.com/api/fusers/posts/', post)
             .then(res => {
-                console.log(res)
+                // console.log(res)
             })
->>>>>>> 95ca50db36b4de574762a65517c3515d594ca5ee
     };
 
 
@@ -132,9 +124,9 @@ export default function Upload() {
                                 !image
                                 &&
                                 <MaterialCommunityIcons
-                                    name='plus-circle-outline'
+                                    name='plus-circle'
                                     color={'#2196f3'}
-                                    size={130}
+                                    size={100}
                                     onPress={pickImage}
                                 />
                             }
@@ -148,8 +140,8 @@ export default function Upload() {
                                 labelHorizontal={true}
                                 buttonColor={'#2196f3'}
                                 selectedButtonColor={'#2196f3'}
-                                buttonSize={10}
-                                buttonOuterSize={26}
+                                buttonSize={6}
+                                buttonOuterSize={18}
                                 labelStyle={{ fontFamily: 'Vision_Regular', fontSize: 16 }}
                             />
                         </View>
@@ -158,7 +150,7 @@ export default function Upload() {
                                 <TextInput
                                     editable
                                     maxLength={100}
-                                    placeholder={'caption'}
+                                    placeholder={'write your caption...'}
                                     multiline
                                     numberOfLines={4}
                                     onChangeText={text => OnChangeCaption(text)}
@@ -173,7 +165,6 @@ export default function Upload() {
                                     <Text style={styles.vision}>
                                         {'UPLOAD'}
                                     </Text>
-                                    {/* on click handling is reqiered */}
                                 </Button>
                             </View>
                         </View>
@@ -200,7 +191,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#2196f3',
         height: 55,
         marginHorizontal: 50,
-        marginVertical: 7.5,
+        marginVertical: 20,
         borderRadius: 27.5,
         alignItems: 'center',
         justifyContent: 'center',
@@ -213,10 +204,10 @@ const styles = StyleSheet.create({
         height: 100,
         marginHorizontal: 10,
         marginVertical: 7.5,
-        borderRadius: 3,
+        borderRadius: 7.5,
         borderWidth: 0.5,
         backgroundColor: 'white',
-        borderColor: 'rgba(0, 0, 0, 0.5)',
+        borderColor: 'rgba(0, 0, 0, 0.35)',
         paddingLeft: 10,
         fontFamily: 'Vision_Bold',
         fontSize: 16,
