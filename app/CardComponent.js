@@ -2,9 +2,9 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
 import { Button, Icon, Card, CardItem, Thumbnail, Body, Left, Right } from 'native-base';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import ProgressCircle from 'react-native-progress-circle'
-import Slider from "react-native-slider";
+
+import SliderComponent from './Slider/SliderComponent';
 
 const { width, height } = Dimensions.get('window');
 
@@ -20,12 +20,27 @@ const category = {
     2: 'Lifestyle'
 }
 
+function goToPost(props) {
+    props.navigation.navigate('Post', {
+        name: props.name,
+        date: props.date,
+        profilePicSource: props.profilePicSource,
+        imageSource: props.imageSource,
+        category: props.category,
+        rate: props.rate,
+        caption: props.caption,
+        comments: props.comments,
+        fullPagePost: true,
+        goIntoAnotherPage: false
+    });
+}
+
 // create a component
 class CardComponent extends Component {
     constructor(props) {
         super(props);
 
-        this.openRating = false;
+        this.openRating = this.props.canRate;
         this.subrate = [];
 
         switch (category[this.props.category]) {
@@ -40,15 +55,6 @@ class CardComponent extends Component {
                 break;
         }
     }
-
-    state = {
-        value: 0.2
-    };
-
-    RatingChanger() {
-        // this.Ratings = !this.Ratings;
-        console.log(this.Ratings);
-    };
 
     render() {
         return (
@@ -67,7 +73,7 @@ class CardComponent extends Component {
                         <Text style={{ ...styles.vision, fontSize: 16, right: 15 }}>{category[this.props.category]}</Text>
                     </View>
                 </CardItem>
-                <CardItem cardBody>
+                <CardItem cardBody button={this.props.goIntoAnotherPage} onPress={() => goToPost(this.props)}>
                     <Image
                         source={{ uri: this.props.imageSource }}
                         style={{ height: width, width: null, flex: 1 }}
@@ -76,17 +82,30 @@ class CardComponent extends Component {
                 {
                     this.openRating
                     &&
-                    <CardItem style={{ height: 100, backgroundColor: 'white', borderColor: 'black', borderWidth: '2' }}>
-                        <Body style={{ justifyContent: 'center', width: width }}>
-                            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'stretch', marginLeft: 0, marginRight: 100, width: width / 2 }}>
-                                <Slider
-                                    value={this.state.value}
-                                    onValueChange={value => this.setState({ value })}
-                                />
-                                <Text>
-                                    Value: {this.state.value}
-                                </Text>
-                            </View>
+                    <CardItem style={{ height: 140, backgroundColor: 'white', borderColor: 'black' }}>
+                        <Body style={styles.body}>
+                            <SliderComponent
+                                sliderHeight={160}
+                                barColor={colors[category[this.props.category]]}
+                            />
+                        </Body>
+                        <Body style={styles.body}>
+                            <SliderComponent
+                                sliderHeight={160}
+                                barColor={colors[category[this.props.category]]}
+                            />
+                        </Body>
+                        <Body style={styles.body}>
+                            <SliderComponent
+                                sliderHeight={160}
+                                barColor={colors[category[this.props.category]]}
+                            />
+                        </Body>
+                        <Body style={styles.body}>
+                            <SliderComponent
+                                sliderHeight={160}
+                                barColor={colors[category[this.props.category]]}
+                            />
                         </Body>
                     </CardItem>
                 }
@@ -152,21 +171,9 @@ class CardComponent extends Component {
                         </Text>
                     </Body>
                 </CardItem>
-                <CardItem>
+                <CardItem button={this.props.goIntoAnotherPage} onPress={() => goToPost(this.props)}>
                     <Body>
-                        <Text style={{ fontFamily: 'Vision_Regular', fontSize: 14, textAlign: 'left', textAlignVertical: 'auto' }}
-                            onPress={() => {
-                                this.props.navigation.navigate('Post', {
-                                    name: this.props.name,
-                                    date: this.props.date,
-                                    profilePicSource: this.props.profilePicSource,
-                                    imageSource: this.props.imageSource,
-                                    category: this.props.category,
-                                    rate: this.props.rate,
-                                    caption: this.props.caption,
-                                    fullPagePost: true
-                                });
-                            }}>
+                        <Text style={{ fontFamily: 'Vision_Regular', fontSize: 14, textAlign: 'left', textAlignVertical: 'auto' }}>
                             {this.props.caption}
                         </Text>
                     </Body>
@@ -176,12 +183,16 @@ class CardComponent extends Component {
                     &&
                     <CardItem>
                         <Body>
-                            <Text style={{ fontFamily: 'Vision_Light', fontSize: 13, textAlign: 'left', textAlignVertical: 'auto' }}>
-                                <Text style={{ fontFamily: 'Vision_Bold', fontSize: 13, textAlign: 'left', textAlignVertical: 'auto' }}>
-                                    {'Ali'}{' '}
-                                </Text>
-                                {'First comment, First commentFirst commentFirst commentFirst commentFirst comment First commentFirst comment'}
-                            </Text>
+                            {this.props.comments.map((p) => {
+                                return (
+                                    <Text style={{ fontFamily: 'Vision_Light', fontSize: 13, textAlign: 'left', textAlignVertical: 'auto' }}>
+                                        <Text style={{ fontFamily: 'Vision_Bold', fontSize: 13, textAlign: 'left', textAlignVertical: 'auto' }}>
+                                            {p[0]}{' '}
+                                        </Text>
+                                        {p[1]}
+                                    </Text>
+                                )
+                            })}
                         </Body>
                     </CardItem>
                 }

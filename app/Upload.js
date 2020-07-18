@@ -179,7 +179,7 @@ export default function Upload() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white',
+        backgroundColor: '#fdfdfd',
     },
     title: {
         fontFamily: 'Vision_Black',

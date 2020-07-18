@@ -1,32 +1,34 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { Container } from 'native-base';
 
 import CardComponent from './CardComponent';
 
 function Post({ route, navigation }) {
     /* 2. Get the param */
-    const { name } = route.params;
-    const { date } = route.params;
-    const { profilePicSource } = route.params;
-    const { imageSource } = route.params;
-    const { category } = route.params;
-    const { rate } = route.params;
-    const { caption } = route.params;
+    const { name, date, profilePicSource, imageSource, category, rate, caption, comments, fullPagePost, goIntoAnotherPage } = route.params;
 
     return (
-        <View style={styles.container}>
-            <CardComponent
-                name={name}
-                date={date}
-                profilePicSource={JSON.stringify(profilePicSource)}
-                imageSource={imageSource}
-                category={category}
-                rate={rate}
-                caption={caption}
-                fullPagePost={true}
-            />
-        </View>
+        <Container>
+            <ScrollView>
+                <View style={styles.container}>
+                    <CardComponent
+                        name={name}
+                        date={date}
+                        profilePicSource={JSON.stringify(profilePicSource)}
+                        imageSource={imageSource}
+                        category={category}
+                        rate={rate}
+                        caption={caption}
+                        comments={comments}
+                        fullPagePost={true}
+                        goIntoAnotherPage={false}
+                        canRate={true}
+                    />
+                </View>
+            </ScrollView>
+        </Container>
     );
 }
 

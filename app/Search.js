@@ -78,7 +78,7 @@ class Search extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#ffffff',
+        backgroundColor: '#fdfdfd',
     },
     title: {
         fontFamily: 'Vision_Black',
@@ -88,12 +88,12 @@ const styles = StyleSheet.create({
     },
     textInput: {
         height: 50,
-        backgroundColor: '#f9f9f9',
+        backgroundColor: '#fdfdfd',
         paddingLeft: 20,
         fontFamily: 'Vision_Bold',
-        // shadowOffset: { height: 2 },
-        // shadowColor: 'black',
-        // shadowOpacity: 0.2
+        shadowOffset: { height: 2 },
+        shadowColor: 'black',
+        shadowOpacity: 0.1
     },
     vision: {
         fontFamily: 'Vision_Heavy',

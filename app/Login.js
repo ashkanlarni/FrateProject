@@ -48,10 +48,6 @@ class Login extends React.Component {
         this.password = "";
         this.buttonOpacity = new Value(1);
 
-        this.state = {
-            isDisabled: true
-        };
-
         this.onStateChange = event([
             {
                 nativeEvent: ({ state }) =>

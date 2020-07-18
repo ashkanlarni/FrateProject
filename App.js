@@ -15,6 +15,7 @@ import Home from './app/Home';
 import Upload from './app/Upload';
 import Search from './app/Search';
 import Post from './app/Post';
+import SliderComponent from './app/Slider/SliderComponent';
 
 
 const Stack = createStackNavigator();
@@ -53,6 +54,12 @@ function HomeScreen() {
         tabBarLabel: 'Upload',
         tabBarIcon: ({ color }) => (
           <MaterialCommunityIcons name="upload" style={{ padding: 10 }} color={color} size={26} font={'Vision_Bold'} />
+        ),
+      }} />
+      <Tab.Screen name="Slider" component={SliderComponent} options={{
+        tabBarLabel: 'Slider',
+        tabBarIcon: ({ color }) => (
+          <MaterialCommunityIcons name="slider" style={{ padding: 10 }} color={color} size={26} font={'Vision_Bold'} />
         ),
       }} />
     </Tab.Navigator>
