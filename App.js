@@ -120,9 +120,9 @@ export default class App extends React.Component {
       this.state.isSignedIn ? (
         <>
           <NavigationContainer>
-            <Stack.Navigator initialRouteName='HomeScreen' >
-              <Stack.Screen options={{ headerShown: false }} name='HomeScreen' component={HomeScreen} />
-              <Stack.Screen name='Post' component={Post} />
+            <Stack.Navigator initialRouteName='Home' >
+              <Stack.Screen options={{ headerShown: false }} name='Home' component={HomeScreen} />
+              <Stack.Screen options={{ headerBackTitle: 'Back' }} name='Post' component={Post} />
             </Stack.Navigator>
           </NavigationContainer>
         </>

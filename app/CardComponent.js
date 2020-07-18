@@ -52,7 +52,7 @@ class CardComponent extends Component {
 
     render() {
         return (
-            <Card transparent={true}>
+            <Card transparent={false} noShadow={true}>
                 <CardItem style={{ justifyContent: 'center', alignItems: 'center', width: width }}>
                     <View style={{ width: width / 3, alignItems: 'flex-start' }}>
                         <Text style={{ fontFamily: 'Vision_Bold', fontSize: 18, left: 15 }}>{this.props.name}</Text>

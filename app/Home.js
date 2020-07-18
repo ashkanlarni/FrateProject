@@ -11,7 +11,7 @@ var pi = {
     "date": 'Jun 20, 2020',
     "profilePic": require('../assets/images/profile/Ashkan.jpg'),
     "image": 'file:///Users/ashkan/Library/Developer/CoreSimulator/Devices/825688DF-57ED-46F7-ADB8-2ABEF50401F0/data/Containers/Data/Application/582F0363-4AD4-4322-8115-7B227FE4E194/Library/Caches/ExponentExperienceData/%2540anonymous%252FFrate-5fb55f5d-3d78-46f0-9e2f-c614ec9e7bc4/ImagePicker/D397414C-7B98-4F77-AF48-464821404C3D.jpg',
-    "category": 3,
+    "category": 1,
     "rate": ['1.1', '4.5', '2.5', '3.0'],
     "caption": 'This is a test caption for a hardcode post.'
 }
@@ -130,7 +130,7 @@ export default function Home({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#ffffff',
+        backgroundColor: '#efefef',
     },
     title: {
         fontFamily: 'Vision_Black',

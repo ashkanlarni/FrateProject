@@ -17,13 +17,13 @@ function Post({ route, navigation }) {
     return (
         <View style={styles.container}>
             <CardComponent
-                name={JSON.stringify(name)}
-                date={JSON.stringify(date)}
+                name={name}
+                date={date}
                 profilePicSource={JSON.stringify(profilePicSource)}
                 imageSource={imageSource}
-                category={JSON.stringify(category)}
+                category={category}
                 rate={rate}
-                caption={JSON.stringify(caption)}
+                caption={caption}
                 fullPagePost={true}
             />
         </View>
@@ -34,39 +34,11 @@ function Post({ route, navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        // alignItems: 'center',
-        backgroundColor: '#dddddd',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        backgroundColor: '#efefef',
     },
 });
 
 //make this component available to the app
 export default Post;
-
-// create a component
-// class Post extends Component {
-//     constructor(props) {
-//         super(props);
-//         console.log(this.props.rate, 'kir');
-//         console.log(this.props.name);
-//         console.log(this.props.caption);
-//         console.log(this.props.category);
-//     }
-
-//     render() {
-//         return (
-//             <View style={styles.container}>
-//                 <CardComponent
-//                     name={this.props.name}
-//                     date={this.props.date}
-//                     profilePicSource={this.props.profilePicSource}
-//                     imageSource={this.props.imageSource}
-//                     category={this.props.category}
-//                     rate={['1.1', '4.5', '2.5', '3.0']}
-//                     caption={this.props.caption}
-//                     fullPagePost={true}
-//                 />
-//             </View>
-//         );
-//     }
-// }
