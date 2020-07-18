@@ -11,7 +11,7 @@ const { width, height } = Dimensions.get('window');
 const colors = {
     "Lifestyle": '#00a572',
     "Art": '#2196f3',
-    "Photography": '#e91e63',
+    "Photography": 'rgb(220, 50, 100)',
 }
 
 const category = {
@@ -154,11 +154,37 @@ class CardComponent extends Component {
                 </CardItem>
                 <CardItem>
                     <Body>
-                        <Text style={{ fontFamily: 'Vision_Regular', fontSize: 14, textAlign: 'left', textAlignVertical: 'auto' }}>
+                        <Text style={{ fontFamily: 'Vision_Regular', fontSize: 14, textAlign: 'left', textAlignVertical: 'auto' }}
+                            onPress={() => {
+                                this.props.navigation.navigate('Post', {
+                                    name: this.props.name,
+                                    date: this.props.date,
+                                    profilePicSource: this.props.profilePicSource,
+                                    imageSource: this.props.imageSource,
+                                    category: this.props.category,
+                                    rate: this.props.rate,
+                                    caption: this.props.caption,
+                                    fullPagePost: true
+                                });
+                            }}>
                             {this.props.caption}
                         </Text>
                     </Body>
                 </CardItem>
+                {
+                    this.props.fullPagePost
+                    &&
+                    <CardItem>
+                        <Body>
+                            <Text style={{ fontFamily: 'Vision_Light', fontSize: 13, textAlign: 'left', textAlignVertical: 'auto' }}>
+                                <Text style={{ fontFamily: 'Vision_Bold', fontSize: 13, textAlign: 'left', textAlignVertical: 'auto' }}>
+                                    {'Ali'}{' '}
+                                </Text>
+                                {'First comment, First commentFirst commentFirst commentFirst commentFirst comment First commentFirst comment'}
+                            </Text>
+                        </Body>
+                    </CardItem>
+                }
             </Card>
         );
     }

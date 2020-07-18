@@ -112,6 +112,7 @@ class Login extends React.Component {
             extrapolate: Extrapolate.CLAMP
         });
     }
+    
     onPressSignInButton() {
         if (this.password == "" || this.email == "") {
             alert('Please fill out all the fields.')
@@ -145,7 +146,6 @@ class Login extends React.Component {
                         console.log(user.Username);
                     } catch (error) {
                     }
-
                     this.props.navigation.navigate('Home');
                 }
                 else

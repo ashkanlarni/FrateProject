@@ -32,7 +32,7 @@ class SearchComponent extends Component {
                             &&
                             <Button rounded
                                 style={styles.button}>
-                                <Text style={{ ...styles.vision, color: '#2a9df4' }}>
+                                <Text style={{ ...styles.vision, color: 'rgb(220, 50, 100)' }}>
                                     {'Follow'}
                                 </Text>
                             </Button>
@@ -41,7 +41,7 @@ class SearchComponent extends Component {
                             !this.props.following
                             &&
                             <Button rounded
-                                style={{ ...styles.button, backgroundColor: '#2a9df4' }}>
+                                style={{ ...styles.button, backgroundColor: 'rgb(220, 50, 100)' }}>
                                 <Text style={{ ...styles.vision, color: 'white' }}>
                                     {'Following'}
                                 </Text>
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     },
     button: {
         backgroundColor: 'white',
-        borderColor: '#2a9df4',
+        borderColor: 'rgb(220, 50, 100)',
         borderWidth: 2,
         height: 30,
         width: 85,

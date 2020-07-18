@@ -6,6 +6,15 @@ import axios from 'axios';
 
 import CardComponent from './CardComponent';
 
+var pi = {
+    "name": 'Ashkan',
+    "date": 'Jun 20, 2020',
+    "profilePic": require('../assets/images/profile/Ashkan.jpg'),
+    "image": 'file:///Users/ashkan/Library/Developer/CoreSimulator/Devices/825688DF-57ED-46F7-ADB8-2ABEF50401F0/data/Containers/Data/Application/582F0363-4AD4-4322-8115-7B227FE4E194/Library/Caches/ExponentExperienceData/%2540anonymous%252FFrate-5fb55f5d-3d78-46f0-9e2f-c614ec9e7bc4/ImagePicker/D397414C-7B98-4F77-AF48-464821404C3D.jpg',
+    "category": 3,
+    "rate": ['1.1', '4.5', '2.5', '3.0'],
+    "caption": 'This is a test caption for a hardcode post.'
+}
 var posts = []
 var user = 'Ali';
 var dbReady = false;
@@ -16,7 +25,7 @@ function wait(timeout) {
     });
 }
 
-export default function Home() {
+export default function Home({ navigation }) {
     const [refreshing, setRefreshing] = React.useState(false);
 
     onRefresh = React.useCallback(() => {
@@ -50,7 +59,6 @@ export default function Home() {
                             "caption": obj.Caption
                         }
                         posts.unshift(p)
-
                     }
                 }
 
@@ -87,17 +95,29 @@ export default function Home() {
                 >
                     <Content>
                         {
-                            posts.map((p) => {
-                                return (<CardComponent
-                                    name={p.name}
-                                    date={p.date}
-                                    profilePicSource={p.profilePic}
-                                    imageSource={p.image}
-                                    category={p.category}
-                                    rate={p.rate}
-                                    caption={p.caption}
-                                />)
-                            })
+                            // posts.map((p) => {
+                            //     return (<CardComponent
+                            // name={p.name}
+                            // date={p.date}
+                            // profilePicSource={p.profilePic}
+                            // imageSource={p.image}
+                            // category={p.category}
+                            // rate={p.rate}
+                            // caption={p.caption}
+                            // fullPagePost={false}
+                            //     />)
+                            // })
+                            <CardComponent
+                                name={pi.name}
+                                date={pi.date}
+                                profilePicSource={pi.profilePic}
+                                imageSource={pi.image}
+                                category={pi.category}
+                                rate={pi.rate}
+                                caption={pi.caption}
+                                fullPagePost={false}
+                                navigation={navigation}
+                            />
                         }
                     </Content>
                 </ScrollView>

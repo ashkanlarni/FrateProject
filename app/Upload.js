@@ -125,7 +125,7 @@ export default function Upload() {
                                 &&
                                 <MaterialCommunityIcons
                                     name='plus-circle'
-                                    color={'#2196f3'}
+                                    color={'rgb(220, 50, 100)'}
                                     size={100}
                                     onPress={pickImage}
                                 />
@@ -138,8 +138,8 @@ export default function Upload() {
                                 onPress={(value) => { checked = value }}
                                 formHorizontal={false}
                                 labelHorizontal={true}
-                                buttonColor={'#2196f3'}
-                                selectedButtonColor={'#2196f3'}
+                                buttonColor={'rgb(220, 50, 100)'}
+                                selectedButtonColor={'rgb(220, 50, 100)'}
                                 buttonSize={6}
                                 buttonOuterSize={18}
                                 labelStyle={{ fontFamily: 'Vision_Regular', fontSize: 16 }}
@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
         alignContent: 'center'
     },
     button: {
-        backgroundColor: '#2196f3',
+        backgroundColor: 'rgb(220, 50, 100)',
         height: 55,
         marginHorizontal: 50,
         marginVertical: 20,

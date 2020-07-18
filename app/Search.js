@@ -34,8 +34,8 @@ class Search extends Component {
                         E
                     </Title>
                 </Header>
-                <Header style={{ backgroundColor: 'white', height: 50, top: -10 }} noShadow={true}>
-                    <View style={{ justifyContent: 'center', width: width, height: 50 }}>
+                <Header style={{ backgroundColor: 'white', height: 50 }} noShadow={true}>
+                    <View style={{ justifyContent: 'center', width: width, height: 14 }}>
                         <TextInput
                             onChangeText={(text) => this.search = text}
                             placeholder='SEARCH'
