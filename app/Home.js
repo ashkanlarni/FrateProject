@@ -84,7 +84,7 @@ export default function Home() {
 
                     }
                 }
-
+                console.log(posts.length)
             })
 
         wait(1000).then(() => setRefreshing(false));

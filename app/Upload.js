@@ -85,18 +85,11 @@ export default function Upload() {
             Caption: captionText
         }
 
-<<<<<<< HEAD
-        axios.post('https://nameless-tor-88964.herokuapp.com/api/fusers/posts/', post)
-                        .then(res => {
-                            // console.log(res)
-                        })
-=======
-
         axios.post('https://nameless-tor-88964.herokuapp.com/api/fusers/posts/', post)
             .then(res => {
-                console.log(res)
+                // console.log(res)
             })
->>>>>>> 95ca50db36b4de574762a65517c3515d594ca5ee
+
     };
 
 
