@@ -2,43 +2,22 @@
 import React, { Component } from 'react';
 import { RefreshControl, SafeAreaView, ScrollView, StyleSheet, Dimensions, AsyncStorage } from 'react-native';
 import { Container, Content, Header, Title } from 'native-base';
-import Constants from 'expo-constants';
 import axios from 'axios';
-
-
 
 import CardComponent from './CardComponent';
 
-// var post = [{
-//     "name": 'Ashkan',
-//     "date": 'Jun 9, 2020',
-//     "profilePic": require('../assets/images/profile/Ashkan.jpg'),
-//     "image": require('../assets/images/feed/1.jpg'),
-//     "category": 2,
-//     "rate": [1.5, 2.5, 3.5, 4.5],
-//     "caption": 'Ea do Lorem occaecat laborum do. Minim ullamco ipsum minim eiusmod dolore cupidatat magna exercitation amet proident qui. Est do irure magna dolor adipisicing do quis labore excepteur.',
-// },
-// {
-//     "name": 'Ali',
-//     "date": 'Feb 14, 2020',
-//     "profilePic": require('../assets/images/profile/Ali.jpg'),
-//     "image": require('../assets/images/feed/2.jpg'),
-//     "category": 0,
-//     "rate": [1.7, 2.7, 3.7, 4.7],
-//     "caption": 'Minim ullamco ipsum minim eiusmod dolore cupidatat magna exercitation amet proident qui. Est do irure magna dolor adipisicing do quis labore excepteur.',
-// },
-// {
-//     "name": 'Shayesteh',
-//     "date": 'Aug 2, 2019',
-//     "profilePic": require('../assets/images/profile/Shayesteh.jpg'),
-//     "image": require('../assets/images/feed/3.jpg'),
-//     "category": 1,
-//     "rate": [1.9, 2.9, 3.9, 4.9],
-//     "caption": 'Est do irure magna dolor adipisicing do quis labore excepteur.'
-// }];
-
+var pi = {
+    "name": 'Ashkan',
+    "date": 'Jun 20, 2020',
+    "profilePic": require('../assets/images/profile/Ashkan.jpg'),
+    "image": 'file:///Users/ashkan/Library/Developer/CoreSimulator/Devices/825688DF-57ED-46F7-ADB8-2ABEF50401F0/data/Containers/Data/Application/582F0363-4AD4-4322-8115-7B227FE4E194/Library/Caches/ExponentExperienceData/%2540anonymous%252FFrate-5fb55f5d-3d78-46f0-9e2f-c614ec9e7bc4/ImagePicker/D397414C-7B98-4F77-AF48-464821404C3D.jpg',
+    "category": 0,
+    "rate": ['1.1', '4.5', '2.5', '3.0'],
+    "caption": 'This is a test caption for a hardcode post.',
+    "comments": [['Ali', 'first comment first comment first comment first comment first comment first comment first comment '], ['Shayesteh', 'second comment'], ['Ashkan', 'third comment']]
+}
 var posts = []
-var user = 'Ashkan';
+var user = 'Ali';
 var dbReady = false;
 
 function wait(timeout) {
@@ -47,19 +26,19 @@ function wait(timeout) {
     });
 }
 
-export default function Home() {
+export default function Home({ navigation }) {
     const [refreshing, setRefreshing] = React.useState(false);
 
     onRefresh = React.useCallback(() => {
         setRefreshing(true);
-        // if (! dbReady) {
-        //     AsyncStorage.getItem('username', (err, result) => {
-        //     if (result != null) {
-        //       user = result;
-        //     }
-        //     dbReady = true;
-        //   }); 
-        // }
+        if (!dbReady) {
+            AsyncStorage.getItem('username', (err, result) => {
+                if (result != null) {
+                    user = result;
+                }
+                dbReady = true;
+            });
+        }
 
         posts = []
 
@@ -81,7 +60,6 @@ export default function Home() {
                             "caption": obj.Caption
                         }
                         posts.unshift(p)
-
                     }
                 }
                 console.log(posts.length)
@@ -118,17 +96,34 @@ export default function Home() {
                 >
                     <Content>
                         {
-                            posts.map((p) => {
-                                return (<CardComponent
-                                    name={p.name}
-                                    date={p.date}
-                                    profilePicSource={p.profilePic}
-                                    imageSource={p.image}
-                                    category={p.category}
-                                    rate={p.rate}
-                                    caption={p.caption}
-                                />)
-                            })
+                            // posts.map((p) => {
+                            //     return (<CardComponent
+                            // name={p.name}
+                            // date={p.date}
+                            // profilePicSource={p.profilePic}
+                            // imageSource={p.image}
+                            // category={p.category}
+                            // rate={p.rate}
+                            // caption={p.caption}
+                            // fullPagePost={false}
+                            // goIntoAnotherPage={true}
+                            // navigation={navigation}
+                            //     />)
+                            // })
+                            <CardComponent
+                                name={pi.name}
+                                date={pi.date}
+                                profilePicSource={pi.profilePic}
+                                imageSource={pi.image}
+                                category={pi.category}
+                                rate={pi.rate}
+                                caption={pi.caption}
+                                comments={pi.comments}
+                                fullPagePost={false}
+                                goIntoAnotherPage={true}
+                                canRate={false}
+                                navigation={navigation}
+                            />
                         }
                     </Content>
                 </ScrollView>
@@ -141,7 +136,7 @@ export default function Home() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#ffffff',
+        backgroundColor: '#fdfdfd',
     },
     title: {
         fontFamily: 'Vision_Black',

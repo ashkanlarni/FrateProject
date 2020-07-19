@@ -13,6 +13,13 @@ import Login from './app/Login';
 import SignUp from './app/SignUp';
 import Home from './app/Home';
 import Upload from './app/Upload';
+import Search from './app/Search';
+import Post from './app/Post';
+import SliderComponent from './app/Slider/SliderComponent';
+
+
+const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
 function cacheImages(images) {
   return images.map(image => {
@@ -28,44 +35,36 @@ function cacheFonts(fonts) {
   return fonts.map(font => Font.loadAsync(font));
 }
 
-function HomeStack() {
+function HomeScreen() {
   return (
-    <Stack.Navigator initialRouteName='Home' >
-      <Stack.Screen
-        options={{
-          headerShown: false
-        }}
-        name='Home'
-        component={Home}
-      />
-      <Stack.Screen options={{ headerShown: false }} name='Upload' component={Upload} />
-    </Stack.Navigator>
+    <Tab.Navigator initialRouteName='Home' tabBarOptions={{ activeTintColor: '#e91e63' }}>
+      <Tab.Screen name="Home" component={Home} options={{
+        tabBarLabel: 'Home',
+        tabBarIcon: ({ color }) => (
+          <MaterialCommunityIcons name="home" style={{ padding: 10 }} color={color} size={26} font={'Vision_Bold'} />
+        ),
+      }} />
+      <Tab.Screen name="Search" component={Search} options={{
+        tabBarLabel: 'Search',
+        tabBarIcon: ({ color }) => (
+          <MaterialCommunityIcons name="magnify" style={{ padding: 10 }} color={color} size={26} font={'Vision_Bold'} />
+        ),
+      }} />
+      <Tab.Screen name="Upload" component={Upload} options={{
+        tabBarLabel: 'Upload',
+        tabBarIcon: ({ color }) => (
+          <MaterialCommunityIcons name="upload" style={{ padding: 10 }} color={color} size={26} font={'Vision_Bold'} />
+        ),
+      }} />
+      <Tab.Screen name="Slider" component={SliderComponent} options={{
+        tabBarLabel: 'Slider',
+        tabBarIcon: ({ color }) => (
+          <MaterialCommunityIcons name="slider" style={{ padding: 10 }} color={color} size={26} font={'Vision_Bold'} />
+        ),
+      }} />
+    </Tab.Navigator>
   );
 }
-
-function UploadStack() {
-  return (
-    <Stack.Navigator initialRouteName='Upload' >
-      <Stack.Screen
-        options={{
-          headerShown: false
-        }}
-        name='Upload'
-        component={Upload}
-      />
-      <Stack.Screen options={{ headerShown: false }} name='Home' component={Home} />
-    </Stack.Navigator>
-  );
-}
-
-function isSignedInHandler() {
-  this.setState({
-    isSignedIn: true,
-  });
-}
-
-const Stack = createStackNavigator();
-const Tab = createBottomTabNavigator();
 
 export default class App extends React.Component {
   constructor(props) {
@@ -79,13 +78,13 @@ export default class App extends React.Component {
     };
 
     AsyncStorage.getItem('username', (err, result) => {
-        if (result != null) {
-          this.state.isSignedIn = true;
-        }
-        this.dbReady = true;
-      });
-    
-    console.log(this.state)
+      if (result != null) {
+        this.state.isSignedIn = true;
+      }
+      this.dbReady = true;
+    });
+
+    console.log(this.state);
 
   }
 
@@ -113,7 +112,6 @@ export default class App extends React.Component {
     await Promise.all([...imageAssets, ...fontAssets]);
     this.setState({ isReady: true });
 
-    
   }
 
 
@@ -129,42 +127,18 @@ export default class App extends React.Component {
       this.state.isSignedIn ? (
         <>
           <NavigationContainer>
-            <Tab.Navigator initialRouteName='Home' tabBarOptions={{ activeTintColor: '#e91e63' }}>
-              <Tab.Screen name="HomeStack" component={HomeStack} options={{
-                tabBarLabel: 'Home',
-                tabBarIcon: ({ color }) => (
-                  <MaterialCommunityIcons name="home" style={{ padding: 10 }} color={color} size={26} font={'Vision_Bold'} />
-                ),
-              }} />
-              <Tab.Screen name="UploadStack" component={UploadStack} options={{
-                tabBarLabel: 'Upload',
-                tabBarIcon: ({ color }) => (
-                  <MaterialCommunityIcons name="upload" style={{ padding: 10 }} color={color} size={26} font={'Vision_Bold'} />
-                ),
-              }} />
-            </Tab.Navigator>
+            <Stack.Navigator initialRouteName='Home' >
+              <Stack.Screen options={{ headerShown: false }} name='Home' component={HomeScreen} />
+              <Stack.Screen options={{ headerBackTitle: 'Back' }} name='Post' component={Post} />
+            </Stack.Navigator>
           </NavigationContainer>
         </>
       ) : (
           <NavigationContainer>
             <Stack.Navigator initialRouteName='Login' >
-              <Stack.Screen
-                options={{
-                  headerShown: false
-                }}
-                name='Login'
-                component={Login}
-              />
-              <Stack.Screen
-                options={{ headerShown: false }}
-                name='Sign Up'
-                component={SignUp}
-              />
-              <Stack.Screen
-                options={{ headerShown: false }}
-                name='Home'
-                component={Home}
-              />
+              <Stack.Screen options={{ headerShown: false }} name='Login' component={Login} />
+              <Stack.Screen options={{ headerShown: false }} name='Sign Up' component={SignUp} />
+              <Stack.Screen options={{ headerShown: false }} name='Home' component={Home} />
             </Stack.Navigator>
           </NavigationContainer>
         )

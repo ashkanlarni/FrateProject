@@ -19,7 +19,6 @@ class SignUp extends React.Component {
         this.email = "";
         this.password = "";
         this.passwordsmatch = false;
-
     }
 
     onPasswordChange(text) {
@@ -62,15 +61,15 @@ class SignUp extends React.Component {
                 if (correct == true) {
                     try {
                         AsyncStorage.setItem(
-                          'username',
-                          user.Username
+                            'username',
+                            user.Username
                         );
                         AsyncStorage.setItem(
-                          'email',
-                          user.Email
+                            'email',
+                            user.Email
                         );
-                      } catch (error) {
-                      }
+                    } catch (error) {
+                    }
                     alert('Hooray.');
                     isSignedIn = true;
                     // TODO
@@ -104,7 +103,6 @@ class SignUp extends React.Component {
                             placeholderTextColor='rgba(0, 0, 0, 0.6)'
                             textContentType={'emailAddress'}
                             clearButtonMode={'while-editing'}
-                        // returnKeyType={'next'}
                         />
                         <TextInput
                             onChangeText={(text) => this.email = text}
@@ -114,7 +112,6 @@ class SignUp extends React.Component {
                             textContentType={'emailAddress'}
                             clearButtonMode={'while-editing'}
                             keyboardType={'email-address'}
-                        // returnKeyType={'next'}
                         />
                         <TextInput onChangeText={(text) => this.password = text}
                             placeholder='PASSWORD'
@@ -125,7 +122,7 @@ class SignUp extends React.Component {
                             spellCheck={false}
                             textContentType={'password'}
                             clearButtonMode={'while-editing'}
-                        // returnKeyType={'next'}
+                        // TODO: returnKeyType={'next'}
                         />
                         <TextInput
                             onChangeText={(text) => this.onPasswordChange(text)}

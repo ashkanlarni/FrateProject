@@ -48,10 +48,6 @@ class Login extends React.Component {
         this.password = "";
         this.buttonOpacity = new Value(1);
 
-        this.state = {
-            isDisabled: true
-        };
-
         this.onStateChange = event([
             {
                 nativeEvent: ({ state }) =>
@@ -112,6 +108,7 @@ class Login extends React.Component {
             extrapolate: Extrapolate.CLAMP
         });
     }
+    
     onPressSignInButton() {
         if (this.password == "" || this.email == "") {
             alert('Please fill out all the fields.')
@@ -135,16 +132,16 @@ class Login extends React.Component {
                     alert('Hooray.');
                     try {
                         AsyncStorage.setItem(
-                          'username',
-                          user.Username
+                            'username',
+                            user.Username
                         );
                         AsyncStorage.setItem(
-                          'email',
-                          user.Email
+                            'email',
+                            user.Email
                         );
-                      } catch (error) {
-                      }
-                                
+                        console.log(user.Username);
+                    } catch (error) {
+                    }
                     this.props.navigation.navigate('Home');
                 }
                 else

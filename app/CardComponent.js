@@ -2,15 +2,16 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
 import { Button, Icon, Card, CardItem, Thumbnail, Body, Left, Right } from 'native-base';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import ProgressCircle from 'react-native-progress-circle'
+
+import SliderComponent from './Slider/SliderComponent';
 
 const { width, height } = Dimensions.get('window');
 
 const colors = {
     "Lifestyle": '#00a572',
     "Art": '#2196f3',
-    "Photography": '#e91e63',
+    "Photography": 'rgb(220, 50, 100)',
 }
 
 const category = {
@@ -19,11 +20,27 @@ const category = {
     2: 'Lifestyle'
 }
 
+function goToPost(props) {
+    props.navigation.navigate('Post', {
+        name: props.name,
+        date: props.date,
+        profilePicSource: props.profilePicSource,
+        imageSource: props.imageSource,
+        category: props.category,
+        rate: props.rate,
+        caption: props.caption,
+        comments: props.comments,
+        fullPagePost: true,
+        goIntoAnotherPage: false
+    });
+}
+
 // create a component
 class CardComponent extends Component {
     constructor(props) {
         super(props);
 
+        this.openRating = this.props.canRate;
         this.subrate = [];
 
         switch (category[this.props.category]) {
@@ -41,7 +58,7 @@ class CardComponent extends Component {
 
     render() {
         return (
-            <Card>
+            <Card transparent={false} noShadow={true}>
                 <CardItem style={{ justifyContent: 'center', alignItems: 'center', width: width }}>
                     <View style={{ width: width / 3, alignItems: 'flex-start' }}>
                         <Text style={{ fontFamily: 'Vision_Bold', fontSize: 18, left: 15 }}>{this.props.name}</Text>
@@ -56,12 +73,42 @@ class CardComponent extends Component {
                         <Text style={{ ...styles.vision, fontSize: 16, right: 15 }}>{category[this.props.category]}</Text>
                     </View>
                 </CardItem>
-                <CardItem cardBody>
+                <CardItem cardBody button={this.props.goIntoAnotherPage} onPress={() => goToPost(this.props)}>
                     <Image
                         source={{ uri: this.props.imageSource }}
                         style={{ height: width, width: null, flex: 1 }}
                     />
                 </CardItem>
+                {
+                    this.openRating
+                    &&
+                    <CardItem style={{ height: 140, backgroundColor: 'white', borderColor: 'black' }}>
+                        <Body style={styles.body}>
+                            <SliderComponent
+                                sliderHeight={160}
+                                barColor={colors[category[this.props.category]]}
+                            />
+                        </Body>
+                        <Body style={styles.body}>
+                            <SliderComponent
+                                sliderHeight={160}
+                                barColor={colors[category[this.props.category]]}
+                            />
+                        </Body>
+                        <Body style={styles.body}>
+                            <SliderComponent
+                                sliderHeight={160}
+                                barColor={colors[category[this.props.category]]}
+                            />
+                        </Body>
+                        <Body style={styles.body}>
+                            <SliderComponent
+                                sliderHeight={160}
+                                barColor={colors[category[this.props.category]]}
+                            />
+                        </Body>
+                    </CardItem>
+                }
                 <CardItem style={{ height: 70 }}>
                     <Body style={styles.body}>
                         <ProgressCircle
@@ -124,13 +171,31 @@ class CardComponent extends Component {
                         </Text>
                     </Body>
                 </CardItem>
-                <CardItem>
+                <CardItem button={this.props.goIntoAnotherPage} onPress={() => goToPost(this.props)}>
                     <Body>
                         <Text style={{ fontFamily: 'Vision_Regular', fontSize: 14, textAlign: 'left', textAlignVertical: 'auto' }}>
                             {this.props.caption}
                         </Text>
                     </Body>
                 </CardItem>
+                {
+                    this.props.fullPagePost
+                    &&
+                    <CardItem>
+                        <Body>
+                            {this.props.comments.map((p) => {
+                                return (
+                                    <Text style={{ fontFamily: 'Vision_Light', fontSize: 13, textAlign: 'left', textAlignVertical: 'auto' }}>
+                                        <Text style={{ fontFamily: 'Vision_Bold', fontSize: 13, textAlign: 'left', textAlignVertical: 'auto' }}>
+                                            {p[0]}{' '}
+                                        </Text>
+                                        {p[1]}
+                                    </Text>
+                                )
+                            })}
+                        </Body>
+                    </CardItem>
+                }
             </Card>
         );
     }
