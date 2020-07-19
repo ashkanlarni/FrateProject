@@ -12,6 +12,46 @@ class Search extends Component {
     constructor(props) {
         super(props);
         this.search = "";
+        this.result = [];
+        this.username = 'Ali';
+    }
+
+    onSearchButtonPressed() {
+        this.result = []
+        axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/followers/'
+        )
+            .then(res => {
+                var followers = []
+                for (var u in res.data) {
+                    var obj = res.data[u]
+                    if (obj.follower == this.username) {
+                        followers.push(obj.following)
+                    }
+                }
+
+                axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/login/'
+                )
+                    .then(res => {
+                        for (var u in res.data) {
+                            var obj = res.data[u]
+                            if (obj.username.startsWith(this.search)) {
+                                var isF = false
+                                if (followers.includes(obj.username))
+                                    isF = true
+
+                                var p = {
+                                    username: obj.username,
+                                    profilePic: require('../assets/images/profile/Ashkan.jpg'),
+                                    isFollowing: isF
+                                }
+
+                                this.result.push(p)
+                            }
+                        }
+                    })
+            })
+
+        
     }
 
     render() {

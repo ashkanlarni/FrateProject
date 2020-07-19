@@ -50,7 +50,7 @@ class SignUp extends React.Component {
             .then(res => {
                 for (var u in res.data) {
                     var obj = res.data[u]
-                    if (obj.Username == user.Username || obj.Email == user.Email)
+                    if (obj.username == user.Username || obj.email == user.Email)
                         correct = false
                 }
                 if (correct) {
