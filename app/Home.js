@@ -36,55 +36,57 @@ export default function Home({ navigation }) {
 
         posts = []
 
-        axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/posts/'
+        axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/followers/'
         )
             .then(res => {
+                var followers = []
                 for (var u in res.data) {
                     var obj = res.data[u]
-                    if (obj.username == user) {
-                        var r = obj.ratings.split('-')
-
-                        var b = 12.34
-                        console.log(b.toString())
-
-                        
-
-                        // axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/posts/'
-                        // )
-                        //     .then(res => {
-                        //         for (var u in res.data) {
-                                 
-                        //         }
-                        //     })
-
-                        var com = []
-                        com.push(['Shay', 'Lalay'])
-                        com.push(['Ashkan', 'Hooraa'])
-                        com.push(['Ali', 'This is just a comment!'])
-
-                        var rc = 0
-                        if (obj.rateCount.length != 0)
-                            rc = parseInt(obj.rateCount)
-
-
-                        var count = obj.rateCount.split('-')
-
-                        var p = {
-                            "postid": obj.id,
-                            "name": obj.username,
-                            "date": obj.date,
-                            "profilePic": require('../assets/images/profile/Ashkan.jpg'),
-                            "image": obj.filename,
-                            "category": obj.category,
-                            "rate": r,
-                            "rateCount": rc,
-                            "caption": obj.caption,
-                            "comments": com
-                        }
-                        posts.unshift(p)
+                    if (obj.follower == user) {
+                        followers.push(obj.following)
                     }
                 }
+
+                axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/posts/'
+                )
+                    .then(res => {
+                        for (var u in res.data) {
+                            var obj = res.data[u]
+                            if (obj.username == user || followers.includes(obj.username)) {
+                                var r = obj.ratings.split('-')
+
+                                var com = []
+                                com.push(['Shay', 'Lalay'])
+                                com.push(['Ashkan', 'Hooraa'])
+                                com.push(['Ali', 'This is just a comment!'])
+
+                                var rc = 0
+                                if (obj.rateCount.length != 0)
+                                    rc = parseInt(obj.rateCount)
+
+
+                                var count = obj.rateCount.split('-')
+
+                                var p = {
+                                    "postid": obj.id,
+                                    "name": obj.username,
+                                    "date": obj.date,
+                                    "profilePic": require('../assets/images/profile/Ashkan.jpg'),
+                                    "image": obj.filename,
+                                    "category": obj.category,
+                                    "rate": r,
+                                    "rateCount": rc,
+                                    "caption": obj.caption,
+                                    "comments": com
+                                }
+                                posts.unshift(p)
+                            }
+                        }
+                    })
+
             })
+
+        
 
         wait(1000).then(() => setRefreshing(false));
     }, [refreshing]);

@@ -85,12 +85,15 @@ export default function Upload() {
         //         // console.log(res)
         //     })
 
-        var id = 9
-        axios.patch('https://nameless-tor-88964.herokuapp.com/api/fusers/posts/'+id+'/', {caption: 'hoor'})
+        var f = {
+            Follower: 'Ash',
+            Following: 'Ashkan'
+        }
+
+        axios.delete('https://nameless-tor-88964.herokuapp.com/api/fusers/followers/1/')
             .then(res => {
                 console.log(res)
             })
-
 
 
     };

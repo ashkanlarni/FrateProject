@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
 import { Button, Icon, Card, CardItem, Thumbnail, Body, Left, Right } from 'native-base';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import ProgressCircle from 'react-native-progress-circle'
+import ProgressCircle from 'react-native-progress-circle';
+import axios from 'axios';
 
 const { width, height } = Dimensions.get('window');
 
@@ -15,9 +16,49 @@ class SearchComponent extends Component {
         this.state = {
             following: props.following
         }
+        this.username = props.username
+        this.name = props.name
     }
 
     toggle = () => { this.setState({ following: !this.state.following }) }
+
+    onPressFollowButton = () => {
+        this.toggle()
+
+        var f = {
+            Follower: this.username,
+            Following: this.name
+        }
+
+        axios.post('https://nameless-tor-88964.herokuapp.com/api/fusers/followers/', f)
+            .then(res => {
+                // console.log(res)
+            })
+
+    }
+
+    onPressUnFollowButton = () => {
+        this.toggle()
+
+        axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/followers/'
+                        )
+                            .then(res => {
+                                var id = 0
+                                for (var u in res.data) {
+                                    var obj = res.data[u]
+                                    if (obj.follower == this.username && obj.following == this.name) {
+                                        id = obj.id
+                                        break
+                                    }
+                                }
+
+
+                                axios.delete('https://nameless-tor-88964.herokuapp.com/api/fusers/followers/'+id+'/')
+                                    .then(res => {
+                                        // console.log(res)
+                                    })
+                            })
+    }
 
     render() {
         return (
@@ -37,7 +78,7 @@ class SearchComponent extends Component {
                             &&
                             <Button rounded
                                 style={styles.button}
-                                onPress={this.toggle}
+                                onPress={this.onPressFollowButton}
                             >
                                 <Text style={{ ...styles.vision, color: 'rgb(220, 50, 100)' }}>
                                     {'Follow'}
@@ -49,7 +90,7 @@ class SearchComponent extends Component {
                             &&
                             <Button rounded
                                 style={{ ...styles.button, backgroundColor: 'rgb(220, 50, 100)' }}
-                                onPress={this.toggle}
+                                onPress={this.onPressUnFollowButton}
                             >
                                 <Text style={{ ...styles.vision, color: 'white' }}>
                                     {'Following'}

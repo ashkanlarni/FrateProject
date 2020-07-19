@@ -99,16 +99,19 @@ class Search extends Component {
                     <View style={{ justifyContent: 'center', width: width }}>
 
                         <SearchComponent
+                            username = {this.username}
                             name={'Ashkan'}
                             profilePicSource={require('../assets/images/profile/Ashkan.jpg')}
-                            following={true}
+                            following={false}
                         />
                         <SearchComponent
+                            username = {this.username}
                             name={'Ali'}
                             profilePicSource={require('../assets/images/profile/Ali.jpg')}
                             following={false}
                         />
                         <SearchComponent
+                            username = {this.username}
                             name={'Shayesteh'}
                             profilePicSource={require('../assets/images/profile/Shayesteh.jpg')}
                             following={false}
