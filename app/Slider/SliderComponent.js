@@ -5,36 +5,28 @@ import { StyleSheet, Text, View, Slider } from 'react-native';
 export default class SliderComponent extends React.Component {
     constructor(props) {
         super(props);
+
         this.state = {
-            value: 0.0,
             distance: 0.0
         };
+
         this.width = this.props.sliderHeight
         this.height = 40
     }
 
-    change(value) {
-        this.setState(() => {
-            return {
-                value: parseFloat(value)
-            };
-        });
-    }
-
     render() {
-        const { value } = this.state;
         return (
             <View style={styles.container}>
                 <Slider
                     style={{ width: this.width, height: this.height, transform: [{ rotate: '270deg' }, { scale: 0.5 }] }}
                     minimumValue={0}
                     maximumValue={5}
+                    value={0.0}
                     minimumTrackTintColor={this.props.barColor}
-                    maximumTrackTintColor={this.props.barColor}
-                    value={this.state.distance}
-                    onValueChange={val => this.setState({ distance: val })}
+                    maximumTrackTintColor='#999999'
+                    onValueChange={val => this.props.changeFunction(this.props.variable, val)}
                 />
-                <Text style={{ ...styles.text, top: this.width / 4 }}>{Number(this.state.distance).toFixed(1)}</Text>
+                <Text style={{ ...styles.text, top: this.width / 5 }}>{Number(this.props.value).toFixed(1)}</Text>
             </View>
         );
     }
@@ -43,7 +35,7 @@ export default class SliderComponent extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#ffffff',
         alignItems: 'center',
         justifyContent: 'center'
     },

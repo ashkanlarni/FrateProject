@@ -56,12 +56,6 @@ function HomeScreen() {
           <MaterialCommunityIcons name="upload" style={{ padding: 10 }} color={color} size={26} font={'Vision_Bold'} />
         ),
       }} />
-      <Tab.Screen name="Slider" component={SliderComponent} options={{
-        tabBarLabel: 'Slider',
-        tabBarIcon: ({ color }) => (
-          <MaterialCommunityIcons name="slider" style={{ padding: 10 }} color={color} size={26} font={'Vision_Bold'} />
-        ),
-      }} />
     </Tab.Navigator>
   );
 }

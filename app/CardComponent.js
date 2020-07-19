@@ -43,6 +43,13 @@ class CardComponent extends Component {
         this.openRating = this.props.canRate;
         this.subrate = [];
 
+        this.state = {
+            rate1: 0.0,
+            rate2: 0.0,
+            rate3: 0.0,
+            rate4: 0.0
+        };
+
         switch (category[this.props.category]) {
             case 'Lifestyle':
                 this.subrate = ['Beauty', 'Appeal', 'Quality', 'Overall'];
@@ -56,13 +63,18 @@ class CardComponent extends Component {
         }
     }
 
+    change = (variable, value) => {
+        this.setState({ [variable]: value })
+    }
+
+
     onSubmitRating() {
         var ratings = [4.6, 2.0, 3.7, 2.1]
         var b = props.rate.map(parseFloat)
         var newRatings = ''
 
         for (var i = 0; i < 4; i++) {
-            var t = ( b[i] * props.rateCount + ratings[i] ) / (props.rateCount + 1)
+            var t = (b[i] * props.rateCount + ratings[i]) / (props.rateCount + 1)
             t = t.toFixed(1)
             newRatings += t.toString() + '-'
         }
@@ -70,18 +82,15 @@ class CardComponent extends Component {
         newRatings = newRatings.substring(0, newRatings.length - 1)
         var newCount = (props.rateCount + 1).toString()
 
-        axios.patch('https://nameless-tor-88964.herokuapp.com/api/fusers/posts/'+props.postid+'/', {rateCount: newCount, ratings: newRatings})
+        axios.patch('https://nameless-tor-88964.herokuapp.com/api/fusers/posts/' + props.postid + '/', { rateCount: newCount, ratings: newRatings })
             .then(res => {
                 // console.log(res)
             })
-
-
-        
     }
 
     render() {
         return (
-            <Card transparent={false} noShadow={true}>
+            <Card transparent={true} noShadow={true}>
                 <CardItem style={{ justifyContent: 'center', alignItems: 'center', width: width }}>
                     <View style={{ width: width / 3, alignItems: 'flex-start' }}>
                         <Text style={{ fontFamily: 'Vision_Bold', fontSize: 18, left: 15 }}>{this.props.name}</Text>
@@ -110,24 +119,36 @@ class CardComponent extends Component {
                             <SliderComponent
                                 sliderHeight={160}
                                 barColor={colors[category[this.props.category]]}
+                                variable='rate1'
+                                value={this.state.rate1}
+                                changeFunction={this.change}
                             />
                         </Body>
                         <Body style={styles.body}>
                             <SliderComponent
                                 sliderHeight={160}
                                 barColor={colors[category[this.props.category]]}
+                                variable='rate2'
+                                value={this.state.rate2}
+                                changeFunction={this.change}
                             />
                         </Body>
                         <Body style={styles.body}>
                             <SliderComponent
                                 sliderHeight={160}
                                 barColor={colors[category[this.props.category]]}
+                                variable='rate3'
+                                value={this.state.rate3}
+                                changeFunction={this.change}
                             />
                         </Body>
                         <Body style={styles.body}>
                             <SliderComponent
                                 sliderHeight={160}
                                 barColor={colors[category[this.props.category]]}
+                                variable='rate4'
+                                value={this.state.rate4}
+                                changeFunction={this.change}
                             />
                         </Body>
                     </CardItem>

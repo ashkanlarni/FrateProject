@@ -1,7 +1,8 @@
 //import liraries
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Dimensions, TextInput } from 'react-native';
-import { Container, Content, Header, Title } from 'native-base';
+import { Container, Content, Header, Title, Button, Icon, Item } from 'native-base';
+import axios from 'axios';
 
 import SearchComponent from './SeachComponent'
 
@@ -51,7 +52,7 @@ class Search extends Component {
                     })
             })
 
-        
+
     }
 
     render() {
@@ -78,8 +79,8 @@ class Search extends Component {
                     <View style={{ justifyContent: 'center', width: width, height: 14 }}>
                         <TextInput
                             onChangeText={(text) => this.search = text}
-                            placeholder='SEARCH'
-                            style={styles.textInput}
+                            placeholder='Username'
+                            style={{ ...styles.textInput, width: width, left: 50 }}
                             placeholderTextColor='rgba(0, 0, 0, 0.4)'
                             autoCorrect={false}
                             spellCheck={false}
@@ -88,6 +89,11 @@ class Search extends Component {
                             returnKeyType={'search'}
                         />
                     </View>
+                    <Button transparent style={styles.searchButton} onPress={() => this.onSearchButtonPressed()}>
+                        <Text style={{ fontFamily: 'Vision_Heavy', fontSize: 20, color: '#2196f3' }}>
+                            {'Search'}
+                        </Text>
+                    </Button>
                 </Header>
                 <Content>
                     <View style={{ justifyContent: 'center', width: width }}>
@@ -128,12 +134,20 @@ const styles = StyleSheet.create({
     },
     textInput: {
         height: 50,
-        backgroundColor: '#fdfdfd',
+        backgroundColor: '#eeeeee',
         paddingLeft: 20,
         fontFamily: 'Vision_Bold',
         shadowOffset: { height: 2 },
         shadowColor: 'black',
         shadowOpacity: 0.1
+    },
+    searchButton: {
+        height: 50,
+        width: 100,
+        justifyContent: 'center',
+        alignItems: 'center',
+        right: width / 6,
+        bottom: 5
     },
     vision: {
         fontFamily: 'Vision_Heavy',

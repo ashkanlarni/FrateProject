@@ -11,11 +11,17 @@ const { width, height } = Dimensions.get('window');
 class SearchComponent extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            following: props.following
+        }
     }
+
+    toggle = () => { this.setState({ following: !this.state.following }) }
 
     render() {
         return (
-            <Card noShadow={true} transparent={false}>
+            <Card noShadow={true} transparent={true}>
                 <CardItem style={{ justifyContent: 'center', alignItems: 'center', width: width }}>
                     <View style={{ width: width / 3, alignItems: 'flex-start' }}>
                         <Text style={{ fontFamily: 'Vision_Bold', fontSize: 18, left: 15 }}>{this.props.name}</Text>
@@ -27,20 +33,24 @@ class SearchComponent extends Component {
                     </View>
                     <View style={{ width: width / 3, alignItems: 'flex-end' }}>
                         {
-                            this.props.following
+                            this.state.following
                             &&
                             <Button rounded
-                                style={styles.button}>
+                                style={styles.button}
+                                onPress={this.toggle}
+                            >
                                 <Text style={{ ...styles.vision, color: 'rgb(220, 50, 100)' }}>
                                     {'Follow'}
                                 </Text>
                             </Button>
                         }
                         {
-                            !this.props.following
+                            !this.state.following
                             &&
                             <Button rounded
-                                style={{ ...styles.button, backgroundColor: 'rgb(220, 50, 100)' }}>
+                                style={{ ...styles.button, backgroundColor: 'rgb(220, 50, 100)' }}
+                                onPress={this.toggle}
+                            >
                                 <Text style={{ ...styles.vision, color: 'white' }}>
                                     {'Following'}
                                 </Text>
