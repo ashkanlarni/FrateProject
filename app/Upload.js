@@ -75,14 +75,20 @@ export default function Upload() {
             Category: checked,
             Ratings: rate,
             RateCount: '0',
-            Caption: captionText
+            Caption: captionText,
         }
 
         console.log('here')
 
-        axios.post('https://nameless-tor-88964.herokuapp.com/api/fusers/posts/', post)
+        // axios.post('https://nameless-tor-88964.herokuapp.com/api/fusers/posts/', post)
+        //     .then(res => {
+        //         // console.log(res)
+        //     })
+
+        var id = 9
+        axios.patch('https://nameless-tor-88964.herokuapp.com/api/fusers/posts/'+id+'/', {caption: 'hoor'})
             .then(res => {
-                // console.log(res)
+                console.log(res)
             })
 
 

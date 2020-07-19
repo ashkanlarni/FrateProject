@@ -56,6 +56,29 @@ class CardComponent extends Component {
         }
     }
 
+    onSubmitRating() {
+        var ratings = [4.6, 2.0, 3.7, 2.1]
+        var b = props.rate.map(parseFloat)
+        var newRatings = ''
+
+        for (var i = 0; i < 4; i++) {
+            var t = ( b[i] * props.rateCount + ratings[i] ) / (props.rateCount + 1)
+            t = t.toFixed(1)
+            newRatings += t.toString() + '-'
+        }
+
+        newRatings = newRatings.substring(0, newRatings.length - 1)
+        var newCount = (props.rateCount + 1).toString()
+
+        axios.patch('https://nameless-tor-88964.herokuapp.com/api/fusers/posts/'+props.postid+'/', {rateCount: newCount, ratings: newRatings})
+            .then(res => {
+                // console.log(res)
+            })
+
+
+        
+    }
+
     render() {
         return (
             <Card transparent={false} noShadow={true}>

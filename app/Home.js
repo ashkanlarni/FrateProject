@@ -7,6 +7,7 @@ import axios from 'axios';
 import CardComponent from './CardComponent';
 
 var pi = {
+    "postid": 9,
     "name": 'Ashkan',
     "date": 'Jun 20, 2020',
     "profilePic": require('../assets/images/profile/Ashkan.jpg'),
@@ -43,6 +44,11 @@ export default function Home({ navigation }) {
                     if (obj.username == user) {
                         var r = obj.ratings.split('-')
 
+                        var b = 12.34
+                        console.log(b.toString())
+
+                        
+
                         // axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/posts/'
                         // )
                         //     .then(res => {
@@ -60,11 +66,11 @@ export default function Home({ navigation }) {
                         if (obj.rateCount.length != 0)
                             rc = parseInt(obj.rateCount)
 
-                        console.log(rc)
 
                         var count = obj.rateCount.split('-')
 
                         var p = {
+                            "postid": obj.id,
                             "name": obj.username,
                             "date": obj.date,
                             "profilePic": require('../assets/images/profile/Ashkan.jpg'),
@@ -126,6 +132,7 @@ export default function Home({ navigation }) {
                             //     />)
                             // })
                             <CardComponent
+                                postid={pi.postid}
                                 name={pi.name}
                                 date={pi.date}
                                 profilePicSource={pi.profilePic}
