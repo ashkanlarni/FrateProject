@@ -153,6 +153,19 @@ class CardComponent extends Component {
                         </Body>
                     </CardItem>
                 }
+                {
+                    this.openRating
+                    &&
+                    <CardItem style={{ height: 40 }}>
+                        <Body style={{ justifyContent: 'center', alignItems: 'center' }}>
+                            <Button rounded style={{ width: 100, justifyContent: 'center', backgroundColor: '#5acb61', height: 36 }}>
+                                <Text style={{ fontFamily: 'Vision_Bold', fontSize: 16, color: 'white' }} onPress={this.onSubmitRating}>
+                                    {'SUBMIT'}
+                                </Text>
+                            </Button>
+                        </Body>
+                    </CardItem>
+                }
                 <CardItem style={{ height: 70 }}>
                     <Body style={styles.body}>
                         <ProgressCircle
