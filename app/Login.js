@@ -123,7 +123,7 @@ class Login extends React.Component {
                 var user
                 for (var u in res.data) {
                     var obj = res.data[u]
-                    if (obj.Email == this.email && obj.Password == this.password) {
+                    if (obj.email == this.email && obj.password == this.password) {
                         correct = true;
                         user = obj
                     }
@@ -133,13 +133,13 @@ class Login extends React.Component {
                     try {
                         AsyncStorage.setItem(
                             'username',
-                            user.Username
+                            user.username
                         );
                         AsyncStorage.setItem(
                             'email',
-                            user.Email
+                            user.email
                         );
-                        console.log(user.Username);
+                        console.log(user.username);
                     } catch (error) {
                     }
                     this.props.navigation.navigate('Home');
