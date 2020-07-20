@@ -72,7 +72,7 @@ class SearchComponent extends Component {
                             name={this.state.following ? 'plus' : 'check'}
                             color={this.state.following ? 'black' : '#00a572'}
                             size={30}
-                            onPress={this.onPressFollowButton}
+                            onPress={this.state.following ? this.onPressUnFollowButton : this.onPressFollowButton}
                             style={{ marginHorizontal: 50, justifyContent: 'center', alignItems: 'center' }}
                         />
                     </View>

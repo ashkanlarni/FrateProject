@@ -2,7 +2,8 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
 import { Button, Icon, Card, CardItem, Thumbnail, Body, Left, Right } from 'native-base';
-import ProgressCircle from 'react-native-progress-circle'
+import ProgressCircle from 'react-native-progress-circle';
+import axios from 'axios';
 
 import SliderComponent from './Slider/SliderComponent';
 
@@ -50,6 +51,8 @@ class CardComponent extends Component {
             rate4: 0.0
         };
 
+        console.log('test1', this.props.rateCount, this.state.rate1);
+
         switch (category[this.props.category]) {
             case 'Lifestyle':
                 this.subrate = ['Beauty', 'Appeal', 'Quality', 'Overall'];
@@ -67,22 +70,22 @@ class CardComponent extends Component {
         this.setState({ [variable]: value })
     }
 
-
     onSubmitRating() {
-        var ratings = [4.6, 2.0, 3.7, 2.1]
-        var b = props.rate.map(parseFloat)
+        var ratings = [this.state.rate1, this.state.rate2, this.state.rate3, this.state.rate4]
+        var b = this.props.rate.map(parseFloat);
         var newRatings = ''
-
+        console.log('test2', this.props.name, this.state.rate1)
+        console.log('test3', this.props.rateCount, this.state.rate1)
         for (var i = 0; i < 4; i++) {
-            var t = (b[i] * props.rateCount + ratings[i]) / (props.rateCount + 1)
+            var t = (b[i] * this.props.rateCount + ratings[i]) / (this.props.rateCount + 1)
             t = t.toFixed(1)
             newRatings += t.toString() + '-'
         }
 
         newRatings = newRatings.substring(0, newRatings.length - 1)
-        var newCount = (props.rateCount + 1).toString()
+        var newCount = (this.props.rateCount + 1).toString()
 
-        axios.patch('https://nameless-tor-88964.herokuapp.com/api/fusers/posts/' + props.postid + '/', { rateCount: newCount, ratings: newRatings })
+        axios.patch('https://nameless-tor-88964.herokuapp.com/api/fusers/posts/' + this.props.postid + '/', { rateCount: newCount, ratings: newRatings })
             .then(res => {
                 // console.log(res)
             })
@@ -159,7 +162,7 @@ class CardComponent extends Component {
                     <CardItem style={{ height: 40 }}>
                         <Body style={{ justifyContent: 'center', alignItems: 'center' }}>
                             <Button rounded style={{ width: 100, justifyContent: 'center', backgroundColor: '#50c878', height: 36 }}>
-                                <Text style={{ fontFamily: 'Vision_Bold', fontSize: 16, color: 'white' }} onPress={this.onSubmitRating}>
+                                <Text style={{ fontFamily: 'Vision_Bold', fontSize: 16, color: 'white' }} onPress={() => this.onSubmitRating()}>
                                     {'SUBMIT'}
                                 </Text>
                             </Button>
