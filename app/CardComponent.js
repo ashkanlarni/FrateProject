@@ -29,6 +29,8 @@ function goToPost(props) {
         imageSource: props.imageSource,
         category: props.category,
         rate: props.rate,
+        rateCount: props.rateCount,
+        postid: props.postid,
         caption: props.caption,
         comments: props.comments,
         fullPagePost: true,
@@ -72,18 +74,28 @@ class CardComponent extends Component {
 
     onSubmitRating() {
         var ratings = [this.state.rate1, this.state.rate2, this.state.rate3, this.state.rate4]
+
+        var rc = 0
+        if (this.props.rateCount.length != 0)
+            rc = parseInt(this.props.rateCount)
+        
+
         var b = this.props.rate.map(parseFloat);
         var newRatings = ''
         console.log('test2', this.props.name, this.state.rate1)
         console.log('test3', this.props.rateCount, this.state.rate1)
         for (var i = 0; i < 4; i++) {
-            var t = (b[i] * this.props.rateCount + ratings[i]) / (this.props.rateCount + 1)
+            var t = (b[i] * rc + ratings[i]) / (rc + 1)
             t = t.toFixed(1)
             newRatings += t.toString() + '-'
         }
 
         newRatings = newRatings.substring(0, newRatings.length - 1)
-        var newCount = (this.props.rateCount + 1).toString()
+        var newCount = (rc + 1).toString()
+
+        console.log(this.props.postid)
+
+        
 
         axios.patch('https://nameless-tor-88964.herokuapp.com/api/fusers/posts/' + this.props.postid + '/', { rateCount: newCount, ratings: newRatings })
             .then(res => {

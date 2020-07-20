@@ -47,6 +47,8 @@ class Search extends Component {
                                 this.result.push(p)
                             }
                         }
+
+                        console.log(this.result.length)
                     })
             })
     }
@@ -96,8 +98,8 @@ class Search extends Component {
                         {
                             this.result.map((p) => {
                                 return (<SearchComponent
-                                    username={p.username}
-                                    name={p.name}
+                                    username={this.username}
+                                    name={p.username}
                                     profilePicSource={p.profilePic}
                                     following={p.isFollowing}
                                 />)

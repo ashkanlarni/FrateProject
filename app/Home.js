@@ -7,7 +7,7 @@ import axios from 'axios';
 import CardComponent from './CardComponent';
 
 var posts = []
-var user = 'Ashkan';
+var user = 'Alil';
 var dbReady = false;
 
 function wait(timeout) {
@@ -61,10 +61,11 @@ export default function Home({ navigation }) {
                                     "image": obj.filename,
                                     "category": obj.category,
                                     "rate": r,
-                                    "rateCount": rc,
+                                    "rateCount": obj.rateCount,
                                     "caption": obj.caption,
                                     "comments": com
                                 }
+
                                 posts.unshift(p)
                             }
                         }

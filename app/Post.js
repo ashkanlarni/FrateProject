@@ -7,7 +7,7 @@ import CardComponent from './CardComponent';
 
 function Post({ route, navigation }) {
     /* 2. Get the param */
-    const { name, date, profilePicSource, imageSource, category, rate, caption, comments, fullPagePost, goIntoAnotherPage } = route.params;
+    const { name, date, profilePicSource, imageSource, category, rate, rateCount, postid, caption, comments, fullPagePost, goIntoAnotherPage } = route.params;
 
     return (
         <Container>
@@ -20,6 +20,8 @@ function Post({ route, navigation }) {
                         imageSource={imageSource}
                         category={category}
                         rate={rate}
+                        rateCount = {rateCount}
+                        postid = {postid}
                         caption={caption}
                         comments={comments}
                         fullPagePost={true}
