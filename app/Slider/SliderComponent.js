@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, Text, View, Slider } from 'react-native';
-// import Slider from '@react-native-community/slider';
 
 export default class SliderComponent extends React.Component {
     constructor(props) {
