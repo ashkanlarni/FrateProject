@@ -29,7 +29,6 @@ class Search extends Component {
                         followers.push(obj.following)
                     }
                 }
-
                 axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/login/'
                 )
                     .then(res => {
@@ -45,14 +44,11 @@ class Search extends Component {
                                     profilePic: require('../assets/images/profile/Ashkan.jpg'),
                                     isFollowing: isF
                                 }
-
                                 this.result.push(p)
                             }
                         }
                     })
             })
-
-
     }
 
     render() {
@@ -81,7 +77,7 @@ class Search extends Component {
                             onChangeText={(text) => this.search = text}
                             placeholder='Username'
                             style={{ ...styles.textInput, width: width, left: 50 }}
-                            placeholderTextColor='rgba(0, 0, 0, 0.4)'
+                            placeholderTextColor='rgba(0, 0, 0, 0.3)'
                             autoCorrect={false}
                             spellCheck={false}
                             textContentType={'username'}
@@ -90,32 +86,23 @@ class Search extends Component {
                         />
                     </View>
                     <Button transparent style={styles.searchButton} onPress={() => this.onSearchButtonPressed()}>
-                        <Text style={{ fontFamily: 'Vision_Heavy', fontSize: 20, color: '#2196f3' }}>
+                        <Text style={{ fontFamily: 'Vision_Heavy', fontSize: 20, color: '#0080ff' }}>
                             {'Search'}
                         </Text>
                     </Button>
                 </Header>
                 <Content>
                     <View style={{ justifyContent: 'center', width: width }}>
-
-                        <SearchComponent
-                            username = {this.username}
-                            name={'Ashkan'}
-                            profilePicSource={require('../assets/images/profile/Ashkan.jpg')}
-                            following={false}
-                        />
-                        <SearchComponent
-                            username = {this.username}
-                            name={'Ali'}
-                            profilePicSource={require('../assets/images/profile/Ali.jpg')}
-                            following={false}
-                        />
-                        <SearchComponent
-                            username = {this.username}
-                            name={'Shayesteh'}
-                            profilePicSource={require('../assets/images/profile/Shayesteh.jpg')}
-                            following={false}
-                        />
+                        {
+                            this.result.map((p) => {
+                                return (<SearchComponent
+                                    username={p.username}
+                                    name={p.name}
+                                    profilePicSource={p.profilePic}
+                                    following={p.isFollowing}
+                                />)
+                            })
+                        }
                     </View>
                 </Content>
             </Container>
@@ -137,7 +124,7 @@ const styles = StyleSheet.create({
     },
     textInput: {
         height: 50,
-        backgroundColor: '#eeeeee',
+        backgroundColor: '#fafafa',
         paddingLeft: 20,
         fontFamily: 'Vision_Bold',
         shadowOffset: { height: 2 },

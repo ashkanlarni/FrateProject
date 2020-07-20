@@ -6,7 +6,7 @@ import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import { Container, Content, Header, Title } from 'native-base';
 import RadioForm from 'react-native-simple-radio-button';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import axios from 'axios';
 
@@ -80,22 +80,15 @@ export default function Upload() {
 
         console.log('here')
 
-        // axios.post('https://nameless-tor-88964.herokuapp.com/api/fusers/posts/', post)
-        //     .then(res => {
-        //         // console.log(res)
-        //     })
-
-        var f = {
-            Follower: 'Ash',
-            Following: 'Ashkan'
-        }
+        axios.post('https://nameless-tor-88964.herokuapp.com/api/fusers/posts/', post)
+            .then(res => {
+                // console.log(res)
+            })
 
         axios.delete('https://nameless-tor-88964.herokuapp.com/api/fusers/followers/1/')
             .then(res => {
                 console.log(res)
             })
-
-
     };
 
 
@@ -130,9 +123,9 @@ export default function Upload() {
                             {
                                 !image
                                 &&
-                                <MaterialCommunityIcons
-                                    name='plus-circle'
-                                    color={'rgb(220, 50, 100)'}
+                                <SimpleLineIcons
+                                    name='plus'
+                                    color={'#0080ff'}
                                     size={100}
                                     onPress={pickImage}
                                 />
@@ -145,8 +138,8 @@ export default function Upload() {
                                 onPress={(value) => { checked = value }}
                                 formHorizontal={false}
                                 labelHorizontal={true}
-                                buttonColor={'rgb(220, 50, 100)'}
-                                selectedButtonColor={'rgb(220, 50, 100)'}
+                                buttonColor={'#7285a5'}
+                                selectedButtonColor={'#0080ff'}
                                 buttonSize={6}
                                 buttonOuterSize={18}
                                 labelStyle={{ fontFamily: 'Vision_Regular', fontSize: 16 }}
@@ -165,7 +158,7 @@ export default function Upload() {
                                     style={{ ...styles.textInput, fontFamily: 'Vision_Light' }}
                                 />
                             </View>
-                            <View style={{ justifyContent: 'center' }}>
+                            <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                                 <Button rounded
                                     onPress={() => OnPressUpButton()}
                                     style={styles.button}>
@@ -195,8 +188,9 @@ const styles = StyleSheet.create({
         alignContent: 'center'
     },
     button: {
-        backgroundColor: 'rgb(220, 50, 100)',
+        backgroundColor: '#0080ff',
         height: 55,
+        width: 3 * width / 5,
         marginHorizontal: 50,
         marginVertical: 20,
         borderRadius: 27.5,
@@ -216,6 +210,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         borderColor: 'rgba(0, 0, 0, 0.35)',
         paddingLeft: 10,
+        paddingTop: 5,
         fontFamily: 'Vision_Bold',
         fontSize: 16,
         shadowColor: 'black',

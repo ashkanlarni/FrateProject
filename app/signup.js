@@ -1,14 +1,11 @@
 //This is an example code for Navigator// 
 import * as React from 'react';
 
-import { SafeAreaView, View, Text, StyleSheet, Dimensions, TextInput, AsyncStorage } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, TextInput, AsyncStorage } from 'react-native';
 import Svg, { Image } from 'react-native-svg';
 import { Button } from 'native-base';
 import axios from 'axios';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import PassMeter from 'react-native-passmeter';
-
-import { isSignedIn } from '../App';
 
 const { width, height } = Dimensions.get('window');
 
@@ -75,7 +72,7 @@ class SignUp extends React.Component {
                     // TODO
                 }
                 else
-                    alert('There is already an account with this email address.')
+                    alert('There is already an account with this email address.');
                 // TODO
             })
 
@@ -83,7 +80,7 @@ class SignUp extends React.Component {
     }
     render() {
         return (
-            <KeyboardAwareScrollView>
+            <KeyboardAwareScrollView resetScrollToCoords={{ x: 0, y: 0 }} contentContainerStyle={styles.container} scrollEnabled={false}>
                 <View style={{ flex: 1, backgroundColor: '#f2f2f2', justifyContent: 'flex-end' }}>
                     <View style={StyleSheet.absoluteFill}>
                         <Svg height={height} width={width}>
@@ -95,7 +92,7 @@ class SignUp extends React.Component {
                             />
                         </Svg>
                     </View>
-                    <View style={{ height: height + height / 10, justifyContent: 'center', alignContent: 'center' }}>
+                    <View style={{ height: height, justifyContent: 'center', alignItems: 'center' }}>
                         <TextInput
                             onChangeText={(text) => this.username = text}
                             placeholder='USERNAME'
@@ -154,14 +151,12 @@ export default SignUp;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
-        margin: 50,
-        alignItems: 'center',
         justifyContent: 'center',
     },
     button: {
         backgroundColor: 'white',
         height: 65,
+        width: 3 * width / 5,
         marginHorizontal: 50,
         marginVertical: 7.5,
         borderRadius: 32.5,
@@ -174,6 +169,7 @@ const styles = StyleSheet.create({
     },
     textInput: {
         height: 50,
+        width: 3 * width / 5,
         borderRadius: 25,
         borderWidth: 0.3,
         backgroundColor: 'white',

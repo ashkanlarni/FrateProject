@@ -1,7 +1,8 @@
 //import liraries
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
-import { Button, Icon, Card, CardItem, Thumbnail, Body, Left, Right } from 'native-base';
+import { Button, Card, CardItem, Thumbnail } from 'native-base';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import axios from 'axios';
 
 const { width, height } = Dimensions.get('window');
@@ -32,12 +33,10 @@ class SearchComponent extends Component {
             .then(res => {
                 // console.log(res)
             })
-
     }
 
     onPressUnFollowButton = () => {
         this.toggle()
-
         axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/followers/'
         )
             .then(res => {
@@ -49,8 +48,6 @@ class SearchComponent extends Component {
                         break
                     }
                 }
-
-
                 axios.delete('https://nameless-tor-88964.herokuapp.com/api/fusers/followers/' + id + '/')
                     .then(res => {
                         // console.log(res)
@@ -61,7 +58,7 @@ class SearchComponent extends Component {
     render() {
         return (
             <Card noShadow={true} transparent={true}>
-                <CardItem style={{ justifyContent: 'center', alignItems: 'center', width: width }}>
+                <CardItem style={{ justifyContent: 'center', alignItems: 'center', width: width, height: 65 }}>
                     <View style={{ width: width / 3, alignItems: 'flex-start' }}>
                         <Text style={{ fontFamily: 'Vision_Bold', fontSize: 18, left: 15 }}>{this.props.name}</Text>
                     </View>
@@ -71,30 +68,13 @@ class SearchComponent extends Component {
                         />
                     </View>
                     <View style={{ width: width / 3, alignItems: 'flex-end' }}>
-                        {
-                            this.state.following
-                            &&
-                            <Button rounded
-                                style={styles.button}
-                                onPress={this.onPressFollowButton}
-                            >
-                                <Text style={{ ...styles.vision, color: 'rgb(220, 50, 100)' }}>
-                                    {'Follow'}
-                                </Text>
-                            </Button>
-                        }
-                        {
-                            !this.state.following
-                            &&
-                            <Button rounded
-                                style={{ ...styles.button, backgroundColor: 'rgb(220, 50, 100)' }}
-                                onPress={this.onPressUnFollowButton}
-                            >
-                                <Text style={{ ...styles.vision, color: 'white' }}>
-                                    {'Following'}
-                                </Text>
-                            </Button>
-                        }
+                        <SimpleLineIcons
+                            name={this.state.following ? 'plus' : 'check'}
+                            color={this.state.following ? 'black' : '#00a572'}
+                            size={30}
+                            onPress={this.onPressFollowButton}
+                            style={{ marginHorizontal: 50, justifyContent: 'center', alignItems: 'center' }}
+                        />
                     </View>
                 </CardItem>
             </Card>
@@ -109,21 +89,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: 'white',
-    },
-    button: {
-        backgroundColor: 'white',
-        borderColor: 'rgb(220, 50, 100)',
-        borderWidth: 2,
-        height: 34,
-        width: 95,
-        marginHorizontal: 25,
-        borderRadius: 17,
-        alignItems: 'center',
-        justifyContent: 'center',
-        shadowOffset: { height: 2 },
-        shadowColor: 'black',
-        shadowOpacity: 0.1,
-        elevation: 5
     },
     vision: {
         fontFamily: 'Vision_Heavy',

@@ -7,7 +7,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 
 import Login from './app/Login';
 import SignUp from './app/SignUp';
@@ -15,7 +15,6 @@ import Home from './app/Home';
 import Upload from './app/Upload';
 import Search from './app/Search';
 import Post from './app/Post';
-import SliderComponent from './app/Slider/SliderComponent';
 
 
 const Stack = createStackNavigator();
@@ -40,20 +39,20 @@ function HomeScreen() {
     <Tab.Navigator initialRouteName='Home' tabBarOptions={{ activeTintColor: '#e91e63' }}>
       <Tab.Screen name="Home" component={Home} options={{
         tabBarLabel: 'Home',
-        tabBarIcon: ({ color }) => (
-          <MaterialCommunityIcons name="home" style={{ padding: 10 }} color={color} size={26} font={'Vision_Bold'} />
+        tabBarIcon: ({ color, size }) => (
+          <SimpleLineIcons name="home" style={{ padding: 10 }} color={color} size={size} font={'Vision_Bold'} />
         ),
       }} />
       <Tab.Screen name="Search" component={Search} options={{
         tabBarLabel: 'Search',
-        tabBarIcon: ({ color }) => (
-          <MaterialCommunityIcons name="magnify" style={{ padding: 10 }} color={color} size={26} font={'Vision_Bold'} />
+        tabBarIcon: ({ color, size }) => (
+          <SimpleLineIcons name="magnifier" style={{ padding: 10 }} color={color} size={size} font={'Vision_Bold'} />
         ),
       }} />
       <Tab.Screen name="Upload" component={Upload} options={{
         tabBarLabel: 'Upload',
-        tabBarIcon: ({ color }) => (
-          <MaterialCommunityIcons name="upload" style={{ padding: 10 }} color={color} size={26} font={'Vision_Bold'} />
+        tabBarIcon: ({ color, size }) => (
+          <SimpleLineIcons name="arrow-up-circle" style={{ padding: 10 }} color={color} size={size} font={'Vision_Bold'} />
         ),
       }} />
     </Tab.Navigator>

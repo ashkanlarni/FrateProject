@@ -9,9 +9,9 @@ import SliderComponent from './Slider/SliderComponent';
 const { width, height } = Dimensions.get('window');
 
 const colors = {
-    "Lifestyle": '#00a572',
-    "Art": '#2196f3',
-    "Photography": 'rgb(220, 50, 100)',
+    "Lifestyle": '#50c878',
+    "Art": '#0080ff',
+    "Photography": '#e0115f',
 }
 
 const category = {
@@ -90,7 +90,7 @@ class CardComponent extends Component {
 
     render() {
         return (
-            <Card transparent={true} noShadow={true}>
+            <Card transparent={false} noShadow={true}>
                 <CardItem style={{ justifyContent: 'center', alignItems: 'center', width: width }}>
                     <View style={{ width: width / 3, alignItems: 'flex-start' }}>
                         <Text style={{ fontFamily: 'Vision_Bold', fontSize: 18, left: 15 }}>{this.props.name}</Text>
@@ -158,7 +158,7 @@ class CardComponent extends Component {
                     &&
                     <CardItem style={{ height: 40 }}>
                         <Body style={{ justifyContent: 'center', alignItems: 'center' }}>
-                            <Button rounded style={{ width: 100, justifyContent: 'center', backgroundColor: '#5acb61', height: 36 }}>
+                            <Button rounded style={{ width: 100, justifyContent: 'center', backgroundColor: '#50c878', height: 36 }}>
                                 <Text style={{ fontFamily: 'Vision_Bold', fontSize: 16, color: 'white' }} onPress={this.onSubmitRating}>
                                     {'SUBMIT'}
                                 </Text>

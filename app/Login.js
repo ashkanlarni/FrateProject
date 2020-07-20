@@ -108,7 +108,7 @@ class Login extends React.Component {
             extrapolate: Extrapolate.CLAMP
         });
     }
-    
+
     onPressSignInButton() {
         if (this.password == "" || this.email == "") {
             alert('Please fill out all the fields.')
@@ -145,14 +145,13 @@ class Login extends React.Component {
                     this.props.navigation.navigate('Home');
                 }
                 else
-                    alert('The email or password did not match our records. Please try again.')
-
+                    alert('The email or password did not match our records. Please try again.');
             })
     }
 
     render() {
         return (
-            <KeyboardAwareScrollView>
+            <KeyboardAwareScrollView resetScrollToCoords={{ x: 0, y: 0 }} contentContainerStyle={styles.container} scrollEnabled={false}>
                 <View style={{ flex: 1, backgroundColor: '#f6f6f6', justifyContent: 'flex-end' }}>
                     <Animated.View style={{ ...StyleSheet.absoluteFill, transform: [{ translateY: this.bgY }] }}>
                         <Svg height={height} width={width}>
@@ -172,7 +171,7 @@ class Login extends React.Component {
                             {'A Rating Social Media'}
                         </Text>
                     </Animated.View>
-                    <View style={{ height: height / 3, justifyContent: 'center' }}>
+                    <View style={{ height: height / 3, justifyContent: 'center', alignItems: 'center' }}>
                         <TapGestureHandler onHandlerStateChange={this.onStateChange}>
                             <Animated.View style={{ opacity: this.buttonOpacity, transform: [{ translateY: this.buttonY }] }}>
                                 <Button rounded style={styles.button} >
@@ -182,16 +181,16 @@ class Login extends React.Component {
                                 </Button>
                             </Animated.View>
                         </TapGestureHandler>
-                        <Animated.View style={{ justifyContent: 'center', alignItems: 'center', marginVertical: 30, opacity: this.buttonOpacity, transform: [{ translateY: this.buttonY }] }}>
+                        <Animated.View style={{ justifyContent: 'center', marginVertical: 30, opacity: this.buttonOpacity, transform: [{ translateY: this.buttonY }] }}>
                             <Button transparent style={{ justifyContent: 'center', alignItems: 'center' }} onPress={() => this.props.navigation.navigate('Sign Up')}>
                                 <Text style={{ ...styles.vision, fontSize: 18 }}>
                                     {"Don't have an account yet?"}
                                 </Text>
                             </Button>
                         </Animated.View>
-                        <Animated.View style={{ zIndex: this.textInputZindex, opacity: this.textInputOpacity, transform: [{ translateY: this.textInputY }], height: height / 2, ...StyleSheet.absoluteFill, top: null, justifyContent: 'center' }}>
+                        <Animated.View style={{ zIndex: this.textInputZindex, opacity: this.textInputOpacity, transform: [{ translateY: this.textInputY }], height: height / 2, ...StyleSheet.absoluteFill, top: null, justifyContent: 'center', alignItems: 'center' }}>
                             <TapGestureHandler onHandlerStateChange={this.onCloseState}>
-                                <Animated.View style={{ top: 0, position: 'absolute', justifyContent: 'center', alignItems: 'center' }}>
+                                <Animated.View style={{ top: 0, position: 'absolute', justifyContent: 'center', alignItems: 'center', left: 0 }}>
                                     <Button rounded style={styles.closeButton}>
                                         <Animated.Text style={{ ...styles.vision, fontSize: 18, color: 'black' }}>
                                             {'X'}
@@ -207,7 +206,7 @@ class Login extends React.Component {
                                 textContentType={'emailAddress'}
                                 clearButtonMode={'while-editing'}
                                 keyboardType={'email-address'}
-                            // returnKeyType={'next'}
+                                returnKeyType={'next'}
                             />
                             <TextInput
                                 onChangeText={(text) => this.password = text}
@@ -242,12 +241,12 @@ export default Login;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
         justifyContent: 'center'
     },
     button: {
         backgroundColor: 'white',
         height: 55,
+        width: 3 * width / 5,
         marginHorizontal: 50,
         marginVertical: 7.5,
         borderRadius: 27.5,
@@ -273,6 +272,7 @@ const styles = StyleSheet.create({
     },
     textInput: {
         height: 50,
+        width: 3 * width / 5,
         borderRadius: 25,
         borderWidth: 0.3,
         backgroundColor: 'white',

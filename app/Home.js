@@ -1,23 +1,11 @@
 //import liraries
 import React, { Component } from 'react';
-import { RefreshControl, SafeAreaView, ScrollView, StyleSheet, Dimensions, AsyncStorage } from 'react-native';
+import { RefreshControl, SafeAreaView, ScrollView, StyleSheet, AsyncStorage } from 'react-native';
 import { Container, Content, Header, Title } from 'native-base';
 import axios from 'axios';
 
 import CardComponent from './CardComponent';
 
-var pi = {
-    "postid": 9,
-    "name": 'Ashkan',
-    "date": 'Jun 20, 2020',
-    "profilePic": require('../assets/images/profile/Ashkan.jpg'),
-    "image": 'file:///Users/ashkan/Library/Developer/CoreSimulator/Devices/825688DF-57ED-46F7-ADB8-2ABEF50401F0/data/Containers/Data/Application/582F0363-4AD4-4322-8115-7B227FE4E194/Library/Caches/ExponentExperienceData/%2540anonymous%252FFrate-5fb55f5d-3d78-46f0-9e2f-c614ec9e7bc4/ImagePicker/D397414C-7B98-4F77-AF48-464821404C3D.jpg',
-    "category": 0,
-    "rate": ['1.1', '4.5', '2.5', '3.0'],
-    "rateCount" : 0,
-    "caption": 'This is a test caption for a hardcode post.',
-    "comments": [['Ali', 'first comment first comment first comment first comment first comment first comment first comment '], ['Shayesteh', 'second comment'], ['Ashkan', 'third comment']]
-}
 var posts = []
 var user = 'Ashkan';
 var dbReady = false;
@@ -46,7 +34,6 @@ export default function Home({ navigation }) {
                         followers.push(obj.following)
                     }
                 }
-
                 axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/posts/'
                 )
                     .then(res => {
@@ -63,7 +50,6 @@ export default function Home({ navigation }) {
                                 var rc = 0
                                 if (obj.rateCount.length != 0)
                                     rc = parseInt(obj.rateCount)
-
 
                                 var count = obj.rateCount.split('-')
 
@@ -83,11 +69,7 @@ export default function Home({ navigation }) {
                             }
                         }
                     })
-
             })
-
-        
-
         wait(1000).then(() => setRefreshing(false));
     }, [refreshing]);
 
@@ -119,36 +101,24 @@ export default function Home({ navigation }) {
                 >
                     <Content>
                         {
-                            // posts.map((p) => {
-                            //     return (<CardComponent
-                            // name={p.name}
-                            // date={p.date}
-                            // profilePicSource={p.profilePic}
-                            // imageSource={p.image}
-                            // category={p.category}
-                            // rate={p.rate}
-                            // caption={p.caption}
-                            // fullPagePost={false}
-                            // goIntoAnotherPage={true}
-                            // navigation={navigation}
-                            //     />)
-                            // })
-                            <CardComponent
-                                postid={pi.postid}
-                                name={pi.name}
-                                date={pi.date}
-                                profilePicSource={pi.profilePic}
-                                imageSource={pi.image}
-                                category={pi.category}
-                                rate={pi.rate}
-                                rateCount={pi.rateCount}
-                                caption={pi.caption}
-                                comments={pi.comments}
-                                fullPagePost={false}
-                                goIntoAnotherPage={true}
-                                canRate={false}
-                                navigation={navigation}
-                            />
+                            posts.map((p) => {
+                                return (<CardComponent
+                                    postid={p.postid}
+                                    name={p.name}
+                                    date={p.date}
+                                    profilePicSource={p.profilePic}
+                                    imageSource={p.image}
+                                    category={p.category}
+                                    rate={p.rate}
+                                    rateCount={p.rateCount}
+                                    caption={p.caption}
+                                    comments={p.comments}
+                                    fullPagePost={false}
+                                    goIntoAnotherPage={true}
+                                    canRate={false}
+                                    navigation={navigation}
+                                />)
+                            })
                         }
                     </Content>
                 </ScrollView>
