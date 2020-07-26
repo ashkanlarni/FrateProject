@@ -112,7 +112,7 @@ export default function Upload() {
                     </Title>
             </Header>
             <Content>
-                <KeyboardAwareScrollView>
+                <KeyboardAwareScrollView resetScrollToCoords={{ x: 0, y: 0 }} contentContainerStyle={styles.container} scrollEnabled={false}>
                     <View style={{ justifyContent: 'center' }}>
                         <View style={{ justifyContent: 'center', alignItems: 'center', height: height / 2.5, paddingTop: 10 }}>
                             {

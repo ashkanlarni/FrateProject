@@ -8,17 +8,23 @@ import SearchComponent from './SeachComponent'
 
 const { width, height } = Dimensions.get('window');
 
+function wait(timeout) {
+    return new Promise(resolve => {
+        setTimeout(resolve, timeout);
+    });
+}
+
 // create a component
 class Search extends Component {
     constructor(props) {
         super(props);
         this.search = "";
         this.result = [];
-        this.username = 'Ali';
+        this.username = 'Ashkan';
     }
 
     onSearchButtonPressed() {
-        this.result = []
+        // this.result = []
         axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/followers/'
         )
             .then(res => {
@@ -45,10 +51,10 @@ class Search extends Component {
                                     isFollowing: isF
                                 }
                                 this.result.push(p)
+
                             }
                         }
-
-                        console.log(this.result.length)
+                        console.log('ajab', this.result)
                     })
             })
     }
@@ -95,8 +101,10 @@ class Search extends Component {
                 </Header>
                 <Content>
                     <View style={{ justifyContent: 'center', width: width }}>
-                        {
+                        {/* {
                             this.result.map((p) => {
+                                console.log('ahan', this.result)
+                                console.log('ajab', p)
                                 return (<SearchComponent
                                     username={this.username}
                                     name={p.username}
@@ -104,7 +112,25 @@ class Search extends Component {
                                     following={p.isFollowing}
                                 />)
                             })
-                        }
+                        } */}
+                        < SearchComponent
+                            username={'Alil'}
+                            name={'Shayesteh'}
+                            profilePicSource={require('../assets/images/profile/Shayesteh.jpg')}
+                            following={true}
+                        />
+                        <SearchComponent
+                            username={'Alil'}
+                            name={'Ali'}
+                            profilePicSource={require('../assets/images/profile/Ali.jpg')}
+                            following={false}
+                        />
+                        <SearchComponent
+                            username={'Alil'}
+                            name={'Ashkan'}
+                            profilePicSource={require('../assets/images/profile/Ashkan.jpg')}
+                            following={false}
+                        />
                     </View>
                 </Content>
             </Container>

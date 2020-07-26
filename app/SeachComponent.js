@@ -69,8 +69,8 @@ class SearchComponent extends Component {
                     </View>
                     <View style={{ width: width / 3, alignItems: 'flex-end' }}>
                         <SimpleLineIcons
-                            name={this.state.following ? 'plus' : 'check'}
-                            color={this.state.following ? 'black' : '#00a572'}
+                            name={this.state.following ? 'check' : 'plus'}
+                            color={this.state.following ? '#00a572' : 'black'}
                             size={30}
                             onPress={this.state.following ? this.onPressUnFollowButton : this.onPressFollowButton}
                             style={{ marginHorizontal: 50, justifyContent: 'center', alignItems: 'center' }}

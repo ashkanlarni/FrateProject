@@ -53,8 +53,6 @@ class CardComponent extends Component {
             rate4: 0.0
         };
 
-        console.log('test1', this.props.rateCount, this.state.rate1);
-
         switch (category[this.props.category]) {
             case 'Lifestyle':
                 this.subrate = ['Beauty', 'Appeal', 'Quality', 'Overall'];
@@ -78,12 +76,9 @@ class CardComponent extends Component {
         var rc = 0
         if (this.props.rateCount.length != 0)
             rc = parseInt(this.props.rateCount)
-        
 
         var b = this.props.rate.map(parseFloat);
         var newRatings = ''
-        console.log('test2', this.props.name, this.state.rate1)
-        console.log('test3', this.props.rateCount, this.state.rate1)
         for (var i = 0; i < 4; i++) {
             var t = (b[i] * rc + ratings[i]) / (rc + 1)
             t = t.toFixed(1)
@@ -92,10 +87,6 @@ class CardComponent extends Component {
 
         newRatings = newRatings.substring(0, newRatings.length - 1)
         var newCount = (rc + 1).toString()
-
-        console.log(this.props.postid)
-
-        
 
         axios.patch('https://nameless-tor-88964.herokuapp.com/api/fusers/posts/' + this.props.postid + '/', { rateCount: newCount, ratings: newRatings })
             .then(res => {
