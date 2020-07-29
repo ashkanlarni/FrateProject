@@ -57,7 +57,7 @@ class DashboardComponent extends Component {
                                     <View style={{ flexDirection: 'row', width: width, alignItems: 'center', justifyContent: 'center' }}>
                                         <Button transparent style={{ width: width / 2, justifyContent: 'center', flexDirection: 'column' }}>
                                             <Text style={styles.samsungSans}> {'Followers'}</Text>
-                                            <Text style={styles.samsungSans}>{'290'}</Text>
+                                            <Text style={styles.samsungSans}>{'291'}</Text>
                                         </Button>
                                         <Button transparent style={{ width: width / 2, justifyContent: 'center', flexDirection: 'column' }}>
                                             <Text style={styles.samsungSans}>{'Followings'}</Text>
