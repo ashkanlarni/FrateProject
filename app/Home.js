@@ -1,5 +1,5 @@
 //import liraries
-import React, { Component } from 'react';
+import React from 'react';
 import { RefreshControl, SafeAreaView, ScrollView, StyleSheet, AsyncStorage } from 'react-native';
 import { Container, Content, Header, Title } from 'native-base';
 import axios from 'axios';
@@ -134,7 +134,7 @@ export default function Home({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fdfdfd',
+        backgroundColor: '#ffffff',
     },
     title: {
         fontFamily: 'Vision_Black',

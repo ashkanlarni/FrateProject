@@ -96,11 +96,11 @@ class CardComponent extends Component {
 
     render() {
         return (
-            <Card transparent={false} noShadow={true}>
-                <CardItem style={{ justifyContent: 'center', alignItems: 'center', width: width }}>
+            <Card transparent={true} noShadow={true}>
+                <CardItem style={styles.cardItem}>
                     <View style={{ width: width / 3, alignItems: 'flex-start' }}>
-                        <Text style={{ fontFamily: 'Vision_Bold', fontSize: 18, left: 15 }}>{this.props.name}</Text>
-                        <Text note style={{ fontFamily: 'Vision_Light', fontSize: 12, left: 15, color: '#333333' }}>{this.props.date}</Text>
+                        <Text style={{ fontFamily: 'SamsungSans_Medium', fontSize: 18, left: 15 }}>{this.props.name}</Text>
+                        <Text note style={{ fontFamily: 'SamsungSans_Light', fontSize: 12, left: 15, color: '#333333' }}>{this.props.date}</Text>
                     </View>
                     <View style={{ width: width / 3, alignItems: 'center' }}>
                         <Thumbnail
@@ -108,10 +108,10 @@ class CardComponent extends Component {
                         />
                     </View>
                     <View style={{ width: width / 3, alignItems: 'flex-end' }}>
-                        <Text style={{ ...styles.vision, fontSize: 16, right: 15 }}>{category[this.props.category]}</Text>
+                        <Text style={{ ...styles.samsungSans, fontSize: 16, right: 15 }}>{category[this.props.category]}</Text>
                     </View>
                 </CardItem>
-                <CardItem cardBody button={this.props.goIntoAnotherPage} onPress={() => goToPost(this.props)}>
+                <CardItem cardBody button={this.props.goIntoAnotherPage} onPress={() => goToPost(this.props)} style={styles.cardItem}>
                     <Image
                         source={{ uri: this.props.imageSource }}
                         style={{ height: width, width: null, flex: 1 }}
@@ -120,7 +120,7 @@ class CardComponent extends Component {
                 {
                     this.openRating
                     &&
-                    <CardItem style={{ height: 140, backgroundColor: 'white', borderColor: 'black' }}>
+                    <CardItem style={{ height: 140, backgroundColor: '#ffffff' }}>
                         <Body style={styles.body}>
                             <SliderComponent
                                 sliderHeight={160}
@@ -162,17 +162,17 @@ class CardComponent extends Component {
                 {
                     this.openRating
                     &&
-                    <CardItem style={{ height: 40 }}>
+                    <CardItem style={{ height: 40, backgroundColor: '#ffffff' }}>
                         <Body style={{ justifyContent: 'center', alignItems: 'center' }}>
                             <Button rounded style={{ width: 100, justifyContent: 'center', backgroundColor: '#50c878', height: 36 }}>
-                                <Text style={{ fontFamily: 'Vision_Bold', fontSize: 16, color: 'white' }} onPress={() => this.onSubmitRating()}>
+                                <Text style={{ fontFamily: 'SamsungSans_Medium', fontSize: 16, color: 'white' }} onPress={() => this.onSubmitRating()}>
                                     {'SUBMIT'}
                                 </Text>
                             </Button>
                         </Body>
                     </CardItem>
                 }
-                <CardItem style={{ height: 70 }}>
+                <CardItem style={{ height: 70, backgroundColor: '#ffffff' }}>
                     <Body style={styles.body}>
                         <ProgressCircle
                             percent={this.props.rate[0] / 5 * 100}
@@ -182,9 +182,9 @@ class CardComponent extends Component {
                             shadowColor="#d3d3d3"
                             bgColor="white"
                         >
-                            <Text style={styles.vision} >{[this.props.rate[0]]}</Text>
+                            <Text style={styles.samsungSans} >{[this.props.rate[0]]}</Text>
                         </ProgressCircle>
-                        <Text style={{ ...styles.vision, paddingTop: 5 }}>
+                        <Text style={{ ...styles.samsungSans, paddingTop: 5 }}>
                             {this.subrate[0]}
                         </Text>
                     </Body>
@@ -197,9 +197,9 @@ class CardComponent extends Component {
                             shadowColor="#d3d3d3"
                             bgColor="white"
                         >
-                            <Text style={styles.vision} >{[this.props.rate[1]]}</Text>
+                            <Text style={styles.samsungSans} >{[this.props.rate[1]]}</Text>
                         </ProgressCircle>
-                        <Text style={{ ...styles.vision, paddingTop: 5 }}>
+                        <Text style={{ ...styles.samsungSans, paddingTop: 5 }}>
                             {this.subrate[1]}
                         </Text>
                     </Body>
@@ -212,9 +212,9 @@ class CardComponent extends Component {
                             shadowColor="#d3d3d3"
                             bgColor="white"
                         >
-                            <Text style={styles.vision} >{[this.props.rate[2]]}</Text>
+                            <Text style={styles.samsungSans} >{[this.props.rate[2]]}</Text>
                         </ProgressCircle>
-                        <Text style={{ ...styles.vision, paddingTop: 5 }}>
+                        <Text style={{ ...styles.samsungSans, paddingTop: 5 }}>
                             {this.subrate[2]}
                         </Text>
                     </Body>
@@ -227,16 +227,16 @@ class CardComponent extends Component {
                             shadowColor="#d3d3d3"
                             bgColor="white"
                         >
-                            <Text style={styles.vision} >{[this.props.rate[3]]}</Text>
+                            <Text style={styles.samsungSans} >{[this.props.rate[3]]}</Text>
                         </ProgressCircle>
-                        <Text style={{ ...styles.vision, paddingTop: 5 }}>
+                        <Text style={{ ...styles.samsungSans, paddingTop: 5 }}>
                             {this.subrate[3]}
                         </Text>
                     </Body>
                 </CardItem>
-                <CardItem button={this.props.goIntoAnotherPage} onPress={() => goToPost(this.props)}>
+                <CardItem button={this.props.goIntoAnotherPage} onPress={() => goToPost(this.props)} style={styles.cardItem}>
                     <Body>
-                        <Text style={{ fontFamily: 'Vision_Regular', fontSize: 14, textAlign: 'left', textAlignVertical: 'auto' }}>
+                        <Text style={{ fontFamily: 'SamsungSans_Regular', fontSize: 14, textAlign: 'left', textAlignVertical: 'auto' }}>
                             {this.props.caption}
                         </Text>
                     </Body>
@@ -244,12 +244,12 @@ class CardComponent extends Component {
                 {
                     this.props.fullPagePost
                     &&
-                    <CardItem>
+                    <CardItem style={styles.cardItem}>
                         <Body>
                             {this.props.comments.map((p) => {
                                 return (
-                                    <Text style={{ fontFamily: 'Vision_Light', fontSize: 13, textAlign: 'left', textAlignVertical: 'auto' }}>
-                                        <Text style={{ fontFamily: 'Vision_Bold', fontSize: 13, textAlign: 'left', textAlignVertical: 'auto' }}>
+                                    <Text style={{ fontFamily: 'SamsungSans_Light', fontSize: 13, textAlign: 'left', textAlignVertical: 'auto' }}>
+                                        <Text style={{ fontFamily: 'SamsungSans_Medium', fontSize: 13, textAlign: 'left', textAlignVertical: 'auto' }}>
                                             {p[0]}{' '}
                                         </Text>
                                         {p[1]}
@@ -272,13 +272,19 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: 'white',
     },
-    vision: {
-        fontFamily: 'Vision_Bold',
+    samsungSans: {
+        fontFamily: 'SamsungSans_Medium',
         fontSize: 13
     },
     body: {
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    cardItem: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: width,
+        backgroundColor: '#ffffff'
     }
 });
 

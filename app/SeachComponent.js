@@ -58,9 +58,9 @@ class SearchComponent extends Component {
     render() {
         return (
             <Card noShadow={true} transparent={true}>
-                <CardItem style={{ justifyContent: 'center', alignItems: 'center', width: width, height: 65 }}>
+                <CardItem style={{ justifyContent: 'center', alignItems: 'center', width: width, height: 65, backgroundColor: '#ffffff' }}>
                     <View style={{ width: width / 3, alignItems: 'flex-start' }}>
-                        <Text style={{ fontFamily: 'Vision_Bold', fontSize: 18, left: 15 }}>{this.props.name}</Text>
+                        <Text style={{ fontFamily: 'SamsungSans_Medium', fontSize: 18, left: 15 }}>{this.props.name}</Text>
                     </View>
                     <View style={{ width: width / 3, alignItems: 'center' }}>
                         <Thumbnail
@@ -70,7 +70,7 @@ class SearchComponent extends Component {
                     <View style={{ width: width / 3, alignItems: 'flex-end' }}>
                         <SimpleLineIcons
                             name={this.state.following ? 'check' : 'plus'}
-                            color={this.state.following ? '#00a572' : 'black'}
+                            color={this.state.following ? '#50c878' : '#0080ff'}
                             size={30}
                             onPress={this.state.following ? this.onPressUnFollowButton : this.onPressFollowButton}
                             style={{ marginHorizontal: 50, justifyContent: 'center', alignItems: 'center' }}
@@ -90,8 +90,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: 'white',
     },
-    vision: {
-        fontFamily: 'Vision_Heavy',
+    samsungSans: {
+        fontFamily: 'SamsungSans_Bold',
         fontSize: 16
     },
     body: {

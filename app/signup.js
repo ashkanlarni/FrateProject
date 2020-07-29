@@ -136,7 +136,7 @@ class SignUp extends React.Component {
                         <Button rounded
                             onPress={() => this.onPressSignUpButton()}
                             style={{ ...styles.button, marginVertical: 50, backgroundColor: 'rgb(85, 205, 95)' }}>
-                            <Text style={{ fontFamily: 'Vision_Heavy', fontSize: 20 }}>
+                            <Text style={{ fontFamily: 'SamsungSans_Bold', fontSize: 20 }}>
                                 {'SIGN UP'}
                             </Text>
                         </Button>
@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 50,
         marginVertical: 10,
         paddingLeft: 20,
-        fontFamily: 'Vision_Bold',
+        fontFamily: 'SamsungSans_Medium',
         shadowColor: 'black',
         shadowOpacity: 0.2
     }

@@ -142,11 +142,11 @@ export default function Upload() {
                                 selectedButtonColor={'#0080ff'}
                                 buttonSize={6}
                                 buttonOuterSize={18}
-                                labelStyle={{ fontFamily: 'Vision_Regular', fontSize: 16 }}
+                                labelStyle={{ fontFamily: 'SamsungSans_Regular', fontSize: 16 }}
                             />
                         </View>
                         <View style={{ justifyContent: 'center', height: height / 3 }}>
-                            <View style={{ justifyContent: 'center', fontFamily: 'Vision_Bold' }}>
+                            <View style={{ justifyContent: 'center', fontFamily: 'SamsungSans_Medium' }}>
                                 <TextInput
                                     editable
                                     maxLength={100}
@@ -155,14 +155,14 @@ export default function Upload() {
                                     numberOfLines={4}
                                     onChangeText={text => OnChangeCaption(text)}
                                     value={value}
-                                    style={{ ...styles.textInput, fontFamily: 'Vision_Light' }}
+                                    style={{ ...styles.textInput, fontFamily: 'SamsungSans_Light' }}
                                 />
                             </View>
                             <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                                 <Button rounded
                                     onPress={() => OnPressUpButton()}
                                     style={styles.button}>
-                                    <Text style={styles.vision}>
+                                    <Text style={styles.samsungSans}>
                                         {'UPLOAD'}
                                     </Text>
                                 </Button>
@@ -179,7 +179,7 @@ export default function Upload() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fdfdfd',
+        backgroundColor: '#ffffff',
     },
     title: {
         fontFamily: 'Vision_Black',
@@ -211,13 +211,13 @@ const styles = StyleSheet.create({
         borderColor: 'rgba(0, 0, 0, 0.35)',
         paddingLeft: 10,
         paddingTop: 5,
-        fontFamily: 'Vision_Bold',
+        fontFamily: 'SamsungSans_Medium',
         fontSize: 16,
         shadowColor: 'black',
         shadowOpacity: 0.0
     },
-    vision: {
-        fontFamily: 'Vision_Heavy',
+    samsungSans: {
+        fontFamily: 'SamsungSans_Bold',
         fontSize: 20,
         color: 'white'
     }

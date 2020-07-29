@@ -15,6 +15,7 @@ import Home from './app/Home';
 import Upload from './app/Upload';
 import Search from './app/Search';
 import Post from './app/Post';
+import Dashboard from './app/Dashboard';
 
 
 const Stack = createStackNavigator();
@@ -40,19 +41,25 @@ function HomeScreen() {
       <Tab.Screen name="Home" component={Home} options={{
         tabBarLabel: 'Home',
         tabBarIcon: ({ color, size }) => (
-          <SimpleLineIcons name="home" style={{ padding: 10 }} color={color} size={size} font={'Vision_Bold'} />
+          <SimpleLineIcons name="home" style={{ padding: 10 }} color={color} size={size} font={'SamsungSans_Medium'} />
         ),
       }} />
       <Tab.Screen name="Search" component={Search} options={{
         tabBarLabel: 'Search',
         tabBarIcon: ({ color, size }) => (
-          <SimpleLineIcons name="magnifier" style={{ padding: 10 }} color={color} size={size} font={'Vision_Bold'} />
+          <SimpleLineIcons name="magnifier" style={{ padding: 10 }} color={color} size={size} font={'SamsungSans_Medium'} />
         ),
       }} />
       <Tab.Screen name="Upload" component={Upload} options={{
         tabBarLabel: 'Upload',
         tabBarIcon: ({ color, size }) => (
-          <SimpleLineIcons name="arrow-up-circle" style={{ padding: 10 }} color={color} size={size} font={'Vision_Bold'} />
+          <SimpleLineIcons name="arrow-up-circle" style={{ padding: 10 }} color={color} size={size} font={'SamsungSans_Medium'} />
+        ),
+      }} />
+      <Tab.Screen name="Dashboard" component={Dashboard} options={{
+        tabBarLabel: 'Dashboard',
+        tabBarIcon: ({ color, size }) => (
+          <SimpleLineIcons name="menu" style={{ padding: 10 }} color={color} size={size} font={'SamsungSans_Medium'} />
         ),
       }} />
     </Tab.Navigator>
@@ -90,16 +97,12 @@ export default class App extends React.Component {
     const fontAssets = cacheFonts([FontAwesome.font]);
 
     await Font.loadAsync({
-      Roboto_medium: require("./assets/fonts/Vision/Vision-Black.ttf"),
-      Vision_Black: require("./assets/fonts/Vision/Vision-Black.ttf"),
-      Vision_Heavy: require("./assets/fonts/Vision/Vision-Heavy.ttf"),
-      Vision_Bold: require("./assets/fonts/Vision/Vision-Bold.ttf"),
-      Vision_Regular: require("./assets/fonts/Vision/Vision-Regular.ttf"),
-      Vision_Light: require("./assets/fonts/Vision/Vision-Light.ttf"),
-      Vision_Thin: require("./assets/fonts/Vision/Vision-Thin.ttf"),
-      Vision_HeavyItalic: require("./assets/fonts/Vision/Vision-HeavyItalic.ttf"),
-      Vision_BoldItalic: require("./assets/fonts/Vision/Vision-BoldItalic.ttf"),
-      Vision_Italic: require("./assets/fonts/Vision/Vision-Italic.ttf")
+      SamsungSans_Bold: require("./assets/fonts/SamsungSans/SamsungSans-Bold.ttf"),
+      SamsungSans_Medium: require("./assets/fonts/SamsungSans/SamsungSans-Medium.ttf"),
+      SamsungSans_Regular: require("./assets/fonts/SamsungSans/SamsungSans-Regular.ttf"),
+      SamsungSans_Light: require("./assets/fonts/SamsungSans/SamsungSans-Light.ttf"),
+      SamsungSans_Thin: require("./assets/fonts/SamsungSans/SamsungSans-Thin.ttf"),
+      Vision_Black: require("./assets/fonts/Vision/Vision-Black.ttf")
     });
 
     await Promise.all([...imageAssets, ...fontAssets]);

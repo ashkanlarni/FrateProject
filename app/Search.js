@@ -94,7 +94,7 @@ class Search extends Component {
                         />
                     </View>
                     <Button transparent style={styles.searchButton} onPress={() => this.onSearchButtonPressed()}>
-                        <Text style={{ fontFamily: 'Vision_Heavy', fontSize: 20, color: '#0080ff' }}>
+                        <Text style={{ fontFamily: 'SamsungSans_Bold', fontSize: 20, color: '#0080ff' }}>
                             {'Search'}
                         </Text>
                     </Button>
@@ -142,7 +142,7 @@ class Search extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fdfdfd',
+        backgroundColor: '#ffffff',
     },
     title: {
         fontFamily: 'Vision_Black',
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
         height: 50,
         backgroundColor: '#fafafa',
         paddingLeft: 20,
-        fontFamily: 'Vision_Bold',
+        fontFamily: 'SamsungSans_Medium',
         shadowOffset: { height: 2 },
         shadowColor: 'black',
         shadowOpacity: 0.1
@@ -167,8 +167,8 @@ const styles = StyleSheet.create({
         right: width / 6,
         bottom: 5
     },
-    vision: {
-        fontFamily: 'Vision_Heavy',
+    samsungSans: {
+        fontFamily: 'SamsungSans_Bold',
         fontSize: 20,
         color: 'white'
     }
