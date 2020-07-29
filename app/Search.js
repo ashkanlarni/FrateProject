@@ -94,7 +94,7 @@ class Search extends Component {
                         />
                     </View>
                     <Button transparent style={styles.searchButton} onPress={() => this.onSearchButtonPressed()}>
-                        <Text style={{ fontFamily: 'SamsungSans_Bold', fontSize: 20, color: '#0080ff' }}>
+                        <Text style={{ fontFamily: 'SamsungSans_Bold', fontSize: 18, color: '#0080ff' }}>
                             {'Search'}
                         </Text>
                     </Button>

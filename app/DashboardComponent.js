@@ -57,7 +57,7 @@ class DashboardComponent extends Component {
                                     <View style={{ flexDirection: 'row', width: width, alignItems: 'center', justifyContent: 'center' }}>
                                         <Button transparent style={{ width: width / 2, justifyContent: 'center', flexDirection: 'column' }}>
                                             <Text style={styles.samsungSans}> {'Followers'}</Text>
-                                            <Text style={styles.samsungSans}>{'291'}</Text>
+                                            <Text style={styles.samsungSans}>{'290'}</Text>
                                         </Button>
                                         <Button transparent style={{ width: width / 2, justifyContent: 'center', flexDirection: 'column' }}>
                                             <Text style={styles.samsungSans}>{'Followings'}</Text>
@@ -66,7 +66,7 @@ class DashboardComponent extends Component {
                                     </View>
                                 </CardItem>
                                 <CardItem style={styles.cardItem}>
-                                    <View style={{ flexDirection: 'row', flex: 1, width: width, justifyContent: 'space-around', backgroundColor: '#fbfbfb', borderRadius: 5 }}>
+                                    <View style={{ flexDirection: 'row', flex: 1, width: width, justifyContent: 'space-around', backgroundColor: '#fafafa', borderRadius: 5 }}>
                                         <View style={styles.progressCircleView}>
                                             <Text style={{ ...styles.samsungSans, paddingBottom: 10 }}>{'Art'}</Text>
                                             <ProgressCircle
@@ -133,11 +133,11 @@ const styles = StyleSheet.create({
     },
     samsungSans: {
         fontFamily: 'SamsungSans_Medium',
-        fontSize: 18
+        fontSize: 16
     },
     progressCircleText: {
         fontFamily: 'SamsungSans_Medium',
-        fontSize: 13
+        fontSize: 12
     },
     cardItem: {
         justifyContent: 'center',

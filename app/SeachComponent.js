@@ -60,7 +60,7 @@ class SearchComponent extends Component {
             <Card noShadow={true} transparent={true}>
                 <CardItem style={{ justifyContent: 'center', alignItems: 'center', width: width, height: 65, backgroundColor: '#ffffff' }}>
                     <View style={{ width: width / 3, alignItems: 'flex-start' }}>
-                        <Text style={{ fontFamily: 'SamsungSans_Medium', fontSize: 18, left: 15 }}>{this.props.name}</Text>
+                        <Text style={{ ...styles.samsungSans, left: 15 }}>{this.props.name}</Text>
                     </View>
                     <View style={{ width: width / 3, alignItems: 'center' }}>
                         <Thumbnail
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
     samsungSans: {
-        fontFamily: 'SamsungSans_Bold',
+        fontFamily: 'SamsungSans_Medium',
         fontSize: 16
     },
     body: {
