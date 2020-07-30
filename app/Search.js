@@ -165,12 +165,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         right: width / 6,
-        bottom: 5
-    },
-    samsungSans: {
-        fontFamily: 'SamsungSans_Bold',
-        fontSize: 20,
-        color: 'white'
+        bottom: 10
     }
 });
 

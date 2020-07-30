@@ -183,7 +183,7 @@ class Login extends React.Component {
                         </TapGestureHandler>
                         <Animated.View style={{ justifyContent: 'center', marginVertical: 30, opacity: this.buttonOpacity, transform: [{ translateY: this.buttonY }] }}>
                             <Button transparent style={{ justifyContent: 'center', alignItems: 'center' }} onPress={() => this.props.navigation.navigate('Sign Up')}>
-                                <Text style={{ ...styles.samsungSans, fontSize: 18 }}>
+                                <Text style={{ ...styles.samsungSans, fontSize: 16 }}>
                                     {"Don't have an account yet?"}
                                 </Text>
                             </Button>
@@ -286,7 +286,7 @@ const styles = StyleSheet.create({
     },
     samsungSans: {
         fontFamily: 'SamsungSans_Bold',
-        fontSize: 20,
+        fontSize: 18,
         color: 'white'
     }
 });

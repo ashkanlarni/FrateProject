@@ -45,6 +45,6 @@ const styles = StyleSheet.create({
         position: 'relative', //Here is the trick
         bottom: 0,
         fontFamily: 'SamsungSans_Medium',
-        fontSize: 14
+        fontSize: 12
     }
 });

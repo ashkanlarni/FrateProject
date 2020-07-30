@@ -136,7 +136,7 @@ class SignUp extends React.Component {
                         <Button rounded
                             onPress={() => this.onPressSignUpButton()}
                             style={{ ...styles.button, marginVertical: 50, backgroundColor: 'rgb(85, 205, 95)' }}>
-                            <Text style={{ fontFamily: 'SamsungSans_Bold', fontSize: 20 }}>
+                            <Text style={{ fontFamily: 'SamsungSans_Bold', fontSize: 18 }}>
                                 {'SIGN UP'}
                             </Text>
                         </Button>

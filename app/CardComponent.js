@@ -99,8 +99,8 @@ class CardComponent extends Component {
             <Card transparent={true} noShadow={true}>
                 <CardItem style={styles.cardItem}>
                     <View style={{ width: width / 3, alignItems: 'flex-start' }}>
-                        <Text style={{ fontFamily: 'SamsungSans_Medium', fontSize: 18, left: 15 }}>{this.props.name}</Text>
-                        <Text note style={{ fontFamily: 'SamsungSans_Light', fontSize: 12, left: 15, color: '#333333' }}>{this.props.date}</Text>
+                        <Text style={{ fontFamily: 'SamsungSans_Medium', fontSize: 16, left: 15 }}>{this.props.name}</Text>
+                        <Text note style={{ fontFamily: 'SamsungSans_Light', fontSize: 11, left: 15, color: '#333333' }}>{this.props.date}</Text>
                     </View>
                     <View style={{ width: width / 3, alignItems: 'center' }}>
                         <Thumbnail
@@ -162,10 +162,10 @@ class CardComponent extends Component {
                 {
                     this.openRating
                     &&
-                    <CardItem style={{ height: 40, backgroundColor: '#ffffff' }}>
+                    <CardItem style={{ height: 50, backgroundColor: '#ffffff' }}>
                         <Body style={{ justifyContent: 'center', alignItems: 'center' }}>
                             <Button rounded style={{ width: 100, justifyContent: 'center', backgroundColor: '#50c878', height: 36 }}>
-                                <Text style={{ fontFamily: 'SamsungSans_Medium', fontSize: 16, color: 'white' }} onPress={() => this.onSubmitRating()}>
+                                <Text style={{ fontFamily: 'SamsungSans_Medium', fontSize: 14, color: 'white' }} onPress={() => this.onSubmitRating()}>
                                     {'SUBMIT'}
                                 </Text>
                             </Button>
@@ -248,8 +248,8 @@ class CardComponent extends Component {
                         <Body>
                             {this.props.comments.map((p) => {
                                 return (
-                                    <Text style={{ fontFamily: 'SamsungSans_Light', fontSize: 13, textAlign: 'left', textAlignVertical: 'auto' }}>
-                                        <Text style={{ fontFamily: 'SamsungSans_Medium', fontSize: 13, textAlign: 'left', textAlignVertical: 'auto' }}>
+                                    <Text style={{ fontFamily: 'SamsungSans_Thin', fontSize: 12, textAlign: 'left', textAlignVertical: 'auto' }}>
+                                        <Text style={{ fontFamily: 'SamsungSans_Regular', fontSize: 12, textAlign: 'left', textAlignVertical: 'auto' }}>
                                             {p[0]}{' '}
                                         </Text>
                                         {p[1]}
@@ -274,7 +274,7 @@ const styles = StyleSheet.create({
     },
     samsungSans: {
         fontFamily: 'SamsungSans_Medium',
-        fontSize: 13
+        fontSize: 12
     },
     body: {
         alignItems: 'center',

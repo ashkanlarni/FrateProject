@@ -142,11 +142,11 @@ export default function Upload() {
                                 selectedButtonColor={'#0080ff'}
                                 buttonSize={6}
                                 buttonOuterSize={18}
-                                labelStyle={{ fontFamily: 'SamsungSans_Regular', fontSize: 16 }}
+                                labelStyle={{ fontFamily: 'SamsungSans_Regular', fontSize: 14 }}
                             />
                         </View>
                         <View style={{ justifyContent: 'center', height: height / 3 }}>
-                            <View style={{ justifyContent: 'center', fontFamily: 'SamsungSans_Medium' }}>
+                            <View style={{ justifyContent: 'center' }}>
                                 <TextInput
                                     editable
                                     maxLength={100}
@@ -212,13 +212,13 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         paddingTop: 5,
         fontFamily: 'SamsungSans_Medium',
-        fontSize: 16,
+        fontSize: 14,
         shadowColor: 'black',
         shadowOpacity: 0.0
     },
     samsungSans: {
         fontFamily: 'SamsungSans_Bold',
-        fontSize: 20,
+        fontSize: 18,
         color: 'white'
     }
 });
