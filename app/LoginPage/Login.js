@@ -156,7 +156,7 @@ class Login extends React.Component {
                     <Animated.View style={{ ...StyleSheet.absoluteFill, transform: [{ translateY: this.bgY }] }}>
                         <Svg height={height} width={width}>
                             <Image
-                                href={require('../assets/images/LoginBackground.jpg')}
+                                href={require('../../assets/images/LoginBackground.jpg')}
                                 height={height}
                                 width={width}
                                 preserveAspectRatio='xMidYMid slice'

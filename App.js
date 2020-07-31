@@ -9,13 +9,13 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 
-import Login from './app/Login';
-import SignUp from './app/SignUp';
-import Home from './app/Home';
-import Upload from './app/Upload';
-import Search from './app/Search';
-import Post from './app/Post';
-import Dashboard from './app/Dashboard';
+import Login from './app/LoginPage/Login';
+import SignUp from './app/LoginPage/SignUp';
+import Home from './app/HomePage/Home';
+import Upload from './app/HomePage/Upload';
+import Search from './app/HomePage/Search';
+import Post from './app/HomePage/Post';
+import Dashboard from './app/HomePage/Dashboard';
 
 
 const Stack = createStackNavigator();
@@ -126,6 +126,7 @@ export default class App extends React.Component {
             <Stack.Navigator initialRouteName='Home' >
               <Stack.Screen options={{ headerShown: false }} name='Home' component={HomeScreen} />
               <Stack.Screen options={{ headerBackTitle: 'Back' }} name='Post' component={Post} />
+              <Stack.Screen options={{ headerShown: false }} name='Dashboard' component={Dashboard} />
             </Stack.Navigator>
           </NavigationContainer>
         </>

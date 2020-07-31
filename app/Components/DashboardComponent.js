@@ -6,6 +6,24 @@ import ProgressCircle from 'react-native-progress-circle';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import axios from 'axios';
 
+import CardComponent from './CardComponent';
+
+posts = [{
+    'postid': 1,
+    'name': 'Alil',
+    'date': 'July 30, 2020',
+    'profilePicSource': require('../../assets/images/profile/Ashkan.jpg'),
+    'imageSource': '../../assets/images/profile/Ashkan.jpg',
+    'category': 1,
+    'rate': ['1.0', '2.0', '3.0', '4.0'],
+    'rateCount': 5,
+    'caption': 'Hello',
+    'comments': [['Ali', 'Salam'], ['Shay', 'Hi']],
+    'fullPagePost': false,
+    'goIntoAnotherPage': true,
+    'canRate': false
+}]
+
 const { width, height } = Dimensions.get('window');
 
 const colors = {
@@ -88,7 +106,7 @@ class DashboardComponent extends Component {
                             <Card noShadow={true} transparent={true}>
                                 <CardItem style={styles.cardItem}>
                                     <View style={{ width: width / 3, alignItems: 'flex-start' }}>
-                                        <Text style={{ fontFamily: 'SamsungSans_Bold', fontSize: 20, left: 15 }}>{this.props.name}</Text>
+                                        <Text style={{ fontFamily: 'SamsungSans_Bold', fontSize: 18, left: 15 }}>{this.props.name}</Text>
                                     </View>
                                     <View style={{ width: width / 3, alignItems: 'center' }}>
                                         <Thumbnail
@@ -130,22 +148,10 @@ class DashboardComponent extends Component {
                                     </View>
                                 </CardItem>
                                 <CardItem style={styles.cardItem}>
-                                    <View style={{ flexDirection: 'row', flex: 1, width: width, justifyContent: 'space-around', backgroundColor: '#fafafa', borderRadius: 5 }}>
+                                    <View style={{ flexDirection: 'row', flex: 1, width: width, justifyContent: 'space-around', backgroundColor: '#f8f8f8', borderRadius: 18 }}>
                                         <View style={styles.progressCircleView}>
-                                            <Text style={{ ...styles.samsungSans, paddingBottom: 10 }}>{'Art'}</Text>
-                                            <ProgressCircle
-                                                percent={this.props.averageRates[1] / 5 * 100}
-                                                radius={18}
-                                                borderWidth={4}
-                                                color={colors['Art']}
-                                                shadowColor="#d3d3d3"
-                                                bgColor="white"
-                                            >
-                                                <Text style={styles.progressCircleText} >{this.props.averageRates[1]}</Text>
-                                            </ProgressCircle>
-                                        </View>
-                                        <View style={styles.progressCircleView}>
-                                            <Text style={{ ...styles.samsungSans, paddingBottom: 10 }}>{'Photography'}</Text>
+                                            <Text style={{ ...styles.samsungSans, paddingBottom: 5 }}>{'Photography'}</Text>
+                                            <Text style={{ fontFamily: 'SamsungSans_Regular', fontSize: 13, paddingBottom: 5 }}>{'1 Post'}</Text>
                                             <ProgressCircle
                                                 percent={this.props.averageRates[0] / 5 * 100}
                                                 radius={18}
@@ -158,7 +164,22 @@ class DashboardComponent extends Component {
                                             </ProgressCircle>
                                         </View>
                                         <View style={styles.progressCircleView}>
-                                            <Text style={{ ...styles.samsungSans, paddingBottom: 10 }}>{'Lifestyle'}</Text>
+                                            <Text style={{ ...styles.samsungSans, paddingBottom: 5 }}>{'Art'}</Text>
+                                            <Text style={{ fontFamily: 'SamsungSans_Regular', fontSize: 13, paddingBottom: 5 }}>{'41 Posts'}</Text>
+                                            <ProgressCircle
+                                                percent={this.props.averageRates[1] / 5 * 100}
+                                                radius={18}
+                                                borderWidth={4}
+                                                color={colors['Art']}
+                                                shadowColor="#d3d3d3"
+                                                bgColor="white"
+                                            >
+                                                <Text style={styles.progressCircleText} >{this.props.averageRates[1]}</Text>
+                                            </ProgressCircle>
+                                        </View>
+                                        <View style={styles.progressCircleView}>
+                                            <Text style={{ ...styles.samsungSans, paddingBottom: 5 }}>{'Lifestyle'}</Text>
+                                            <Text style={{ fontFamily: 'SamsungSans_Regular', fontSize: 13, paddingBottom: 5 }}>{'289 Posts'}</Text>
                                             <ProgressCircle
                                                 percent={this.props.averageRates[2] / 5 * 100}
                                                 radius={18}
@@ -172,12 +193,27 @@ class DashboardComponent extends Component {
                                         </View>
                                     </View>
                                 </CardItem>
-                                <CardItem cardBody style={{ ...styles.cardItem }}>
-                                    <Image
-                                        source={require('../assets/images/feed/2.jpg')}
-                                        style={{ height: width, width: null, flex: 1 }}
-                                    />
-                                </CardItem>
+                                <>
+                                    {
+                                        posts.map((p) => {
+                                            return (<CardComponent
+                                                postid={p.postid}
+                                                name={p.name}
+                                                date={p.date}
+                                                profilePicSource={p.profilePic}
+                                                imageSource={p.image}
+                                                category={p.category}
+                                                rate={p.rate}
+                                                rateCount={p.rateCount}
+                                                caption={p.caption}
+                                                comments={p.comments}
+                                                fullPagePost={false}
+                                                goIntoAnotherPage={true}
+                                                canRate={false}
+                                            />)
+                                        })
+                                    }
+                                </>
                             </Card>
                         </Content>
                     </ScrollView>

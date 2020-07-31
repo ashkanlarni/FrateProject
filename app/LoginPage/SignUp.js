@@ -85,7 +85,7 @@ class SignUp extends React.Component {
                     <View style={StyleSheet.absoluteFill}>
                         <Svg height={height} width={width}>
                             <Image
-                                href={require('../assets/images/SignUpBackground.png')}
+                                href={require('../../assets/images/SignUpBackground.png')}
                                 height={height}
                                 width={width}
                                 preserveAspectRatio='xMidYMid slice'

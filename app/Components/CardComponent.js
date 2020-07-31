@@ -5,7 +5,7 @@ import { Button, Icon, Card, CardItem, Thumbnail, Body, Left, Right } from 'nati
 import ProgressCircle from 'react-native-progress-circle';
 import axios from 'axios';
 
-import SliderComponent from './Slider/SliderComponent';
+import SliderComponent from './SliderComponent';
 
 const { width, height } = Dimensions.get('window');
 

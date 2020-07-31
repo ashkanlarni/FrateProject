@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, Dimensions, TextInput } from 'react-native';
 import { Container, Content, Header, Title, Button, Icon, Item } from 'native-base';
 import axios from 'axios';
 
-import SearchComponent from './SeachComponent'
+import SearchComponent from '../Components/SearchComponent';
 
 const { width, height } = Dimensions.get('window');
 
@@ -47,7 +47,7 @@ class Search extends Component {
 
                                 var p = {
                                     username: obj.username,
-                                    profilePic: require('../assets/images/profile/Ashkan.jpg'),
+                                    profilePic: require('../../assets/images/profile/Ashkan.jpg'),
                                     isFollowing: isF
                                 }
                                 this.result.push(p)
@@ -116,19 +116,19 @@ class Search extends Component {
                         < SearchComponent
                             username={'Alil'}
                             name={'Shayesteh'}
-                            profilePicSource={require('../assets/images/profile/Shayesteh.jpg')}
+                            profilePicSource={require('../../assets/images/profile/Shayesteh.jpg')}
                             following={true}
                         />
                         <SearchComponent
                             username={'Alil'}
                             name={'Ali'}
-                            profilePicSource={require('../assets/images/profile/Ali.jpg')}
+                            profilePicSource={require('../../assets/images/profile/Ali.jpg')}
                             following={false}
                         />
                         <SearchComponent
                             username={'Alil'}
                             name={'Ashkan'}
-                            profilePicSource={require('../assets/images/profile/Ashkan.jpg')}
+                            profilePicSource={require('../../assets/images/profile/Ashkan.jpg')}
                             following={false}
                         />
                     </View>

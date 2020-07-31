@@ -4,7 +4,7 @@ import { RefreshControl, SafeAreaView, ScrollView, StyleSheet, AsyncStorage } fr
 import { Container, Content, Header, Title } from 'native-base';
 import axios from 'axios';
 
-import CardComponent from './CardComponent';
+import CardComponent from '../Components/CardComponent';
 
 var posts = []
 var user = 'Alil';
@@ -57,7 +57,7 @@ export default function Home({ navigation }) {
                                     "postid": obj.id,
                                     "name": obj.username,
                                     "date": obj.date,
-                                    "profilePic": require('../assets/images/profile/Ashkan.jpg'),
+                                    "profilePic": require('../../assets/images/profile/Ashkan.jpg'),
                                     "image": obj.filename,
                                     "category": obj.category,
                                     "rate": r,
