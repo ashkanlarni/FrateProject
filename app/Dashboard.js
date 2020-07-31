@@ -14,9 +14,10 @@ class Dashboard extends Component {
         return (
             <View style={styles.container}>
                 <DashboardComponent
-                    username={'Ashkan'}
+                    username={'Alil'}
+                    name={'Alil'}
                     profilePicture={require('../assets/images/profile/Ashkan.jpg')}
-                    isSelfProfile={true}
+                    following={true}
                 />
             </View>
         );

@@ -154,10 +154,7 @@ const styles = StyleSheet.create({
         height: 50,
         backgroundColor: '#fafafa',
         paddingLeft: 20,
-        fontFamily: 'SamsungSans_Medium',
-        shadowOffset: { height: 2 },
-        shadowColor: 'black',
-        shadowOpacity: 0.1
+        fontFamily: 'SamsungSans_Medium'
     },
     searchButton: {
         height: 50,

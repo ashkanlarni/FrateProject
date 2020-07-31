@@ -120,57 +120,55 @@ class CardComponent extends Component {
                 {
                     this.openRating
                     &&
-                    <CardItem style={{ height: 140, backgroundColor: '#ffffff' }}>
-                        <Body style={styles.body}>
-                            <SliderComponent
-                                sliderHeight={160}
-                                barColor={colors[category[this.props.category]]}
-                                variable='rate1'
-                                value={this.state.rate1}
-                                changeFunction={this.change}
-                            />
-                        </Body>
-                        <Body style={styles.body}>
-                            <SliderComponent
-                                sliderHeight={160}
-                                barColor={colors[category[this.props.category]]}
-                                variable='rate2'
-                                value={this.state.rate2}
-                                changeFunction={this.change}
-                            />
-                        </Body>
-                        <Body style={styles.body}>
-                            <SliderComponent
-                                sliderHeight={160}
-                                barColor={colors[category[this.props.category]]}
-                                variable='rate3'
-                                value={this.state.rate3}
-                                changeFunction={this.change}
-                            />
-                        </Body>
-                        <Body style={styles.body}>
-                            <SliderComponent
-                                sliderHeight={160}
-                                barColor={colors[category[this.props.category]]}
-                                variable='rate4'
-                                value={this.state.rate4}
-                                changeFunction={this.change}
-                            />
-                        </Body>
-                    </CardItem>
-                }
-                {
-                    this.openRating
-                    &&
-                    <CardItem style={{ height: 50, backgroundColor: '#ffffff' }}>
-                        <Body style={{ justifyContent: 'center', alignItems: 'center' }}>
-                            <Button rounded style={{ width: 100, justifyContent: 'center', backgroundColor: '#50c878', height: 36 }}>
-                                <Text style={{ fontFamily: 'SamsungSans_Medium', fontSize: 14, color: 'white' }} onPress={() => this.onSubmitRating()}>
-                                    {'SUBMIT'}
-                                </Text>
-                            </Button>
-                        </Body>
-                    </CardItem>
+                    <>
+                        <CardItem style={{ height: 140, backgroundColor: '#ffffff' }}>
+                            <Body style={styles.body}>
+                                <SliderComponent
+                                    sliderHeight={160}
+                                    barColor={colors[category[this.props.category]]}
+                                    variable='rate1'
+                                    value={this.state.rate1}
+                                    changeFunction={this.change}
+                                />
+                            </Body>
+                            <Body style={styles.body}>
+                                <SliderComponent
+                                    sliderHeight={160}
+                                    barColor={colors[category[this.props.category]]}
+                                    variable='rate2'
+                                    value={this.state.rate2}
+                                    changeFunction={this.change}
+                                />
+                            </Body>
+                            <Body style={styles.body}>
+                                <SliderComponent
+                                    sliderHeight={160}
+                                    barColor={colors[category[this.props.category]]}
+                                    variable='rate3'
+                                    value={this.state.rate3}
+                                    changeFunction={this.change}
+                                />
+                            </Body>
+                            <Body style={styles.body}>
+                                <SliderComponent
+                                    sliderHeight={160}
+                                    barColor={colors[category[this.props.category]]}
+                                    variable='rate4'
+                                    value={this.state.rate4}
+                                    changeFunction={this.change}
+                                />
+                            </Body>
+                        </CardItem>
+                        <CardItem style={{ height: 50, backgroundColor: '#ffffff' }}>
+                            <Body style={{ justifyContent: 'center', alignItems: 'center' }}>
+                                <Button rounded style={{ width: 100, justifyContent: 'center', backgroundColor: '#50c878', height: 36 }}>
+                                    <Text style={{ fontFamily: 'SamsungSans_Medium', fontSize: 14, color: 'white' }} onPress={() => this.onSubmitRating()}>
+                                        {'SUBMIT'}
+                                    </Text>
+                                </Button>
+                            </Body>
+                        </CardItem>
+                    </>
                 }
                 <CardItem style={{ height: 70, backgroundColor: '#ffffff' }}>
                     <Body style={styles.body}>
