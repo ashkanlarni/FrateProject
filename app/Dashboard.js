@@ -18,6 +18,7 @@ class Dashboard extends Component {
                     name={'Alil'}
                     profilePicture={require('../assets/images/profile/Ashkan.jpg')}
                     following={true}
+                    averageRates={['2.9', '3.1', '4.4']}
                 />
             </View>
         );

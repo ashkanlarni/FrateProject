@@ -103,8 +103,6 @@ export default function Home({ navigation }) {
                     <Content>
                         {
                             posts.map((p) => {
-                                console.log('a', p)
-                                console.log('b', posts)
                                 return (<CardComponent
                                     postid={p.postid}
                                     name={p.name}

@@ -10,9 +10,9 @@ import SliderComponent from './Slider/SliderComponent';
 const { width, height } = Dimensions.get('window');
 
 const colors = {
-    "Lifestyle": '#50c878',
-    "Art": '#0080ff',
     "Photography": '#e0115f',
+    "Art": '#0080ff',
+    "Lifestyle": '#50c878'
 }
 
 const category = {

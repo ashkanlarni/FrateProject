@@ -1,12 +1,18 @@
 //import liraries
 import React, { Component } from 'react';
-import { RefreshControl, Text, SafeAreaView, ScrollView, StyleSheet, AsyncStorage, Dimensions } from 'react-native';
-import { Container, Content, Header, Title, Button, Icon, Card, CardItem, Thumbnail, Body, Left, Right, View } from 'native-base';
+import { RefreshControl, Text, SafeAreaView, ScrollView, StyleSheet, AsyncStorage, Dimensions, Image } from 'react-native';
+import { Container, Content, Header, Title, Button, Card, CardItem, Thumbnail, View } from 'native-base';
 import ProgressCircle from 'react-native-progress-circle';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import axios from 'axios';
 
 const { width, height } = Dimensions.get('window');
+
+const colors = {
+    "Photography": '#e0115f',
+    "Art": '#0080ff',
+    "Lifestyle": '#50c878'
+}
 
 // create a component
 class DashboardComponent extends Component {
@@ -82,7 +88,7 @@ class DashboardComponent extends Component {
                             <Card noShadow={true} transparent={true}>
                                 <CardItem style={styles.cardItem}>
                                     <View style={{ width: width / 3, alignItems: 'flex-start' }}>
-                                        <Text style={{ ...styles.samsungSans, left: 15 }}>{this.props.name}</Text>
+                                        <Text style={{ fontFamily: 'SamsungSans_Bold', fontSize: 20, left: 15 }}>{this.props.name}</Text>
                                     </View>
                                     <View style={{ width: width / 3, alignItems: 'center' }}>
                                         <Thumbnail
@@ -90,12 +96,12 @@ class DashboardComponent extends Component {
                                             source={this.props.profilePicture}
                                         />
                                     </View>
-                                    <View style={{ width: width / 3, alignItems: 'center' }}>
+                                    <View style={{ width: width / 3, alignItems: 'flex-end' }}>
                                         {
                                             this.isSelfProfile ?
                                                 (
                                                     <Button transparent>
-                                                        <Text style={{ ...styles.samsungSans, color: '#0080ff' }}>
+                                                        <Text style={{ ...styles.samsungSans, color: '#0080ff', right: 15 }}>
                                                             {'Log Out'}
                                                         </Text>
                                                     </Button>
@@ -105,7 +111,7 @@ class DashboardComponent extends Component {
                                                         color={this.state.following ? '#50c878' : '#0080ff'}
                                                         size={30}
                                                         onPress={this.state.following ? this.onPressUnFollowButton : this.onPressFollowButton}
-                                                        style={{ justifyContent: 'center', alignItems: 'center' }}
+                                                        style={{ right: 15 }}
                                                     />
                                                 )
                                         }
@@ -128,45 +134,49 @@ class DashboardComponent extends Component {
                                         <View style={styles.progressCircleView}>
                                             <Text style={{ ...styles.samsungSans, paddingBottom: 10 }}>{'Art'}</Text>
                                             <ProgressCircle
-                                                percent={2.9 / 5 * 100}
+                                                percent={this.props.averageRates[1] / 5 * 100}
                                                 radius={18}
-                                                borderWidth={3}
-                                                color={'#0080ff'}
+                                                borderWidth={4}
+                                                color={colors['Art']}
                                                 shadowColor="#d3d3d3"
                                                 bgColor="white"
                                             >
-                                                <Text style={styles.progressCircleText} >{'2.9'}</Text>
+                                                <Text style={styles.progressCircleText} >{this.props.averageRates[1]}</Text>
                                             </ProgressCircle>
                                         </View>
                                         <View style={styles.progressCircleView}>
                                             <Text style={{ ...styles.samsungSans, paddingBottom: 10 }}>{'Photography'}</Text>
                                             <ProgressCircle
-                                                percent={2.9 / 5 * 100}
+                                                percent={this.props.averageRates[0] / 5 * 100}
                                                 radius={18}
-                                                borderWidth={3}
-                                                color={'#e0115f'}
+                                                borderWidth={4}
+                                                color={colors['Photography']}
                                                 shadowColor="#d3d3d3"
                                                 bgColor="white"
                                             >
-                                                <Text style={styles.progressCircleText} >{'2.9'}</Text>
+                                                <Text style={styles.progressCircleText} >{this.props.averageRates[0]}</Text>
                                             </ProgressCircle>
                                         </View>
                                         <View style={styles.progressCircleView}>
                                             <Text style={{ ...styles.samsungSans, paddingBottom: 10 }}>{'Lifestyle'}</Text>
                                             <ProgressCircle
-                                                percent={2.9 / 5 * 100}
+                                                percent={this.props.averageRates[2] / 5 * 100}
                                                 radius={18}
-                                                borderWidth={3}
-                                                color={'#50c878'}
+                                                borderWidth={4}
+                                                color={colors['Lifestyle']}
                                                 shadowColor="#d3d3d3"
                                                 bgColor="white"
                                             >
-                                                <Text style={styles.progressCircleText} >{'2.9'}</Text>
+                                                <Text style={styles.progressCircleText} >{this.props.averageRates[2]}</Text>
                                             </ProgressCircle>
-                                            {/* <Text style={{ ...styles.samsungSans }}>{'Photography'}</Text>
-                                            <Text style={{ ...styles.samsungSans }}>{'Lifestyle'}</Text> */}
                                         </View>
                                     </View>
+                                </CardItem>
+                                <CardItem cardBody style={{ ...styles.cardItem }}>
+                                    <Image
+                                        source={require('../assets/images/feed/2.jpg')}
+                                        style={{ height: width, width: null, flex: 1 }}
+                                    />
                                 </CardItem>
                             </Card>
                         </Content>

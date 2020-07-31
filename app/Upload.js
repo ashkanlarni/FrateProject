@@ -142,7 +142,7 @@ export default function Upload() {
                                 selectedButtonColor={'#0080ff'}
                                 buttonSize={6}
                                 buttonOuterSize={18}
-                                labelStyle={{ fontFamily: 'SamsungSans_Regular', fontSize: 14 }}
+                                labelStyle={{ fontFamily: 'SamsungSans_Light', fontSize: 14 }}
                             />
                         </View>
                         <View style={{ justifyContent: 'center', height: height / 3 }}>
