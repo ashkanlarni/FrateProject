@@ -21,6 +21,8 @@ import Dashboard from './app/HomePage/Dashboard';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
+
+
 function cacheImages(images) {
   return images.map(image => {
     if (typeof image === 'string') {
@@ -79,7 +81,7 @@ export default class App extends React.Component {
 
     AsyncStorage.getItem('username', (err, result) => {
       if (result != null) {
-        this.state.isSignedIn = true;
+       this.state.isSignedIn = true;
       }
       this.dbReady = true;
     });
@@ -132,10 +134,11 @@ export default class App extends React.Component {
         </>
       ) : (
           <NavigationContainer>
-            <Stack.Navigator initialRouteName='Login' >
+            <Stack.Navigator screenOptions={{gestureEnabled: false}} initialRouteName='Login' >
               <Stack.Screen options={{ headerShown: false }} name='Login' component={Login} />
-              <Stack.Screen options={{ headerShown: false }} name='Sign Up' component={SignUp} />
-              <Stack.Screen options={{ headerShown: false }} name='Home' component={Home} />
+              <Stack.Screen options={{ headerShown: true }} name='Sign Up' component={SignUp} />
+              <Stack.Screen options={{ headerShown: false }} name='Home' component={HomeScreen} />
+              <Stack.Screen options={{ headerBackTitle: 'Back' }} name='Post' component={Post} />
             </Stack.Navigator>
           </NavigationContainer>
         )
