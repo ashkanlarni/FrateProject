@@ -8,15 +8,18 @@ import SearchComponent from '../Components/SearchComponent';
 var posts = [{
     'username': 'Alil',
     'name': 'Ashkan',
-    'profilePicSource': require('../../assets/images/profile/Ashkan.jpg')
+    'profilePicSource': require('../../assets/images/profile/Ashkan.jpg'),
+    'following': true
 }, {
     'username': 'Alil',
     'name': 'Ali',
-    'profilePicSource': require('../../assets/images/profile/Ali.jpg')
+    'profilePicSource': require('../../assets/images/profile/Ali.jpg'),
+    'following': false
 }, {
     'username': 'Alil',
     'name': 'Shayesteh',
-    'profilePicSource': require('../../assets/images/profile/Shayesteh.jpg')
+    'profilePicSource': require('../../assets/images/profile/Shayesteh.jpg'),
+    'following': true
 }]
 
 // create a component
@@ -26,7 +29,7 @@ function wait(timeout) {
     });
 }
 
-export default function Home({ navigation }) {
+export default function Followers({ navigation }) {
     // const [refreshing, setRefreshing] = React.useState(false);
 
     // onRefresh = React.useCallback(() => {
@@ -100,7 +103,7 @@ export default function Home({ navigation }) {
                                     username={p.username}
                                     name={p.name}
                                     profilePicSource={p.profilePicSource}
-                                    following={true}
+                                    following={p.following}
                                 />)
                             })
                         }

@@ -88,11 +88,9 @@ function FollowScreen() {
 
 function DashboardScreen() {
   return (
-    <Dash.Navigator initialRouteName='Dashboard' >
+    <Dash.Navigator initialRouteName='Dashboard' screenOptions={{ gestureEnabled: false }} >
       <Dash.Screen options={{ headerShown: false }} name='Dashboard' component={Dashboard} />
       <Dash.Screen options={{ headerShown: true, title: ' ' }} name='Follow' component={FollowScreen} />
-      {/* <Dash.Screen options={{ headerShown: false }} name='Followers' component={Followers} />
-      <Dash.Screen options={{ headerShown: false }} name='Followings' component={Followings} /> */}
     </Dash.Navigator>
   );
 }
@@ -151,25 +149,14 @@ export default class App extends React.Component {
 
     }
     return (
-      this.state.isSignedIn ? (
-        <>
-          <NavigationContainer>
-            <Stack.Navigator initialRouteName='Home' >
-              <Stack.Screen options={{ headerShown: false }} name='Home' component={HomeScreen} />
-              <Stack.Screen options={{ headerBackTitle: 'Back', title: ' ' }} name='Post' component={Post} />
-            </Stack.Navigator>
-          </NavigationContainer>
-        </>
-      ) : (
-          <NavigationContainer>
-            <Stack.Navigator screenOptions={{ gestureEnabled: false }} initialRouteName='Login' >
-              <Stack.Screen options={{ headerShown: false }} name='Login' component={Login} />
-              <Stack.Screen name='Sign Up' component={SignUp} />
-              <Stack.Screen options={{ headerShown: false }} name='Home' component={HomeScreen} />
-              <Stack.Screen options={{ headerBackTitle: 'Back' }} name='Post' component={Post} />
-            </Stack.Navigator>
-          </NavigationContainer>
-        )
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName={this.state.isSignedIn ? 'Home' : 'Login'} screenOptions={{ gestureEnabled: false }} >
+          <Stack.Screen options={{ headerShown: false }} name='Login' component={Login} />
+          <Stack.Screen name='Sign Up' component={SignUp} />
+          <Stack.Screen options={{ headerShown: false }} name='Home' component={HomeScreen} />
+          <Stack.Screen options={{ headerBackTitle: 'Back' }} name='Post' component={Post} />
+        </Stack.Navigator>
+      </NavigationContainer>
     );
   }
 }

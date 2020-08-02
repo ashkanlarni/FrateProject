@@ -102,7 +102,7 @@ class DashboardComponent extends Component {
                                         {
                                             this.isSelfProfile ?
                                                 (
-                                                    <Button transparent>
+                                                    <Button transparent onPress={() => this.props.navigation.navigate('Login', { screen: 'Login' })}>
                                                         <Text style={{ ...styles.samsungSans, color: '#0080ff', right: 15 }}>
                                                             {'Log Out'}
                                                         </Text>
@@ -125,7 +125,7 @@ class DashboardComponent extends Component {
                                             <Text style={styles.samsungSans}>{'Followers'}</Text>
                                             <Text style={{ fontFamily: 'SamsungSans_Regular', fontSize: 16 }}>{this.props.followers.length}</Text>
                                         </Button>
-                                        <Button transparent style={{ width: width / 2, justifyContent: 'center', flexDirection: 'column' }} onPress={() => this.props.navigation.navigate('Followins')}>
+                                        <Button transparent style={{ width: width / 2, justifyContent: 'center', flexDirection: 'column' }} onPress={() => this.props.navigation.navigate('Follow')}>
                                             <Text style={styles.samsungSans}>{'Followings'}</Text>
                                             <Text style={{ fontFamily: 'SamsungSans_Regular', fontSize: 16 }}>{this.props.followings.length}</Text>
                                         </Button>
