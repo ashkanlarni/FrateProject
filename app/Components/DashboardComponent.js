@@ -8,22 +8,6 @@ import axios from 'axios';
 
 import CardComponent from './CardComponent';
 
-posts = [{
-    'postid': 1,
-    'name': 'Alil',
-    'date': 'July 30, 2020',
-    'profilePicSource': require('../../assets/images/profile/Ashkan.jpg'),
-    'imageSource': '../../assets/images/profile/Ashkan.jpg',
-    'category': 1,
-    'rate': ['1.0', '2.0', '3.0', '4.0'],
-    'rateCount': 5,
-    'caption': 'Hello',
-    'comments': [['Ali', 'Salam'], ['Shay', 'Hi']],
-    'fullPagePost': false,
-    'goIntoAnotherPage': true,
-    'canRate': false
-}]
-
 const { width, height } = Dimensions.get('window');
 
 const colors = {
@@ -40,7 +24,7 @@ class DashboardComponent extends Component {
         this.isSelfProfile = (this.props.username == this.props.name) ? true : false;
 
         this.state = {
-            following: props.following
+            following: props.isFollowing
         }
     }
 
@@ -137,65 +121,77 @@ class DashboardComponent extends Component {
                                 </CardItem>
                                 <CardItem style={styles.cardItem}>
                                     <View style={{ flexDirection: 'row', width: width, alignItems: 'center', justifyContent: 'center' }}>
-                                        <Button transparent style={{ width: width / 2, justifyContent: 'center', flexDirection: 'column' }}>
-                                            <Text style={styles.samsungSans}> {'Followers'}</Text>
-                                            <Text style={styles.samsungSans}>{'290'}</Text>
+                                        <Button transparent style={{ width: width / 2, justifyContent: 'center', flexDirection: 'column' }} onPress={() => this.props.navigation.navigate('Follow')}>
+                                            <Text style={styles.samsungSans}>{'Followers'}</Text>
+                                            <Text style={{ fontFamily: 'SamsungSans_Regular', fontSize: 16 }}>{this.props.followers.length}</Text>
                                         </Button>
-                                        <Button transparent style={{ width: width / 2, justifyContent: 'center', flexDirection: 'column' }}>
+                                        <Button transparent style={{ width: width / 2, justifyContent: 'center', flexDirection: 'column' }} onPress={() => this.props.navigation.navigate('Followins')}>
                                             <Text style={styles.samsungSans}>{'Followings'}</Text>
-                                            <Text style={styles.samsungSans}>{'123'}</Text>
+                                            <Text style={{ fontFamily: 'SamsungSans_Regular', fontSize: 16 }}>{this.props.followings.length}</Text>
                                         </Button>
                                     </View>
                                 </CardItem>
                                 <CardItem style={styles.cardItem}>
-                                    <View style={{ flexDirection: 'row', flex: 1, width: width, justifyContent: 'space-around', backgroundColor: '#f8f8f8', borderRadius: 18 }}>
+                                    <View style={{ flexDirection: 'row', flex: 1, width: width, justifyContent: 'space-around', backgroundColor: '#fbfbfb', borderRadius: 20 }}>
                                         <View style={styles.progressCircleView}>
                                             <Text style={{ ...styles.samsungSans, paddingBottom: 5 }}>{'Photography'}</Text>
-                                            <Text style={{ fontFamily: 'SamsungSans_Regular', fontSize: 13, paddingBottom: 5 }}>{'1 Post'}</Text>
+                                            <Text style={{ fontFamily: 'SamsungSans_Regular', fontSize: 14, paddingBottom: 5 }}>
+                                                {this.props.numberOfPosts[0]}{(this.props.numberOfPosts[0] == 1) ? ' Post' : ' Posts'}
+                                            </Text>
                                             <ProgressCircle
                                                 percent={this.props.averageRates[0] / 5 * 100}
                                                 radius={18}
                                                 borderWidth={4}
                                                 color={colors['Photography']}
                                                 shadowColor="#d3d3d3"
-                                                bgColor="white"
+                                                bgColor="#fbfbfb"
                                             >
-                                                <Text style={styles.progressCircleText} >{this.props.averageRates[0]}</Text>
+                                                <Text style={styles.progressCircleText}>
+                                                    {this.props.averageRates[0]}
+                                                </Text>
                                             </ProgressCircle>
                                         </View>
                                         <View style={styles.progressCircleView}>
                                             <Text style={{ ...styles.samsungSans, paddingBottom: 5 }}>{'Art'}</Text>
-                                            <Text style={{ fontFamily: 'SamsungSans_Regular', fontSize: 13, paddingBottom: 5 }}>{'41 Posts'}</Text>
+                                            <Text style={{ fontFamily: 'SamsungSans_Regular', fontSize: 14, paddingBottom: 5 }}>
+                                                {this.props.numberOfPosts[1]}{(this.props.numberOfPosts[1] == 1) ? ' Post' : ' Posts'}
+                                            </Text>
                                             <ProgressCircle
                                                 percent={this.props.averageRates[1] / 5 * 100}
                                                 radius={18}
                                                 borderWidth={4}
                                                 color={colors['Art']}
                                                 shadowColor="#d3d3d3"
-                                                bgColor="white"
+                                                bgColor="#fbfbfb"
                                             >
-                                                <Text style={styles.progressCircleText} >{this.props.averageRates[1]}</Text>
+                                                <Text style={styles.progressCircleText}>
+                                                    {this.props.averageRates[1]}
+                                                </Text>
                                             </ProgressCircle>
                                         </View>
                                         <View style={styles.progressCircleView}>
                                             <Text style={{ ...styles.samsungSans, paddingBottom: 5 }}>{'Lifestyle'}</Text>
-                                            <Text style={{ fontFamily: 'SamsungSans_Regular', fontSize: 13, paddingBottom: 5 }}>{'289 Posts'}</Text>
+                                            <Text style={{ fontFamily: 'SamsungSans_Regular', fontSize: 14, paddingBottom: 5 }}>
+                                                {this.props.numberOfPosts[2]}{(this.props.numberOfPosts[2] == 1) ? ' Post' : ' Posts'}
+                                            </Text>
                                             <ProgressCircle
                                                 percent={this.props.averageRates[2] / 5 * 100}
                                                 radius={18}
                                                 borderWidth={4}
                                                 color={colors['Lifestyle']}
                                                 shadowColor="#d3d3d3"
-                                                bgColor="white"
+                                                bgColor="#fbfbfb"
                                             >
-                                                <Text style={styles.progressCircleText} >{this.props.averageRates[2]}</Text>
+                                                <Text style={styles.progressCircleText}>
+                                                    {this.props.averageRates[2]}
+                                                </Text>
                                             </ProgressCircle>
                                         </View>
                                     </View>
                                 </CardItem>
                                 <>
                                     {
-                                        posts.map((p) => {
+                                        this.props.posts.map((p) => {
                                             return (<CardComponent
                                                 postid={p.postid}
                                                 name={p.name}

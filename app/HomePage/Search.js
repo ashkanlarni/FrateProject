@@ -54,7 +54,6 @@ class Search extends Component {
 
                             }
                         }
-                        console.log('ajab', this.result)
                     })
             })
     }
@@ -161,7 +160,7 @@ const styles = StyleSheet.create({
         width: 100,
         justifyContent: 'center',
         alignItems: 'center',
-        right: width / 6,
+        right: width / 6.5,
         bottom: 10
     }
 });
