@@ -27,13 +27,8 @@ export default function Search({ navigation }) {
 
         result = []
 
-<<<<<<< HEAD
     onSearchButtonPressed() {
-        this.result = []
-        console.log(this.result.length)
 
-=======
->>>>>>> 795d1a9a4c764e1b2d9f3a0529a20a61188730e0
         axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/followers/'
         )
         var followers = []
@@ -67,17 +62,12 @@ export default function Search({ navigation }) {
 
                     })
             })
-<<<<<<< HEAD
-            console.log(this.result.length)
-            // while (this.result.length == 0) {
-            //     console.log('lay')
-            // }
 
     }
-=======
+
         wait(1000).then(() => setRefreshing(false));
     }, [refreshing]);
->>>>>>> 795d1a9a4c764e1b2d9f3a0529a20a61188730e0
+
 
     return (
         <Container style={styles.container}>
