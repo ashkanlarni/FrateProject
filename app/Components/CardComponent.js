@@ -51,7 +51,7 @@ class CardComponent extends Component {
     constructor(props) {
         super(props);
 
-        this.openRating = this.props.canRate;
+        this.openRating = this.props.fullPagePost;
         this.subrate = [];
 
         this.state = {
@@ -179,7 +179,7 @@ class CardComponent extends Component {
                             </CardItem>
                         </>
                     }
-                    <CardItem button={this.props.goIntoAnotherPage} onPress={() => goToPost(this.props)} style={{ height: 70, backgroundColor: '#ffffff' }}>
+                    <CardItem button={!this.props.fullPagePost} onPress={() => goToPost(this.props)} style={{ height: 70, backgroundColor: '#ffffff' }}>
                         <Body style={styles.body}>
                             <ProgressCircle
                                 percent={this.props.rate[0] / 5 * 100}
@@ -241,7 +241,7 @@ class CardComponent extends Component {
                             </Text>
                         </Body>
                     </CardItem>
-                    <CardItem button={this.props.goIntoAnotherPage} onPress={() => goToPost(this.props)} style={styles.cardItem}>
+                    <CardItem button={!this.props.fullPagePost} onPress={() => goToPost(this.props)} style={styles.cardItem}>
                         <Body>
                             <Text style={{ fontFamily: 'SamsungSans_Regular', fontSize: 14, textAlign: 'left', textAlignVertical: 'auto' }}>
                                 {this.props.caption}
