@@ -19,6 +19,7 @@ class Search extends Component {
 
     onSearchButtonPressed() {
         this.result = []
+        console.log(this.result.length)
         axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/followers/'
         )
             .then(res => {
@@ -47,10 +48,14 @@ class Search extends Component {
                                 this.result.push(p)
                             }
                         }
-
-                        console.log(this.result.length)
+                        console.log(this.result)
                     })
             })
+            console.log(this.result.length)
+            // while (this.result.length == 0) {
+            //     console.log('lay')
+            // }
+
     }
 
     render() {
