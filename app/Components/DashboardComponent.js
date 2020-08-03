@@ -67,23 +67,6 @@ class DashboardComponent extends Component {
     render() {
         return (
             <Container style={styles.container}>
-                <Header style={{ height: 50, backgroundColor: 'white', alignItems: 'center', justifyContent: 'space-around' }}>
-                    <Title style={styles.title}>
-                        F
-                </Title>
-                    <Title style={styles.title}>
-                        R
-                </Title>
-                    <Title style={styles.title}>
-                        A
-                </Title>
-                    <Title style={styles.title}>
-                        T
-                </Title>
-                    <Title style={styles.title}>
-                        E
-                </Title>
-                </Header>
                 <SafeAreaView style={{ flex: 1 }}>
                     <ScrollView>
                         <Content>

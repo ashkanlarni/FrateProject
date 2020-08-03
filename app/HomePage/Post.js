@@ -1,6 +1,6 @@
 //import liraries
-import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import React from 'react';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import { Container } from 'native-base';
 
 import CardComponent from '../Components/CardComponent';
@@ -20,8 +20,8 @@ function Post({ route, navigation }) {
                         imageSource={imageSource}
                         category={category}
                         rate={rate}
-                        rateCount = {rateCount}
-                        postid = {postid}
+                        rateCount={rateCount}
+                        postid={postid}
                         caption={caption}
                         comments={comments}
                         fullPagePost={true}

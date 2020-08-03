@@ -1,25 +1,26 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
-import { Button, Icon, Card, CardItem, Thumbnail, Body, Left, Right } from 'native-base';
+import { View, Text, TextInput, StyleSheet, Image, Dimensions } from 'react-native';
+import { Button, Card, CardItem, Thumbnail, Body } from 'native-base';
 import ProgressCircle from 'react-native-progress-circle';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import axios from 'axios';
 
 import SliderComponent from './SliderComponent';
 
-const { width, height } = Dimensions.get('window');
+const width = Dimensions.get('window').width;
 
 const colors = {
     "Photography": '#e0115f',
     "Art": '#0080ff',
     "Lifestyle": '#50c878'
-}
+};
 
 const category = {
     0: 'Photography',
     1: 'Art',
     2: 'Lifestyle'
-}
+};
 
 function goToPost(props) {
     props.navigation.navigate('Post', {
@@ -35,6 +36,13 @@ function goToPost(props) {
         comments: props.comments,
         fullPagePost: true,
         goIntoAnotherPage: false
+    });
+}
+
+function goToDashboard(props) {
+    props.navigation.navigate('Profile', {
+        name: props.name,
+        profilePicSource: props.profilePicSource,
     });
 }
 
@@ -96,168 +104,179 @@ class CardComponent extends Component {
 
     render() {
         return (
-            <Card transparent={true} noShadow={true}>
-                <CardItem style={styles.cardItem}>
-                    <View style={{ width: width / 3, alignItems: 'flex-start' }}>
-                        <Text style={{ fontFamily: 'SamsungSans_Medium', fontSize: 16, left: 15 }}>{this.props.name}</Text>
-                        <Text note style={{ fontFamily: 'SamsungSans_Light', fontSize: 11, left: 15, color: '#333333' }}>{this.props.date}</Text>
-                    </View>
-                    <View style={{ width: width / 3, alignItems: 'center' }}>
-                        <Thumbnail
-                            source={this.props.profilePicSource}
+            <KeyboardAwareScrollView resetScrollToCoords={{ x: 0, y: 0 }} contentContainerStyle={styles.container} scrollEnabled={false}>
+                <Card transparent={true} noShadow={true}>
+                    <CardItem style={styles.cardItem} button={true} onPress={() => goToDashboard(this.props)}>
+                        <View style={{ width: width / 3, alignItems: 'flex-start' }}>
+                            <Text style={{ fontFamily: 'SamsungSans_Medium', fontSize: 16, left: 15 }}>{this.props.name}</Text>
+                            <Text note style={{ fontFamily: 'SamsungSans_Light', fontSize: 11, left: 15, color: '#333333' }}>{this.props.date}</Text>
+                        </View>
+                        <View style={{ width: width / 3, alignItems: 'center' }}>
+                            <Thumbnail
+                                source={this.props.profilePicSource}
+                            />
+                        </View>
+                        <View style={{ width: width / 3, alignItems: 'flex-end' }}>
+                            <Text style={{ ...styles.samsungSans, fontSize: 16, right: 15 }}>{category[this.props.category]}</Text>
+                        </View>
+                    </CardItem>
+                    <CardItem cardBody style={styles.cardItem}>
+                        <Image
+                            source={{ uri: this.props.imageSource }}
+                            style={{ height: width, width: null, flex: 1 }}
                         />
-                    </View>
-                    <View style={{ width: width / 3, alignItems: 'flex-end' }}>
-                        <Text style={{ ...styles.samsungSans, fontSize: 16, right: 15 }}>{category[this.props.category]}</Text>
-                    </View>
-                </CardItem>
-                <CardItem cardBody button={this.props.goIntoAnotherPage} onPress={() => goToPost(this.props)} style={styles.cardItem}>
-                    <Image
-                        source={{ uri: this.props.imageSource }}
-                        style={{ height: width, width: null, flex: 1 }}
-                    />
-                </CardItem>
-                {
-                    this.openRating
-                    &&
-                    <>
-                        <CardItem style={{ height: 140, backgroundColor: '#ffffff' }}>
-                            <Body style={styles.body}>
-                                <SliderComponent
-                                    sliderHeight={160}
-                                    barColor={colors[category[this.props.category]]}
-                                    variable='rate1'
-                                    value={this.state.rate1}
-                                    changeFunction={this.change}
-                                />
-                            </Body>
-                            <Body style={styles.body}>
-                                <SliderComponent
-                                    sliderHeight={160}
-                                    barColor={colors[category[this.props.category]]}
-                                    variable='rate2'
-                                    value={this.state.rate2}
-                                    changeFunction={this.change}
-                                />
-                            </Body>
-                            <Body style={styles.body}>
-                                <SliderComponent
-                                    sliderHeight={160}
-                                    barColor={colors[category[this.props.category]]}
-                                    variable='rate3'
-                                    value={this.state.rate3}
-                                    changeFunction={this.change}
-                                />
-                            </Body>
-                            <Body style={styles.body}>
-                                <SliderComponent
-                                    sliderHeight={160}
-                                    barColor={colors[category[this.props.category]]}
-                                    variable='rate4'
-                                    value={this.state.rate4}
-                                    changeFunction={this.change}
-                                />
-                            </Body>
-                        </CardItem>
-                        <CardItem style={{ height: 50, backgroundColor: '#ffffff' }}>
-                            <Body style={{ justifyContent: 'center', alignItems: 'center' }}>
-                                <Button rounded style={{ width: 100, justifyContent: 'center', backgroundColor: '#50c878', height: 36 }}>
-                                    <Text style={{ fontFamily: 'SamsungSans_Medium', fontSize: 14, color: 'white' }} onPress={() => this.onSubmitRating()}>
-                                        {'SUBMIT'}
-                                    </Text>
-                                </Button>
-                            </Body>
-                        </CardItem>
-                    </>
-                }
-                <CardItem style={{ height: 70, backgroundColor: '#ffffff' }}>
-                    <Body style={styles.body}>
-                        <ProgressCircle
-                            percent={this.props.rate[0] / 5 * 100}
-                            radius={18}
-                            borderWidth={4}
-                            color={colors[category[this.props.category]]}
-                            shadowColor="#d3d3d3"
-                            bgColor="white"
-                        >
-                            <Text style={styles.samsungSans} >{[this.props.rate[0]]}</Text>
-                        </ProgressCircle>
-                        <Text style={{ ...styles.samsungSans, paddingTop: 5 }}>
-                            {this.subrate[0]}
-                        </Text>
-                    </Body>
-                    <Body style={styles.body}>
-                        <ProgressCircle
-                            percent={this.props.rate[1] / 5 * 100}
-                            radius={18}
-                            borderWidth={4}
-                            color={colors[category[this.props.category]]}
-                            shadowColor="#d3d3d3"
-                            bgColor="white"
-                        >
-                            <Text style={styles.samsungSans} >{[this.props.rate[1]]}</Text>
-                        </ProgressCircle>
-                        <Text style={{ ...styles.samsungSans, paddingTop: 5 }}>
-                            {this.subrate[1]}
-                        </Text>
-                    </Body>
-                    <Body style={styles.body}>
-                        <ProgressCircle
-                            percent={this.props.rate[2] / 5 * 100}
-                            radius={18}
-                            borderWidth={4}
-                            color={colors[category[this.props.category]]}
-                            shadowColor="#d3d3d3"
-                            bgColor="white"
-                        >
-                            <Text style={styles.samsungSans} >{[this.props.rate[2]]}</Text>
-                        </ProgressCircle>
-                        <Text style={{ ...styles.samsungSans, paddingTop: 5 }}>
-                            {this.subrate[2]}
-                        </Text>
-                    </Body>
-                    <Body style={styles.body}>
-                        <ProgressCircle
-                            percent={this.props.rate[3] / 5 * 100}
-                            radius={18}
-                            borderWidth={4}
-                            color={colors[category[this.props.category]]}
-                            shadowColor="#d3d3d3"
-                            bgColor="white"
-                        >
-                            <Text style={styles.samsungSans} >{[this.props.rate[3]]}</Text>
-                        </ProgressCircle>
-                        <Text style={{ ...styles.samsungSans, paddingTop: 5 }}>
-                            {this.subrate[3]}
-                        </Text>
-                    </Body>
-                </CardItem>
-                <CardItem button={this.props.goIntoAnotherPage} onPress={() => goToPost(this.props)} style={styles.cardItem}>
-                    <Body>
-                        <Text style={{ fontFamily: 'SamsungSans_Regular', fontSize: 14, textAlign: 'left', textAlignVertical: 'auto' }}>
-                            {this.props.caption}
-                        </Text>
-                    </Body>
-                </CardItem>
-                {
-                    this.props.fullPagePost
-                    &&
-                    <CardItem style={styles.cardItem}>
-                        <Body>
-                            {this.props.comments.map((p) => {
-                                return (
-                                    <Text style={{ fontFamily: 'SamsungSans_Thin', fontSize: 12, textAlign: 'left', textAlignVertical: 'auto' }}>
-                                        <Text style={{ fontFamily: 'SamsungSans_Regular', fontSize: 12, textAlign: 'left', textAlignVertical: 'auto' }}>
-                                            {p[0]}{' '}
+                    </CardItem>
+                    {
+                        this.openRating
+                        &&
+                        <>
+                            <CardItem style={{ height: 140, backgroundColor: '#ffffff' }}>
+                                <Body style={styles.body}>
+                                    <SliderComponent
+                                        sliderHeight={160}
+                                        barColor={colors[category[this.props.category]]}
+                                        variable='rate1'
+                                        value={this.state.rate1}
+                                        changeFunction={this.change}
+                                    />
+                                </Body>
+                                <Body style={styles.body}>
+                                    <SliderComponent
+                                        sliderHeight={160}
+                                        barColor={colors[category[this.props.category]]}
+                                        variable='rate2'
+                                        value={this.state.rate2}
+                                        changeFunction={this.change}
+                                    />
+                                </Body>
+                                <Body style={styles.body}>
+                                    <SliderComponent
+                                        sliderHeight={160}
+                                        barColor={colors[category[this.props.category]]}
+                                        variable='rate3'
+                                        value={this.state.rate3}
+                                        changeFunction={this.change}
+                                    />
+                                </Body>
+                                <Body style={styles.body}>
+                                    <SliderComponent
+                                        sliderHeight={160}
+                                        barColor={colors[category[this.props.category]]}
+                                        variable='rate4'
+                                        value={this.state.rate4}
+                                        changeFunction={this.change}
+                                    />
+                                </Body>
+                            </CardItem>
+                            <CardItem style={{ height: 50, backgroundColor: '#ffffff' }}>
+                                <Body style={{ justifyContent: 'center', alignItems: 'center' }}>
+                                    <Button rounded style={{ width: 100, justifyContent: 'center', backgroundColor: '#50c878', height: 36 }}>
+                                        <Text style={{ fontFamily: 'SamsungSans_Medium', fontSize: 14, color: 'white' }} onPress={() => this.onSubmitRating()}>
+                                            {'SUBMIT'}
                                         </Text>
-                                        {p[1]}
-                                    </Text>
-                                )
-                            })}
+                                    </Button>
+                                </Body>
+                            </CardItem>
+                        </>
+                    }
+                    <CardItem button={this.props.goIntoAnotherPage} onPress={() => goToPost(this.props)} style={{ height: 70, backgroundColor: '#ffffff' }}>
+                        <Body style={styles.body}>
+                            <ProgressCircle
+                                percent={this.props.rate[0] / 5 * 100}
+                                radius={18}
+                                borderWidth={4}
+                                color={colors[category[this.props.category]]}
+                                shadowColor="#d3d3d3"
+                                bgColor="white"
+                            >
+                                <Text style={styles.samsungSans} >{[this.props.rate[0]]}</Text>
+                            </ProgressCircle>
+                            <Text style={{ ...styles.samsungSans, paddingTop: 5 }}>
+                                {this.subrate[0]}
+                            </Text>
+                        </Body>
+                        <Body style={styles.body}>
+                            <ProgressCircle
+                                percent={this.props.rate[1] / 5 * 100}
+                                radius={18}
+                                borderWidth={4}
+                                color={colors[category[this.props.category]]}
+                                shadowColor="#d3d3d3"
+                                bgColor="white"
+                            >
+                                <Text style={styles.samsungSans} >{[this.props.rate[1]]}</Text>
+                            </ProgressCircle>
+                            <Text style={{ ...styles.samsungSans, paddingTop: 5 }}>
+                                {this.subrate[1]}
+                            </Text>
+                        </Body>
+                        <Body style={styles.body}>
+                            <ProgressCircle
+                                percent={this.props.rate[2] / 5 * 100}
+                                radius={18}
+                                borderWidth={4}
+                                color={colors[category[this.props.category]]}
+                                shadowColor="#d3d3d3"
+                                bgColor="white"
+                            >
+                                <Text style={styles.samsungSans} >{[this.props.rate[2]]}</Text>
+                            </ProgressCircle>
+                            <Text style={{ ...styles.samsungSans, paddingTop: 5 }}>
+                                {this.subrate[2]}
+                            </Text>
+                        </Body>
+                        <Body style={styles.body}>
+                            <ProgressCircle
+                                percent={this.props.rate[3] / 5 * 100}
+                                radius={18}
+                                borderWidth={4}
+                                color={colors[category[this.props.category]]}
+                                shadowColor="#d3d3d3"
+                                bgColor="white"
+                            >
+                                <Text style={styles.samsungSans} >{[this.props.rate[3]]}</Text>
+                            </ProgressCircle>
+                            <Text style={{ ...styles.samsungSans, paddingTop: 5 }}>
+                                {this.subrate[3]}
+                            </Text>
                         </Body>
                     </CardItem>
-                }
-            </Card>
+                    <CardItem button={this.props.goIntoAnotherPage} onPress={() => goToPost(this.props)} style={styles.cardItem}>
+                        <Body>
+                            <Text style={{ fontFamily: 'SamsungSans_Regular', fontSize: 14, textAlign: 'left', textAlignVertical: 'auto' }}>
+                                {this.props.caption}
+                            </Text>
+                        </Body>
+                    </CardItem>
+                    {
+                        this.props.fullPagePost
+                        &&
+                        <CardItem style={styles.cardItem}>
+                            <Body>
+                                {/* commenting */}
+                                <TextInput
+                                    // onChangeText={(text) => this.username = text}
+                                    multiline={true}
+                                    placeholder='comment...'
+                                    style={styles.textInput}
+                                    placeholderTextColor='rgba(0, 0, 0, 0.5)'
+                                />
+                                {this.props.comments.map((p) => {
+                                    return (
+                                        <Text style={{ fontFamily: 'SamsungSans_Thin', fontSize: 12, textAlign: 'left', textAlignVertical: 'auto' }}>
+                                            <Text style={{ fontFamily: 'SamsungSans_Regular', fontSize: 12, textAlign: 'left', textAlignVertical: 'auto' }}>
+                                                {p[0]}{' '}
+                                            </Text>
+                                            {p[1]}
+                                        </Text>
+                                    )
+                                })}
+
+                            </Body>
+                        </CardItem>
+                    }
+                </Card>
+            </KeyboardAwareScrollView>
         );
     }
 }
@@ -283,6 +302,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: width,
         backgroundColor: '#ffffff'
+    },
+    textInput: {
+        width: 9 * width / 10,
+        borderBottomColor: '#cccccc',
+        borderBottomWidth: 0.5,
+        backgroundColor: '#ffffff',
+        marginVertical: 10,
+        fontFamily: 'SamsungSans_Regular',
     }
 });
 

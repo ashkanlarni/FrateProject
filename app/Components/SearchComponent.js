@@ -1,7 +1,7 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
-import { Button, Card, CardItem, Thumbnail } from 'native-base';
+import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import { Card, CardItem, Thumbnail } from 'native-base';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import axios from 'axios';
 

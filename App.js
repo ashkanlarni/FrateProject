@@ -19,6 +19,7 @@ import Post from './app/HomePage/Post';
 import Dashboard from './app/HomePage/Dashboard';
 import Followers from './app/HomePage/Followers';
 import Followings from './app/HomePage/Followings';
+import Profile from './app/HomePage/Profile';
 
 
 const Stack = createStackNavigator();
@@ -154,7 +155,8 @@ export default class App extends React.Component {
           <Stack.Screen options={{ headerShown: false }} name='Login' component={Login} />
           <Stack.Screen name='Sign Up' component={SignUp} />
           <Stack.Screen options={{ headerShown: false }} name='Home' component={HomeScreen} />
-          <Stack.Screen options={{ headerBackTitle: 'Back' }} name='Post' component={Post} />
+          <Stack.Screen options={{ headerBackTitle: 'Back', title: 'Post' }} name='Post' component={Post} />
+          <Stack.Screen options={{ headerBackTitle: 'Back', title: 'Profile' }} name='Profile' component={Profile} />
         </Stack.Navigator>
       </NavigationContainer>
     );
