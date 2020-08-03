@@ -1,12 +1,16 @@
 //import liraries
-import React, { Component } from 'react';
-import { View, Text, StyleSheet, Dimensions, TextInput } from 'react-native';
-import { Container, Content, Header, Title, Button, Icon, Item } from 'native-base';
+import React from 'react';
+import { RefreshControl, View, SafeAreaView, ScrollView, Text, StyleSheet, Dimensions, TextInput } from 'react-native';
+import { Container, Content, Header, Title, Button } from 'native-base';
 import axios from 'axios';
 
 import SearchComponent from '../Components/SearchComponent';
 
 const { width, height } = Dimensions.get('window');
+
+var result = [];
+var search = "Ashkan";
+var user = 'Ashkan';
 
 function wait(timeout) {
     return new Promise(resolve => {
@@ -14,26 +18,29 @@ function wait(timeout) {
     });
 }
 
-// create a component
-class Search extends Component {
-    constructor(props) {
-        super(props);
-        this.search = "";
-        this.result = [];
-        this.username = 'Ashkan';
-    }
+export default function Search({ navigation }) {
+    const [refreshing, setRefreshing] = React.useState(false);
 
+    onRefresh = React.useCallback(() => {
+        console.log('ajab', search)
+        setRefreshing(true);
+
+        result = []
+
+<<<<<<< HEAD
     onSearchButtonPressed() {
         this.result = []
         console.log(this.result.length)
 
+=======
+>>>>>>> 795d1a9a4c764e1b2d9f3a0529a20a61188730e0
         axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/followers/'
         )
+        var followers = []
             .then(res => {
-                var followers = []
                 for (var u in res.data) {
                     var obj = res.data[u]
-                    if (obj.follower == this.username) {
+                    if (obj.follower == user) {
                         followers.push(obj.following)
                     }
                 }
@@ -42,7 +49,7 @@ class Search extends Component {
                     .then(res => {
                         for (var u in res.data) {
                             var obj = res.data[u]
-                            if (obj.username.startsWith(this.search)) {
+                            if (obj.username.startsWith(search)) {
                                 var isF = false
                                 if (followers.includes(obj.username))
                                     isF = true
@@ -52,98 +59,92 @@ class Search extends Component {
                                     profilePic: require('../../assets/images/profile/Ashkan.jpg'),
                                     isFollowing: isF
                                 }
-                                this.result.push(p)
-
+                                result.push(p);
+                                console.log('big', p);
+                                console.log('small', result);
                             }
                         }
 
                     })
             })
+<<<<<<< HEAD
             console.log(this.result.length)
             // while (this.result.length == 0) {
             //     console.log('lay')
             // }
 
     }
+=======
+        wait(1000).then(() => setRefreshing(false));
+    }, [refreshing]);
+>>>>>>> 795d1a9a4c764e1b2d9f3a0529a20a61188730e0
 
-    render() {
-        return (
-            <Container style={styles.container}>
-                <Header style={{ height: 50, backgroundColor: 'white', alignItems: 'center', justifyContent: 'space-around' }}>
-                    <Title style={styles.title}>
-                        F
+    return (
+        <Container style={styles.container}>
+            <Header style={{ height: 50, backgroundColor: 'white', alignItems: 'center', justifyContent: 'space-around' }}>
+                <Title style={styles.title}>
+                    F
                     </Title>
-                    <Title style={styles.title}>
-                        R
+                <Title style={styles.title}>
+                    R
                     </Title>
-                    <Title style={styles.title}>
-                        A
+                <Title style={styles.title}>
+                    A
                     </Title>
-                    <Title style={styles.title}>
-                        T
+                <Title style={styles.title}>
+                    T
                     </Title>
-                    <Title style={styles.title}>
-                        E
+                <Title style={styles.title}>
+                    E
                     </Title>
-                </Header>
-                <Header style={{ backgroundColor: 'white', height: 50 }} noShadow={true}>
-                    <View style={{ justifyContent: 'center', width: width, height: 14 }}>
-                        <TextInput
-                            onChangeText={(text) => this.search = text}
-                            placeholder='Username'
-                            style={{ ...styles.textInput, width: width, left: 50 }}
-                            placeholderTextColor='rgba(0, 0, 0, 0.3)'
-                            autoCorrect={false}
-                            spellCheck={false}
-                            textContentType={'username'}
-                            clearButtonMode={'while-editing'}
-                            returnKeyType={'search'}
-                        />
-                    </View>
-                    <Button transparent style={styles.searchButton} onPress={() => this.onSearchButtonPressed()}>
-                        <Text style={{ fontFamily: 'SamsungSans_Bold', fontSize: 18, color: '#0080ff' }}>
-                            {'Search'}
-                        </Text>
-                    </Button>
-                </Header>
-                <Content>
-                    <View style={{ justifyContent: 'center', width: width }}>
-                        {/* {
-                            this.result.map((p) => {
-                                console.log('ahan', this.result)
-                                console.log('ajab', p)
+            </Header>
+            <Header style={{ backgroundColor: 'white', height: 50 }} noShadow={true}>
+                <View style={{ justifyContent: 'center', width: width, height: 14 }}>
+                    <TextInput
+                        onChangeText={(text) => search = text, console.log('ok', search, 'ko')}
+                        onEndEditing={(text) => search = text, console.log('ok2', search, 'ko2')}
+                        placeholder='Username'
+                        style={{ ...styles.textInput, width: width, left: 50 }}
+                        placeholderTextColor='rgba(0, 0, 0, 0.3)'
+                        autoCorrect={false}
+                        spellCheck={false}
+                        textContentType={'username'}
+                        clearButtonMode={'while-editing'}
+                        returnKeyType={'search'}
+                    />
+                </View>
+                <Button transparent style={styles.searchButton} onPress={() => { console.log('kir') }}>
+                    <Text style={{ fontFamily: 'SamsungSans_Bold', fontSize: 18, color: '#0080ff' }}>
+                        {'Search'}
+                    </Text>
+                </Button>
+            </Header>
+            <SafeAreaView style={{ flex: 1, justifyContent: 'center', width: width }}>
+                <ScrollView
+                    contentContainerStyle={{ flex: 1 }}
+                    refreshControl={
+                        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+                    }
+                >
+                    <Content>
+                        {
+                            result.map((p) => {
+                                console.log('ajab', result);
                                 return (<SearchComponent
-                                    username={this.username}
+                                    username={user}
                                     name={p.username}
                                     profilePicSource={p.profilePic}
                                     following={p.isFollowing}
                                 />)
                             })
-                        } */}
-                        < SearchComponent
-                            username={'Alil'}
-                            name={'Shayesteh'}
-                            profilePicSource={require('../../assets/images/profile/Shayesteh.jpg')}
-                            following={true}
-                        />
-                        <SearchComponent
-                            username={'Alil'}
-                            name={'Ali'}
-                            profilePicSource={require('../../assets/images/profile/Ali.jpg')}
-                            following={false}
-                        />
-                        <SearchComponent
-                            username={'Alil'}
-                            name={'Ashkan'}
-                            profilePicSource={require('../../assets/images/profile/Ashkan.jpg')}
-                            following={false}
-                        />
-                    </View>
-                </Content>
-            </Container>
-        );
-    }
+                        }
+                    </Content>
+                </ScrollView>
+            </SafeAreaView>
+        </Container >
+    );
 }
+
 
 // define your styles
 const styles = StyleSheet.create({
@@ -173,5 +174,3 @@ const styles = StyleSheet.create({
     }
 });
 
-//make this component available to the app
-export default Search;
