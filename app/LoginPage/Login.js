@@ -156,7 +156,7 @@ class Login extends React.Component {
                     <Animated.View style={{ ...StyleSheet.absoluteFill, transform: [{ translateY: this.bgY }] }}>
                         <Svg height={height} width={width}>
                             <Image
-                                href={require('../assets/images/LoginBackground.jpg')}
+                                href={require('../../assets/images/LoginBackground.jpg')}
                                 height={height}
                                 width={width}
                                 preserveAspectRatio='xMidYMid slice'
@@ -167,7 +167,7 @@ class Login extends React.Component {
                         <Text style={{ fontSize: 66, fontFamily: 'Vision_Black', color: 'white', marginVertical: 30 }}>
                             {'F  R  A  T  E'}
                         </Text>
-                        <Text style={{ ...styles.vision, fontFamily: 'Vision_BoldItalic' }}>
+                        <Text style={{ ...styles.samsungSans, fontFamily: 'SamsungSans_Medium' }}>
                             {'A Rating Social Media'}
                         </Text>
                     </Animated.View>
@@ -175,7 +175,7 @@ class Login extends React.Component {
                         <TapGestureHandler onHandlerStateChange={this.onStateChange}>
                             <Animated.View style={{ opacity: this.buttonOpacity, transform: [{ translateY: this.buttonY }] }}>
                                 <Button rounded style={styles.button} >
-                                    <Text style={{ ...styles.vision, color: 'black' }}>
+                                    <Text style={{ ...styles.samsungSans, color: 'black' }}>
                                         {'SIGN IN'}
                                     </Text>
                                 </Button>
@@ -183,7 +183,7 @@ class Login extends React.Component {
                         </TapGestureHandler>
                         <Animated.View style={{ justifyContent: 'center', marginVertical: 30, opacity: this.buttonOpacity, transform: [{ translateY: this.buttonY }] }}>
                             <Button transparent style={{ justifyContent: 'center', alignItems: 'center' }} onPress={() => this.props.navigation.navigate('Sign Up')}>
-                                <Text style={{ ...styles.vision, fontSize: 18 }}>
+                                <Text style={{ ...styles.samsungSans, fontSize: 16 }}>
                                     {"Don't have an account yet?"}
                                 </Text>
                             </Button>
@@ -192,7 +192,7 @@ class Login extends React.Component {
                             <TapGestureHandler onHandlerStateChange={this.onCloseState}>
                                 <Animated.View style={{ top: 0, position: 'absolute', justifyContent: 'center', alignItems: 'center', left: 0 }}>
                                     <Button rounded style={styles.closeButton}>
-                                        <Animated.Text style={{ ...styles.vision, fontSize: 18, color: 'black' }}>
+                                        <Animated.Text style={{ ...styles.samsungSans, fontSize: 18, color: 'black' }}>
                                             {'X'}
                                         </Animated.Text>
                                     </Button>
@@ -224,7 +224,7 @@ class Login extends React.Component {
                                 <Button rounded
                                     onPress={() => this.onPressSignInButton()}
                                     style={styles.button}>
-                                    <Text style={{ ...styles.vision, color: 'black' }}>
+                                    <Text style={{ ...styles.samsungSans, color: 'black' }}>
                                         {'SIGN IN'}
                                     </Text>
                                 </Button>
@@ -280,13 +280,13 @@ const styles = StyleSheet.create({
         marginHorizontal: 50,
         marginVertical: 7.5,
         paddingLeft: 20,
-        fontFamily: 'Vision_Bold',
+        fontFamily: 'SamsungSans_Medium',
         shadowColor: 'black',
         shadowOpacity: 0.2
     },
-    vision: {
-        fontFamily: 'Vision_Heavy',
-        fontSize: 20,
+    samsungSans: {
+        fontFamily: 'SamsungSans_Bold',
+        fontSize: 18,
         color: 'white'
     }
 });

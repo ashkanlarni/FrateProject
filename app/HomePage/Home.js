@@ -1,10 +1,39 @@
 //import liraries
-import React, { Component } from 'react';
-import { RefreshControl, SafeAreaView, ScrollView, StyleSheet, AsyncStorage } from 'react-native';
+import React from 'react';
+import { RefreshControl, SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 import { Container, Content, Header, Title } from 'native-base';
 import axios from 'axios';
 
-import CardComponent from './CardComponent';
+import CardComponent from '../Components/CardComponent';
+
+var test = [
+    {
+        "postid": '1',
+        "name": 'Ashkna',
+        "date": 'August 2, 2020',
+        "profilePic": require('../../assets/images/profile/Ashkan.jpg'),
+        "image": require('../../assets/images/feed/1.jpg'),
+        "category": 1,
+        "rate": ['1.1', '2.2', '3.3', '4.4'],
+        "rateCount": 20,
+        "caption": 'Hello',
+        "comments": [['Ali', 'first Comment'], ['Azim', 'Kabir']]
+    }
+]
+// postid={p.postid}
+//                                     name={p.name}
+//                                     date={p.date}
+//                                     profilePicSource={p.profilePic}
+//                                     imageSource={p.image}
+//                                     category={p.category}
+//                                     rate={p.rate}
+//                                     rateCount={p.rateCount}
+//                                     caption={p.caption}
+//                                     comments={p.comments}
+//                                     fullPagePost={false}
+//                                     goIntoAnotherPage={true}
+//                                     canRate={false}
+//                                     navigation={navigation}
 
 var posts = []
 var user = 'Alil';
@@ -57,7 +86,7 @@ export default function Home({ navigation }) {
                                     "postid": obj.id,
                                     "name": obj.username,
                                     "date": obj.date,
-                                    "profilePic": require('../assets/images/profile/Ashkan.jpg'),
+                                    "profilePic": require('../../assets/images/profile/Ashkan.jpg'),
                                     "image": obj.filename,
                                     "category": obj.category,
                                     "rate": r,
@@ -102,7 +131,7 @@ export default function Home({ navigation }) {
                 >
                     <Content>
                         {
-                            posts.map((p) => {
+                            test.map((p) => {
                                 return (<CardComponent
                                     postid={p.postid}
                                     name={p.name}
@@ -132,7 +161,7 @@ export default function Home({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fdfdfd',
+        backgroundColor: '#ffffff',
     },
     title: {
         fontFamily: 'Vision_Black',

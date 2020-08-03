@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, AsyncStorage } from 'react-native';
+import { StyleSheet, AsyncStorage, Dimensions } from 'react-native';
 import { AppLoading } from 'expo';
 import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
@@ -7,18 +7,27 @@ import { FontAwesome } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 
-import Login from './app/Login';
-import SignUp from './app/SignUp';
-import Home from './app/Home';
-import Upload from './app/Upload';
-import Search from './app/Search';
-import Post from './app/Post';
+import Login from './app/LoginPage/Login';
+import SignUp from './app/LoginPage/SignUp';
+import Home from './app/HomePage/Home';
+import Upload from './app/HomePage/Upload';
+import Search from './app/HomePage/Search';
+import Post from './app/HomePage/Post';
+import Dashboard from './app/HomePage/Dashboard';
+import Followers from './app/HomePage/Followers';
+import Followings from './app/HomePage/Followings';
+import Profile from './app/HomePage/Profile';
 
 
 const Stack = createStackNavigator();
+const Dash = createStackNavigator();
 const Tab = createBottomTabNavigator();
+const TopTab = createMaterialTopTabNavigator();
+
+
 
 function cacheImages(images) {
   return images.map(image => {
@@ -40,22 +49,50 @@ function HomeScreen() {
       <Tab.Screen name="Home" component={Home} options={{
         tabBarLabel: 'Home',
         tabBarIcon: ({ color, size }) => (
-          <SimpleLineIcons name="home" style={{ padding: 10 }} color={color} size={size} font={'Vision_Bold'} />
+          <SimpleLineIcons name="home" style={{ padding: 10 }} color={color} size={size} font={'SamsungSans_Medium'} />
         ),
       }} />
       <Tab.Screen name="Search" component={Search} options={{
         tabBarLabel: 'Search',
         tabBarIcon: ({ color, size }) => (
-          <SimpleLineIcons name="magnifier" style={{ padding: 10 }} color={color} size={size} font={'Vision_Bold'} />
+          <SimpleLineIcons name="magnifier" style={{ padding: 10 }} color={color} size={size} font={'SamsungSans_Medium'} />
         ),
       }} />
       <Tab.Screen name="Upload" component={Upload} options={{
         tabBarLabel: 'Upload',
         tabBarIcon: ({ color, size }) => (
-          <SimpleLineIcons name="arrow-up-circle" style={{ padding: 10 }} color={color} size={size} font={'Vision_Bold'} />
+          <SimpleLineIcons name="arrow-up-circle" style={{ padding: 10 }} color={color} size={size} font={'SamsungSans_Medium'} />
+        ),
+      }} />
+      <Tab.Screen name="Dashboard" component={DashboardScreen} options={{
+        tabBarLabel: 'Dashboard',
+        tabBarIcon: ({ color, size }) => (
+          <SimpleLineIcons name="menu" style={{ padding: 10 }} color={color} size={size} font={'SamsungSans_Medium'} />
         ),
       }} />
     </Tab.Navigator>
+  );
+}
+
+function FollowScreen() {
+  return (
+    <TopTab.Navigator
+      initialRouteName="Followers"
+      initialLayout={{ width: Dimensions.get('window').width }}
+      tabBarOptions={{ labelStyle: { fontFamily: 'SamsungSans_Medium' } }}
+    >
+      <TopTab.Screen name="Followers" component={Followers} />
+      <TopTab.Screen name="Followings" component={Followings} />
+    </TopTab.Navigator>
+  );
+}
+
+function DashboardScreen() {
+  return (
+    <Dash.Navigator initialRouteName='Dashboard' screenOptions={{ gestureEnabled: false }} >
+      <Dash.Screen options={{ headerShown: false }} name='Dashboard' component={Dashboard} />
+      <Dash.Screen options={{ headerShown: true, title: ' ' }} name='Follow' component={FollowScreen} />
+    </Dash.Navigator>
   );
 }
 
@@ -90,16 +127,12 @@ export default class App extends React.Component {
     const fontAssets = cacheFonts([FontAwesome.font]);
 
     await Font.loadAsync({
-      Roboto_medium: require("./assets/fonts/Vision/Vision-Black.ttf"),
-      Vision_Black: require("./assets/fonts/Vision/Vision-Black.ttf"),
-      Vision_Heavy: require("./assets/fonts/Vision/Vision-Heavy.ttf"),
-      Vision_Bold: require("./assets/fonts/Vision/Vision-Bold.ttf"),
-      Vision_Regular: require("./assets/fonts/Vision/Vision-Regular.ttf"),
-      Vision_Light: require("./assets/fonts/Vision/Vision-Light.ttf"),
-      Vision_Thin: require("./assets/fonts/Vision/Vision-Thin.ttf"),
-      Vision_HeavyItalic: require("./assets/fonts/Vision/Vision-HeavyItalic.ttf"),
-      Vision_BoldItalic: require("./assets/fonts/Vision/Vision-BoldItalic.ttf"),
-      Vision_Italic: require("./assets/fonts/Vision/Vision-Italic.ttf")
+      SamsungSans_Bold: require("./assets/fonts/SamsungSans/SamsungSans-Bold.ttf"),
+      SamsungSans_Medium: require("./assets/fonts/SamsungSans/SamsungSans-Medium.ttf"),
+      SamsungSans_Regular: require("./assets/fonts/SamsungSans/SamsungSans-Regular.ttf"),
+      SamsungSans_Light: require("./assets/fonts/SamsungSans/SamsungSans-Light.ttf"),
+      SamsungSans_Thin: require("./assets/fonts/SamsungSans/SamsungSans-Thin.ttf"),
+      Vision_Black: require("./assets/fonts/Vision/Vision-Black.ttf")
     });
 
     await Promise.all([...imageAssets, ...fontAssets]);
@@ -117,24 +150,15 @@ export default class App extends React.Component {
 
     }
     return (
-      this.state.isSignedIn ? (
-        <>
-          <NavigationContainer>
-            <Stack.Navigator initialRouteName='Home' >
-              <Stack.Screen options={{ headerShown: false }} name='Home' component={HomeScreen} />
-              <Stack.Screen options={{ headerBackTitle: 'Back' }} name='Post' component={Post} />
-            </Stack.Navigator>
-          </NavigationContainer>
-        </>
-      ) : (
-          <NavigationContainer>
-            <Stack.Navigator initialRouteName='Login' >
-              <Stack.Screen options={{ headerShown: false }} name='Login' component={Login} />
-              <Stack.Screen options={{ headerShown: false }} name='Sign Up' component={SignUp} />
-              <Stack.Screen options={{ headerShown: false }} name='Home' component={Home} />
-            </Stack.Navigator>
-          </NavigationContainer>
-        )
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName={this.state.isSignedIn ? 'Home' : 'Login'} screenOptions={{ gestureEnabled: false }} >
+          <Stack.Screen options={{ headerShown: false }} name='Login' component={Login} />
+          <Stack.Screen name='Sign Up' component={SignUp} />
+          <Stack.Screen options={{ headerShown: false }} name='Home' component={HomeScreen} />
+          <Stack.Screen options={{ headerBackTitle: 'Back', title: 'Post' }} name='Post' component={Post} />
+          <Stack.Screen options={{ headerBackTitle: 'Back', title: 'Profile' }} name='Profile' component={Profile} />
+        </Stack.Navigator>
+      </NavigationContainer>
     );
   }
 }

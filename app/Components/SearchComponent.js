@@ -1,7 +1,7 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
-import { Button, Card, CardItem, Thumbnail } from 'native-base';
+import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import { Card, CardItem, Thumbnail } from 'native-base';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import axios from 'axios';
 
@@ -58,9 +58,9 @@ class SearchComponent extends Component {
     render() {
         return (
             <Card noShadow={true} transparent={true}>
-                <CardItem style={{ justifyContent: 'center', alignItems: 'center', width: width, height: 65 }}>
+                <CardItem style={{ justifyContent: 'center', alignItems: 'center', width: width, height: 65, backgroundColor: '#ffffff' }}>
                     <View style={{ width: width / 3, alignItems: 'flex-start' }}>
-                        <Text style={{ fontFamily: 'Vision_Bold', fontSize: 18, left: 15 }}>{this.props.name}</Text>
+                        <Text style={{ ...styles.samsungSans, left: 15 }}>{this.props.name}</Text>
                     </View>
                     <View style={{ width: width / 3, alignItems: 'center' }}>
                         <Thumbnail
@@ -69,8 +69,8 @@ class SearchComponent extends Component {
                     </View>
                     <View style={{ width: width / 3, alignItems: 'flex-end' }}>
                         <SimpleLineIcons
-                            name={this.state.following ? 'plus' : 'check'}
-                            color={this.state.following ? 'black' : '#00a572'}
+                            name={this.state.following ? 'check' : 'plus'}
+                            color={this.state.following ? '#50c878' : '#0080ff'}
                             size={30}
                             onPress={this.state.following ? this.onPressUnFollowButton : this.onPressFollowButton}
                             style={{ marginHorizontal: 50, justifyContent: 'center', alignItems: 'center' }}
@@ -90,8 +90,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: 'white',
     },
-    vision: {
-        fontFamily: 'Vision_Heavy',
+    samsungSans: {
+        fontFamily: 'SamsungSans_Medium',
         fontSize: 16
     },
     body: {

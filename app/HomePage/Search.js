@@ -4,9 +4,15 @@ import { View, Text, StyleSheet, Dimensions, TextInput } from 'react-native';
 import { Container, Content, Header, Title, Button, Icon, Item } from 'native-base';
 import axios from 'axios';
 
-import SearchComponent from './SeachComponent'
+import SearchComponent from '../Components/SearchComponent';
 
 const { width, height } = Dimensions.get('window');
+
+function wait(timeout) {
+    return new Promise(resolve => {
+        setTimeout(resolve, timeout);
+    });
+}
 
 // create a component
 class Search extends Component {
@@ -14,12 +20,13 @@ class Search extends Component {
         super(props);
         this.search = "";
         this.result = [];
-        this.username = 'Ali';
+        this.username = 'Ashkan';
     }
 
     onSearchButtonPressed() {
         this.result = []
         console.log(this.result.length)
+
         axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/followers/'
         )
             .then(res => {
@@ -42,13 +49,14 @@ class Search extends Component {
 
                                 var p = {
                                     username: obj.username,
-                                    profilePic: require('../assets/images/profile/Ashkan.jpg'),
+                                    profilePic: require('../../assets/images/profile/Ashkan.jpg'),
                                     isFollowing: isF
                                 }
                                 this.result.push(p)
+
                             }
                         }
-                        console.log(this.result)
+
                     })
             })
             console.log(this.result.length)
@@ -93,15 +101,17 @@ class Search extends Component {
                         />
                     </View>
                     <Button transparent style={styles.searchButton} onPress={() => this.onSearchButtonPressed()}>
-                        <Text style={{ fontFamily: 'Vision_Heavy', fontSize: 20, color: '#0080ff' }}>
+                        <Text style={{ fontFamily: 'SamsungSans_Bold', fontSize: 18, color: '#0080ff' }}>
                             {'Search'}
                         </Text>
                     </Button>
                 </Header>
                 <Content>
                     <View style={{ justifyContent: 'center', width: width }}>
-                        {
+                        {/* {
                             this.result.map((p) => {
+                                console.log('ahan', this.result)
+                                console.log('ajab', p)
                                 return (<SearchComponent
                                     username={this.username}
                                     name={p.username}
@@ -109,7 +119,25 @@ class Search extends Component {
                                     following={p.isFollowing}
                                 />)
                             })
-                        }
+                        } */}
+                        < SearchComponent
+                            username={'Alil'}
+                            name={'Shayesteh'}
+                            profilePicSource={require('../../assets/images/profile/Shayesteh.jpg')}
+                            following={true}
+                        />
+                        <SearchComponent
+                            username={'Alil'}
+                            name={'Ali'}
+                            profilePicSource={require('../../assets/images/profile/Ali.jpg')}
+                            following={false}
+                        />
+                        <SearchComponent
+                            username={'Alil'}
+                            name={'Ashkan'}
+                            profilePicSource={require('../../assets/images/profile/Ashkan.jpg')}
+                            following={false}
+                        />
                     </View>
                 </Content>
             </Container>
@@ -121,7 +149,7 @@ class Search extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fdfdfd',
+        backgroundColor: '#ffffff',
     },
     title: {
         fontFamily: 'Vision_Black',
@@ -133,23 +161,15 @@ const styles = StyleSheet.create({
         height: 50,
         backgroundColor: '#fafafa',
         paddingLeft: 20,
-        fontFamily: 'Vision_Bold',
-        shadowOffset: { height: 2 },
-        shadowColor: 'black',
-        shadowOpacity: 0.1
+        fontFamily: 'SamsungSans_Medium'
     },
     searchButton: {
         height: 50,
         width: 100,
         justifyContent: 'center',
         alignItems: 'center',
-        right: width / 6,
-        bottom: 5
-    },
-    vision: {
-        fontFamily: 'Vision_Heavy',
-        fontSize: 20,
-        color: 'white'
+        right: width / 6.5,
+        bottom: 10
     }
 });
 

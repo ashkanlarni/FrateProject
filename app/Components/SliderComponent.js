@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         position: 'relative', //Here is the trick
         bottom: 0,
-        fontFamily: 'Vision_Bold',
-        fontSize: 14
+        fontFamily: 'SamsungSans_Medium',
+        fontSize: 12
     }
 });

@@ -1,9 +1,9 @@
 //import liraries
-import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import React from 'react';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import { Container } from 'native-base';
 
-import CardComponent from './CardComponent';
+import CardComponent from '../Components/CardComponent';
 
 function Post({ route, navigation }) {
     /* 2. Get the param */
@@ -20,8 +20,8 @@ function Post({ route, navigation }) {
                         imageSource={imageSource}
                         category={category}
                         rate={rate}
-                        rateCount = {rateCount}
-                        postid = {postid}
+                        rateCount={rateCount}
+                        postid={postid}
                         caption={caption}
                         comments={comments}
                         fullPagePost={true}
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-start',
         alignItems: 'center',
-        backgroundColor: '#efefef',
+        backgroundColor: '#fefefe',
     },
 });
 
