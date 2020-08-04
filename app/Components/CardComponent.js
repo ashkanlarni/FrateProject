@@ -41,10 +41,11 @@ function goToPost(props) {
     });
 }
 
-function goToDashboard(props) {
+function goToProfile(props) {
     props.navigation.navigate('Profile', {
         name: props.name,
         profilePicSource: props.profilePicSource,
+        isFollowing: true,
         navigation: props.navigation
     });
 }
@@ -124,7 +125,7 @@ class CardComponent extends Component {
         return (
             <KeyboardAwareScrollView resetScrollToCoords={{ x: 0, y: 0 }} contentContainerStyle={styles.container} scrollEnabled={false}>
                 <Card transparent={true} noShadow={true}>
-                    <CardItem style={styles.cardItem} button={true} onPress={() => goToDashboard(this.props)}>
+                    <CardItem style={styles.cardItem} button={true} onPress={() => goToProfile(this.props)}>
                         <View style={{ width: width / 3, alignItems: 'flex-start' }}>
                             <Text style={{ fontFamily: 'SamsungSans_Medium', fontSize: 16, left: 15 }}>{this.props.name}</Text>
                             <Text note style={{ fontFamily: 'SamsungSans_Light', fontSize: 11, left: 15, color: '#333333' }}>{this.props.date}</Text>
@@ -331,7 +332,8 @@ const styles = StyleSheet.create({
         borderBottomWidth: 0.5,
         backgroundColor: '#ffffff',
         marginVertical: 10,
-        fontFamily: 'SamsungSans_Regular',
+        fontFamily: 'SamsungSans_Light',
+        fontSize: 13
     }
 });
 

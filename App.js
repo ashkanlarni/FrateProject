@@ -24,6 +24,7 @@ import Profile from './app/HomePage/Profile';
 
 const Stack = createStackNavigator();
 const Dash = createStackNavigator();
+const Prof = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const TopTab = createStackNavigator();
 
@@ -159,6 +160,8 @@ export default class App extends React.Component {
           <Stack.Screen options={{ headerShown: false }} name='Home' component={HomeScreen} />
           <Stack.Screen options={{ headerBackTitle: 'Back', title: 'Post' }} name='Post' component={Post} />
           <Stack.Screen options={{ headerBackTitle: 'Back', title: 'Profile' }} name='Profile' component={Profile} />
+          <Stack.Screen options={{ headerShown: true, title: 'Followers' }} name='Followers' component={Followers} />
+          <Stack.Screen options={{ headerShown: true, title: 'Followings' }} name='Followings' component={Followings} />
         </Stack.Navigator>
       </NavigationContainer>
     );

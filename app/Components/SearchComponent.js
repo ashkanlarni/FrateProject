@@ -7,11 +7,12 @@ import axios from 'axios';
 
 const { width, height } = Dimensions.get('window');
 
-function goToDashboard(props) {
+function goToProfile(props) {
     props.navigation.navigate('Profile', {
         name: props.name,
         profilePicSource: props.profilePicSource,
-        isFollowing: this.state.following
+        isFollowing: props.following,
+        navigation: props.navigation
     });
 }
 
@@ -70,7 +71,7 @@ class SearchComponent extends Component {
             <Card noShadow={true} transparent={true}>
                 <CardItem
                     button
-                    onPress={() => goToDashboard(this.props)}
+                    onPress={() => goToProfile(this.props)}
                     style={{ justifyContent: 'center', alignItems: 'center', width: width, height: 65, backgroundColor: '#ffffff' }}
                 >
                     <View style={{ width: width / 3, alignItems: 'flex-start' }}>
