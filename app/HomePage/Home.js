@@ -89,7 +89,6 @@ export default function Home({ navigation }) {
                                                 posts.unshift(newpost)
                                             })
                                     })
-                                
                             }
                         }
                     })
