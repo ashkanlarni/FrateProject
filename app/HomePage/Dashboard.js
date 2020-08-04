@@ -2,6 +2,7 @@
 import React from 'react';
 import { RefreshControl, SafeAreaView, ScrollView, StyleSheet, AsyncStorage, Dimensions } from 'react-native';
 import { Container, Content, Header, Title } from 'native-base';
+import axios from 'axios';
 
 import DashboardComponent from '../Components/DashboardComponent';
 
@@ -46,7 +47,7 @@ export default function Dashboard({ navigation }) {
                 }
                 following_length = following.length
                 follower_length = followers.length
-        })
+            })
 
         posts = []
 
@@ -63,7 +64,7 @@ export default function Dashboard({ navigation }) {
                         for (var i = 0; i < r.length; i++) {
                             sum += parseFloat(r[i])
                         }
-                        averageRates += sum/4
+                        averageRates += sum / 4
 
                         var com = []
                         axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/comments/'
@@ -151,7 +152,12 @@ export default function Dashboard({ navigation }) {
             </Header>
             <Content>
                 <SafeAreaView style={{ flex: 1 }}>
-                    <ScrollView contentContainerStyle={{ flex: 1 }}>
+                    <ScrollView
+                        contentContainerStyle={{ flex: 1 }}
+                        refreshControl={
+                            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+                        }
+                    >
                         <DashboardComponent
                             userid={userid}
                             username={username}

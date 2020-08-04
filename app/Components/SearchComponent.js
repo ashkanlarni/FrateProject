@@ -7,6 +7,13 @@ import axios from 'axios';
 
 const { width, height } = Dimensions.get('window');
 
+function goToDashboard(props) {
+    props.navigation.navigate('Profile', {
+        name: props.name,
+        profilePicSource: props.profilePicSource,
+    });
+}
+
 // create a component
 class SearchComponent extends Component {
     constructor(props) {
@@ -60,7 +67,11 @@ class SearchComponent extends Component {
     render() {
         return (
             <Card noShadow={true} transparent={true}>
-                <CardItem style={{ justifyContent: 'center', alignItems: 'center', width: width, height: 65, backgroundColor: '#ffffff' }}>
+                <CardItem
+                    button
+                    onPress={() => goToDashboard(this.props)}
+                    style={{ justifyContent: 'center', alignItems: 'center', width: width, height: 65, backgroundColor: '#ffffff' }}
+                >
                     <View style={{ width: width / 3, alignItems: 'flex-start' }}>
                         <Text style={{ ...styles.samsungSans, left: 15 }}>{this.props.name}</Text>
                     </View>

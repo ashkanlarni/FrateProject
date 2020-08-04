@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { RefreshControl, SafeAreaView, ScrollView, StyleSheet, AsyncStorage } from 'react-native';
 import { Container, Content, Header, Title } from 'native-base';
+import axios from 'axios';
 
 import SearchComponent from '../Components/SearchComponent';
 
@@ -59,13 +60,13 @@ export default function Followers({ navigation }) {
                             }
                         }
 
-                        
+
 
                     })
 
             })
 
-    
+
         wait(1000).then(() => setRefreshing(false));
     }, [refreshing]);
 
@@ -74,9 +75,9 @@ export default function Followers({ navigation }) {
             <SafeAreaView style={{ flex: 1 }}>
                 <ScrollView
                     contentContainerStyle={{ flex: 1 }}
-                refreshControl={
-                    <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-                }
+                    refreshControl={
+                        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+                    }
                 >
                     <Content>
                         {

@@ -1,7 +1,8 @@
 //import liraries
 import React from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
-import { Container } from 'native-base';
+import { RefreshControl, View, SafeAreaView, ScrollView, Text, StyleSheet, Dimensions, TextInput } from 'react-native';
+import { Container, Content, Header, Title } from 'native-base';
+import axios from 'axios';
 
 import DashboardComponent from '../Components/DashboardComponent';
 
@@ -27,6 +28,8 @@ function wait(timeout) {
 function Profile({ route, navigation }) {
     /* 2. Get the param */
     const { name, profilePicSource } = route.params;
+
+    const [refreshing, setRefreshing] = React.useState(false);
 
     onRefresh = React.useCallback(() => {
         setRefreshing(true);
@@ -57,7 +60,7 @@ function Profile({ route, navigation }) {
                         }
                         following_length = following.length
                         follower_length = followers.length
-                })
+                    })
 
                 posts = []
 
@@ -74,7 +77,7 @@ function Profile({ route, navigation }) {
                                 for (var i = 0; i < r.length; i++) {
                                     sum += parseFloat(r[i])
                                 }
-                                averageRates += sum/4
+                                averageRates += sum / 4
 
                                 var com = []
                                 axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/comments/'
@@ -136,7 +139,7 @@ function Profile({ route, navigation }) {
                             averageRates[i] = averageRates[i].toFixed(1).toString()
                         }
                     })
-                })
+            })
 
         wait(1000).then(() => setRefreshing(false));
     }, [refreshing]);

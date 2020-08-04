@@ -50,7 +50,7 @@ export default function Search({ navigation }) {
                                     isF = true
 
                                 var p = {
-                                    id : obj.id,
+                                    id: obj.id,
                                     username: obj.username,
                                     profilePic: require('../../assets/images/profile/Ashkan.jpg'),
                                     isFollowing: isF
@@ -84,7 +84,7 @@ export default function Search({ navigation }) {
                     E
                     </Title>
             </Header>
-            <Header style={{ backgroundColor: 'white', justifyContent: 'flex-start', alignItems: 'flex-start', height: 55 }} noShadow={true}>
+            <Header style={{ backgroundColor: 'white', justifyContent: 'flex-start', alignItems: 'flex-start', height: 24 }} noShadow={true}>
                 <View style={{ justifyContent: 'center', width: width }}>
                     <TextInput
                         onChangeText={(text) => search = text}
@@ -97,12 +97,6 @@ export default function Search({ navigation }) {
                         clearButtonMode={'while-editing'}
                         returnKeyType={'search'}
                     />
-                    <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', top: 8 }}>
-                        <Text style={{ fontFamily: 'SamsungSans_Regular', fontSize: 14, color: 'grey' }}>
-                            {'Pull down to search'}
-                        </Text>
-                        <MaterialCommunityIcons name="arrow-down" color={'grey'} size={20} style={{ marginHorizontal: 10 }} />
-                    </View>
                 </View>
             </Header>
             <SafeAreaView style={{ flex: 1 }}>
@@ -113,6 +107,12 @@ export default function Search({ navigation }) {
                     }
                 >
                     <Content>
+                        <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', top: 25 }}>
+                            <Text style={{ fontFamily: 'SamsungSans_Regular', fontSize: 14, color: 'grey' }}>
+                                {'Pull down to search'}
+                            </Text>
+                            <MaterialCommunityIcons name="arrow-down" color={'grey'} size={20} style={{ marginHorizontal: 10 }} />
+                        </View>
                         {
                             result.map((p) => {
                                 return (<SearchComponent
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
         alignContent: 'center'
     },
     textInput: {
-        height: 50,
+        height: 40,
         backgroundColor: '#fafafa',
         paddingLeft: 20,
         fontFamily: 'SamsungSans_Medium'

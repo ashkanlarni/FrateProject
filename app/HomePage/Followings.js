@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { RefreshControl, SafeAreaView, ScrollView, StyleSheet, AsyncStorage } from 'react-native';
 import { Container, Content, Header, Title } from 'native-base';
+import axios from 'axios';
 
 import SearchComponent from '../Components/SearchComponent';
 
@@ -94,8 +95,6 @@ export default function Followings({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
         backgroundColor: '#ffffff',
     },
 });

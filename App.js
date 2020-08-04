@@ -25,7 +25,7 @@ import Profile from './app/HomePage/Profile';
 const Stack = createStackNavigator();
 const Dash = createStackNavigator();
 const Tab = createBottomTabNavigator();
-const TopTab = createMaterialTopTabNavigator();
+const TopTab = createStackNavigator();
 
 
 
@@ -91,7 +91,9 @@ function DashboardScreen() {
   return (
     <Dash.Navigator initialRouteName='Dashboard' screenOptions={{ gestureEnabled: false }} >
       <Dash.Screen options={{ headerShown: false }} name='Dashboard' component={Dashboard} />
-      <Dash.Screen options={{ headerShown: true, title: ' ' }} name='Follow' component={FollowScreen} />
+      {/* <Dash.Screen options={{ headerShown: true, title: ' ' }} name='Follow' component={FollowScreen} /> */}
+      <Dash.Screen options={{ headerShown: true, title: 'Followers' }} name='Followers' component={Followers} />
+      <Dash.Screen options={{ headerShown: true, title: 'Followings' }} name='Followings' component={Followings} />
     </Dash.Navigator>
   );
 }

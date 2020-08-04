@@ -33,35 +33,35 @@ class DashboardComponent extends Component {
     onPressFollowButton = () => {
         this.toggle()
 
-        // var f = {
-        //     Follower: this.username,
-        //     Following: this.name
-        // }
+        var f = {
+            Follower: this.username,
+            Following: this.name
+        }
 
-        // axios.post('https://nameless-tor-88964.herokuapp.com/api/fusers/followers/', f)
-        //     .then(res => {
-        //         // console.log(res)
-        //     })
+        axios.post('https://nameless-tor-88964.herokuapp.com/api/fusers/followers/', f)
+            .then(res => {
+                // console.log(res)
+            })
     }
 
     onPressUnFollowButton = () => {
         this.toggle()
-        // axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/followers/'
-        // )
-        //     .then(res => {
-        //         var id = 0
-        //         for (var u in res.data) {
-        //             var obj = res.data[u]
-        //             if (obj.follower == this.username && obj.following == this.name) {
-        //                 id = obj.id
-        //                 break
-        //             }
-        //         }
-        //         axios.delete('https://nameless-tor-88964.herokuapp.com/api/fusers/followers/' + id + '/')
-        //             .then(res => {
-        //                 // console.log(res)
-        //             })
-        //     })
+        axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/followers/'
+        )
+            .then(res => {
+                var id = 0
+                for (var u in res.data) {
+                    var obj = res.data[u]
+                    if (obj.follower == this.username && obj.following == this.name) {
+                        id = obj.id
+                        break
+                    }
+                }
+                axios.delete('https://nameless-tor-88964.herokuapp.com/api/fusers/followers/' + id + '/')
+                    .then(res => {
+                        // console.log(res)
+                    })
+            })
     }
 
     render() {
@@ -104,11 +104,11 @@ class DashboardComponent extends Component {
                                 </CardItem>
                                 <CardItem style={styles.cardItem}>
                                     <View style={{ flexDirection: 'row', width: width, alignItems: 'center', justifyContent: 'center' }}>
-                                        <Button transparent style={{ width: width / 2, justifyContent: 'center', flexDirection: 'column' }} onPress={() => this.props.navigation.navigate('Follow')}>
+                                        <Button transparent style={{ width: width / 2, justifyContent: 'center', flexDirection: 'column' }} onPress={() => this.props.navigation.navigate('Followers')}>
                                             <Text style={styles.samsungSans}>{'Followers'}</Text>
                                             <Text style={{ fontFamily: 'SamsungSans_Regular', fontSize: 16 }}>{this.props.followers}</Text>
                                         </Button>
-                                        <Button transparent style={{ width: width / 2, justifyContent: 'center', flexDirection: 'column' }} onPress={() => this.props.navigation.navigate('Follow')}>
+                                        <Button transparent style={{ width: width / 2, justifyContent: 'center', flexDirection: 'column' }} onPress={() => this.props.navigation.navigate('Followings')}>
                                             <Text style={styles.samsungSans}>{'Followings'}</Text>
                                             <Text style={{ fontFamily: 'SamsungSans_Regular', fontSize: 16 }}>{this.props.followings}</Text>
                                         </Button>
