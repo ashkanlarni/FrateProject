@@ -31,6 +31,8 @@ export default function Dashboard({ navigation }) {
 
     onRefresh = React.useCallback(() => {
         setRefreshing(true);
+        averageRates = [0, 0, 0]
+        numofposts = [0, 0, 0]
         axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/followers/'
         )
             .then(res => {
@@ -60,11 +62,11 @@ export default function Dashboard({ navigation }) {
                         numofposts[post.category] += 1
 
                         var r = post.ratings.split('-')
-                        sum = 0
+                        var sum = 0
                         for (var i = 0; i < r.length; i++) {
                             sum += parseFloat(r[i])
                         }
-                        averageRates += sum / 4
+                        averageRates[post.category] += sum / 4
 
                         var com = []
                         axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/comments/'
@@ -73,7 +75,7 @@ export default function Dashboard({ navigation }) {
                                 var comusers = []
                                 var combody = []
                                 for (var c in res.data) {
-                                    var comment = res.data[u]
+                                    var comment = res.data[c]
                                     if (comment.post == post.id) {
                                         comusers.push(comment.username)
                                         combody.push(comment.comment)
@@ -124,6 +126,7 @@ export default function Dashboard({ navigation }) {
                     if (numofposts[i] != 0)
                         averageRates[i] = (averageRates[i] / numofposts[i])
                     averageRates[i] = averageRates[i].toFixed(1).toString()
+
                 }
             })
 
@@ -150,30 +153,28 @@ export default function Dashboard({ navigation }) {
                     E
                 </Title>
             </Header>
-            <Content>
-                <SafeAreaView style={{ flex: 1 }}>
-                    <ScrollView
-                        contentContainerStyle={{ flex: 1 }}
-                        refreshControl={
-                            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-                        }
-                    >
-                        <DashboardComponent
-                            userid={userid}
-                            username={username}
-                            name={username}
-                            profilePicture={require('../../assets/images/profile/Ashkan.jpg')}
-                            isFollowing={true}
-                            followers={follower_length}
-                            followings={following_length}
-                            numberOfPosts={numofposts}
-                            averageRates={averageRates}
-                            posts={posts}
-                            navigation={navigation}
-                        />
-                    </ScrollView>
-                </SafeAreaView>
-            </Content>
+            <SafeAreaView style={{ flex: 1 }}>
+                <ScrollView
+                    contentContainerStyle={{ flex: 1 }}
+                    refreshControl={
+                        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+                    }
+                >
+                    <DashboardComponent
+                        userid={userid}
+                        username={username}
+                        name={username}
+                        profilePicture={require('../../assets/images/profile/Ashkan.jpg')}
+                        isFollowing={true}
+                        followers={follower_length}
+                        followings={following_length}
+                        numberOfPosts={numofposts}
+                        averageRates={averageRates}
+                        posts={posts}
+                        navigation={navigation}
+                    />
+                </ScrollView>
+            </SafeAreaView>
         </Container>
     );
 }

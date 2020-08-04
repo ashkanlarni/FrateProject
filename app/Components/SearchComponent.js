@@ -11,6 +11,7 @@ function goToDashboard(props) {
     props.navigation.navigate('Profile', {
         name: props.name,
         profilePicSource: props.profilePicSource,
+        isFollowing: this.state.following
     });
 }
 

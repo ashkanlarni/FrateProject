@@ -50,11 +50,9 @@ export default function Followings({ navigation }) {
                                     "following": true
                                 }
                                 following.push(f)
+
                             }
                         }
-
-                        
-
                     })
 
             })
@@ -67,13 +65,14 @@ export default function Followings({ navigation }) {
             <SafeAreaView style={{ flex: 1 }}>
                 <ScrollView
                     contentContainerStyle={{ flex: 1 }}
-                refreshControl={
-                    <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-                }
+                    refreshControl={
+                        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+                    }
                 >
                     <Content>
                         {
                             following.map((p) => {
+                                console.log('asd', following)
                                 return (<SearchComponent
                                     username={username}
                                     userid={userid}

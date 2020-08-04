@@ -37,20 +37,21 @@ export default function Home({ navigation }) {
                 }
                 axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/posts/'
                 )
-                    .then(res => {
-                        for (var p in res.data) {
-                            var post = res.data[p]
+                    .then(res1 => {
+                        for (var p in res1.data) {
+                            var post = res1.data[p]
                             if (post.username == userid || followers.includes(post.username)) {
                                 var r = post.ratings.split('-')
 
                                 var com = []
                                 axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/comments/'
                                 )
-                                    .then(res => {
+                                    .then(res2 => {
+                                        console.log('jh', post)
                                         var comusers = []
                                         var combody = []
-                                        for (var c in res.data) {
-                                            var comment = res.data[u]
+                                        for (var c in res2.data) {
+                                            var comment = res2.data[u]
                                             if (comment.post == post.id) {
                                                 comusers.push(comment.username)
                                                 combody.push(comment.comment)
@@ -59,10 +60,10 @@ export default function Home({ navigation }) {
 
                                         axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/login/'
                                         )
-                                            .then(res => {
+                                            .then(res3 => {
                                                 var name = ''
-                                                for (var u in res.data) {
-                                                    var use = res.data[u]
+                                                for (var u in res3.data) {
+                                                    var use = res3.data[u]
                                                     if (comusers.includes(use.id)) {
                                                         var index = comusers.indexOf(use.id)
                                                         com.push([use.username, combody[index]])
@@ -70,6 +71,7 @@ export default function Home({ navigation }) {
                                                     if (use.id == post.username)
                                                         name = use.username
                                                 }
+
 
                                                 var rc = 0
                                                 if (post.rateCount.length != 0)
@@ -128,6 +130,7 @@ export default function Home({ navigation }) {
                     <Content>
                         {
                             posts.map((p) => {
+                                console.log('pos', posts)
                                 return (<CardComponent
                                     userid={userid}
                                     postid={p.postid}

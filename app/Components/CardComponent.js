@@ -45,6 +45,7 @@ function goToDashboard(props) {
     props.navigation.navigate('Profile', {
         name: props.name,
         profilePicSource: props.profilePicSource,
+        navigation: props.navigation
     });
 }
 
@@ -139,7 +140,7 @@ class CardComponent extends Component {
                     </CardItem>
                     <CardItem cardBody style={styles.cardItem}>
                         <Image
-                            source={this.props.imageSource}
+                            source={{ uri: this.props.imageSource }}
                             style={{ height: width, width: null, flex: 1 }}
                         />
                     </CardItem>

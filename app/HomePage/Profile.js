@@ -25,9 +25,9 @@ function wait(timeout) {
     });
 }
 
-function Profile({ route, navigation }) {
+function Profile({ route }) {
     /* 2. Get the param */
-    const { name, profilePicSource } = route.params;
+    const { name, profilePicSource, isFollowing, navigation } = route.params;
 
     const [refreshing, setRefreshing] = React.useState(false);
 
@@ -73,7 +73,7 @@ function Profile({ route, navigation }) {
                                 numofposts[post.category] += 1
 
                                 var r = post.ratings.split('-')
-                                sum = 0
+                                var sum = 0
                                 for (var i = 0; i < r.length; i++) {
                                     sum += parseFloat(r[i])
                                 }
@@ -146,13 +146,19 @@ function Profile({ route, navigation }) {
 
     return (
         <Container>
-            <ScrollView>
+            <ScrollView
+                contentContainerStyle={{ flex: 1 }}
+                refreshControl={
+                    <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+                }
+            >
                 <View style={styles.container}>
                     <DashboardComponent
                         userid={userid}
                         username={username}
                         name={name}
                         profilePicture={profilePicSource}
+                        isFollowing={isFollowing}
                         followers={follower_length}
                         followings={following_length}
                         numberOfPosts={numofposts}

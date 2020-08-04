@@ -22,7 +22,7 @@ var checked = 0;
 var captionText = '';
 var pickedImage;
 var user = 'Ashkan';
-var userid = 1;
+var userid = 2;
 var dbReady = false
 
 
