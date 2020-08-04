@@ -7,7 +7,8 @@ import axios from 'axios';
 import CardComponent from '../Components/CardComponent';
 
 var posts = []
-var user = 'Alil';
+var user = 'Ashkan';
+var userid = 1;
 var dbReady = false;
 
 function wait(timeout) {
@@ -30,43 +31,65 @@ export default function Home({ navigation }) {
                 var followers = []
                 for (var u in res.data) {
                     var obj = res.data[u]
-                    if (obj.follower == user) {
+                    if (obj.follower == userid) {
                         followers.push(obj.following)
                     }
                 }
                 axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/posts/'
                 )
                     .then(res => {
-                        for (var u in res.data) {
-                            var obj = res.data[u]
-                            if (obj.username == user || followers.includes(obj.username)) {
-                                var r = obj.ratings.split('-')
+                        for (var p in res.data) {
+                            var post = res.data[p]
+                            if (post.username == userid || followers.includes(post.username)) {
+                                var r = post.ratings.split('-')
 
                                 var com = []
-                                com.push(['Shay', 'Lalay'])
-                                com.push(['Ashkan', 'Hooraa'])
-                                com.push(['Ali', 'This is just a comment!'])
+                                axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/comments/'
+                                )
+                                    .then(res => {
+                                        var comusers = []
+                                        var combody = []
+                                        for (var c in res.data) {
+                                            var comment = res.data[u]
+                                            if (comment.post == post.id) {
+                                                comusers.push(comment.username)
+                                                combody.push(comment.comment)
+                                            }
+                                        }
 
-                                var rc = 0
-                                if (obj.rateCount.length != 0)
-                                    rc = parseInt(obj.rateCount)
+                                        axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/login/'
+                                        )
+                                            .then(res => {
+                                                for (var u in res.data) {
+                                                    var use = res.data[u]
+                                                    if (comusers.includes(use.id)) {
+                                                        var index = comusers.indexOf(use.id)
+                                                        com.push([use.username, combody[index]])
+                                                    }
+                                                }
 
-                                var count = obj.rateCount.split('-')
+                                                var rc = 0
+                                                if (post.rateCount.length != 0)
+                                                    rc = parseInt(post.rateCount)
+                                                var count = post.rateCount.split('-')
 
-                                var p = {
-                                    "postid": obj.id,
-                                    "name": obj.username,
-                                    "date": obj.date,
-                                    "profilePic": require('../../assets/images/profile/Ashkan.jpg'),
-                                    "image": obj.filename,
-                                    "category": obj.category,
-                                    "rate": r,
-                                    "rateCount": obj.rateCount,
-                                    "caption": obj.caption,
-                                    "comments": com
-                                }
+                                                var newpost = {
+                                                    "postid": post.id,
+                                                    "name": post.username,
+                                                    "date": post.date,
+                                                    "profilePic": require('../../assets/images/profile/Ashkan.jpg'),
+                                                    "image": post.filename,
+                                                    "category": post.category,
+                                                    "rate": r,
+                                                    "rateCount": post.rateCount,
+                                                    "caption": post.caption,
+                                                    "comments": com
+                                                }
 
-                                posts.unshift(p)
+                                                posts.unshift(newpost)
+                                            })
+                                    })
+                                
                             }
                         }
                     })

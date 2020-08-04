@@ -20,20 +20,21 @@ export default function Search({ navigation }) {
     this.result = []
     this.search = "Ashkan"
     this.user = 'Ashkan'
+    this.userid = 1
 
     onRefresh = React.useCallback(() => {
         console.log('ajab2', this.search)
         setRefreshing(true);
 
         this.result = []
-
+        var followers = []
         axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/followers/'
         )
-        var followers = []
+        
             .then(res => {
                 for (var u in res.data) {
                     var obj = res.data[u]
-                    if (obj.follower == this.user) {
+                    if (obj.follower == this.userid) {
                         followers.push(obj.following)
                     }
                 }
@@ -44,10 +45,11 @@ export default function Search({ navigation }) {
                             var obj = res.data[u]
                             if (obj.username.startsWith(this.search)) {
                                 var isF = false
-                                if (followers.includes(obj.username))
+                                if (followers.includes(obj.id))
                                     isF = true
 
                                 var p = {
+                                    id : obj.id,
                                     username: obj.username,
                                     profilePic: require('../../assets/images/profile/Ashkan.jpg'),
                                     isFollowing: isF
@@ -118,6 +120,8 @@ export default function Search({ navigation }) {
                                 console.log('ajab', this.result);
                                 return (<SearchComponent
                                     username={this.user}
+                                    userid={thid.userid}
+                                    nameid={p.id}
                                     name={p.username}
                                     profilePicSource={p.profilePic}
                                     following={p.isFollowing}

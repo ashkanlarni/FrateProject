@@ -21,7 +21,8 @@ var radio_props = [
 var checked = 0;
 var captionText = '';
 var pickedImage;
-var user = 'S';
+var user = 'Ashkan';
+var userid = 1;
 var dbReady = false
 
 
@@ -48,8 +49,6 @@ export default function Upload() {
             quality: 1,
         });
 
-        console.log(result);
-
         if (!result.cancelled) {
             setImage(result.uri);
         }
@@ -70,7 +69,7 @@ export default function Upload() {
         rate = rate.substring(0, rate.length - 1)
 
         var post = {
-            Username: user,
+            Username: userid,
             Filename: image,
             Category: checked,
             Ratings: rate,
@@ -78,17 +77,12 @@ export default function Upload() {
             Caption: captionText,
         }
 
-        console.log('here')
 
         axios.post('https://nameless-tor-88964.herokuapp.com/api/fusers/posts/', post)
             .then(res => {
                 // console.log(res)
             })
 
-        axios.delete('https://nameless-tor-88964.herokuapp.com/api/fusers/followers/1/')
-            .then(res => {
-                console.log(res)
-            })
     };
 
 

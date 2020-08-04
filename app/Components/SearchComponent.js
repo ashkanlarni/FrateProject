@@ -17,6 +17,8 @@ class SearchComponent extends Component {
         }
         this.username = props.username
         this.name = props.name
+        this.userid = props.userid
+        this.nameid = props.nameid
     }
 
     toggle = () => { this.setState({ following: !this.state.following }) }
@@ -25,8 +27,8 @@ class SearchComponent extends Component {
         this.toggle()
 
         var f = {
-            Follower: this.username,
-            Following: this.name
+            Follower: this.userid,
+            Following: this.nameid
         }
 
         axios.post('https://nameless-tor-88964.herokuapp.com/api/fusers/followers/', f)
@@ -43,7 +45,7 @@ class SearchComponent extends Component {
                 var id = 0
                 for (var u in res.data) {
                     var obj = res.data[u]
-                    if (obj.follower == this.username && obj.following == this.name) {
+                    if (obj.follower == this.userid && obj.following == this.nameid) {
                         id = obj.id
                         break
                     }
