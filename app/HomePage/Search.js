@@ -27,43 +27,44 @@ export default function Search({ navigation }) {
 
         result = []
 
-    onSearchButtonPressed() {
+    // onSearchButtonPressed() {
+    //     this.result = []
 
-        axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/followers/'
-        )
-        var followers = []
-            .then(res => {
-                for (var u in res.data) {
-                    var obj = res.data[u]
-                    if (obj.follower == user) {
-                        followers.push(obj.following)
-                    }
-                }
-                axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/login/'
-                )
-                    .then(res => {
-                        for (var u in res.data) {
-                            var obj = res.data[u]
-                            if (obj.username.startsWith(search)) {
-                                var isF = false
-                                if (followers.includes(obj.username))
-                                    isF = true
+    //     axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/followers/'
+    //     )
+    //     var followers = []
+    //         .then(res => {
+    //             for (var u in res.data) {
+    //                 var obj = res.data[u]
+    //                 if (obj.follower == user) {
+    //                     followers.push(obj.following)
+    //                 }
+    //             }
+    //             axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/login/'
+    //             )
+    //                 .then(res => {
+    //                     for (var u in res.data) {
+    //                         var obj = res.data[u]
+    //                         if (obj.username.startsWith(search)) {
+    //                             var isF = false
+    //                             if (followers.includes(obj.username))
+    //                                 isF = true
 
-                                var p = {
-                                    username: obj.username,
-                                    profilePic: require('../../assets/images/profile/Ashkan.jpg'),
-                                    isFollowing: isF
-                                }
-                                result.push(p);
-                                console.log('big', p);
-                                console.log('small', result);
-                            }
-                        }
+    //                             var p = {
+    //                                 username: obj.username,
+    //                                 profilePic: require('../../assets/images/profile/Ashkan.jpg'),
+    //                                 isFollowing: isF
+    //                             }
+    //                             result.push(p);
+    //                             console.log('big', p);
+    //                             console.log('small', result);
+    //                         }
+    //                     }
 
-                    })
-            })
+    //                 })
+    //         })
 
-    }
+    // }
 
         wait(1000).then(() => setRefreshing(false));
     }, [refreshing]);
