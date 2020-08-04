@@ -7,13 +7,14 @@ import CardComponent from '../Components/CardComponent';
 
 function Post({ route, navigation }) {
     /* 2. Get the param */
-    const { name, date, profilePicSource, imageSource, category, rate, rateCount, postid, caption, comments, fullPagePost, goIntoAnotherPage } = route.params;
+    const { userid, name, date, profilePicSource, imageSource, category, rate, rateCount, postid, caption, comments, fullPagePost, goIntoAnotherPage } = route.params;
 
     return (
         <Container>
             <ScrollView>
                 <View style={styles.container}>
                     <CardComponent
+                        userid={userid}
                         name={name}
                         date={date}
                         profilePicSource={JSON.stringify(profilePicSource)}

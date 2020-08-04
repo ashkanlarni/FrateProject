@@ -25,6 +25,7 @@ const category = {
 
 function goToPost(props) {
     props.navigation.navigate('Post', {
+        userid: props.userid,
         name: props.name,
         date: props.date,
         profilePicSource: props.profilePicSource,
@@ -54,6 +55,7 @@ class CardComponent extends Component {
 
         this.openRating = this.props.fullPagePost;
         this.subrate = [];
+        this.newcomment = '';
 
         this.state = {
             rate1: 0.0,
@@ -80,7 +82,17 @@ class CardComponent extends Component {
     }
 
     onSubmitComment() {
-        // fill here
+        var comment = {
+            Username: this.props.userid,
+            Comment: this.newcomment,
+            Post: this.props.postid
+        }
+        console.log(comment)
+
+        axios.post('https://nameless-tor-88964.herokuapp.com/api/fusers/comments/', comment)
+            .then(res => {
+                // console.log(res)
+            })
     }
 
     onSubmitRating() {
@@ -260,7 +272,7 @@ class CardComponent extends Component {
                             <Body style={{ flexDirection: 'row' }}>
                                 {/* commenting */}
                                 <TextInput
-                                    // onChangeText={(text) => this.username = text}
+                                    onChangeText={(text) => this.newcomment = text}
                                     multiline={true}
                                     placeholder='comment...'
                                     style={styles.textInput}

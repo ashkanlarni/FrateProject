@@ -139,6 +139,7 @@ export default function Home({ navigation }) {
                         {
                             posts.map((p) => {
                                 return (<CardComponent
+                                    userid={userid}
                                     postid={p.postid}
                                     name={p.name}
                                     date={p.date}
