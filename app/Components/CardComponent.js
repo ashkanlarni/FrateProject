@@ -5,6 +5,7 @@ import { Button, Card, CardItem, Thumbnail, Body } from 'native-base';
 import ProgressCircle from 'react-native-progress-circle';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import axios from 'axios';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 
 import SliderComponent from './SliderComponent';
 
@@ -78,6 +79,10 @@ class CardComponent extends Component {
         this.setState({ [variable]: value })
     }
 
+    onSubmitComment() {
+        // fill here
+    }
+
     onSubmitRating() {
         var ratings = [this.state.rate1, this.state.rate2, this.state.rate3, this.state.rate4]
 
@@ -122,7 +127,7 @@ class CardComponent extends Component {
                     </CardItem>
                     <CardItem cardBody style={styles.cardItem}>
                         <Image
-                            source={{ uri: this.props.imageSource }}
+                            source={this.props.imageSource}
                             style={{ height: width, width: null, flex: 1 }}
                         />
                     </CardItem>
@@ -251,8 +256,8 @@ class CardComponent extends Component {
                     {
                         this.props.fullPagePost
                         &&
-                        <CardItem style={styles.cardItem}>
-                            <Body>
+                        <CardItem style={{ ...styles.cardItem, flexDirection: 'column' }}>
+                            <Body style={{ flexDirection: 'row' }}>
                                 {/* commenting */}
                                 <TextInput
                                     // onChangeText={(text) => this.username = text}
@@ -261,6 +266,11 @@ class CardComponent extends Component {
                                     style={styles.textInput}
                                     placeholderTextColor='rgba(0, 0, 0, 0.5)'
                                 />
+                                <Button transparent onPress={() => this.onSubmitComment()}>
+                                    <SimpleLineIcons name="cursor" color={'#888888'} size={14} style={{ transform: [{ rotate: '45deg' }] }} />
+                                </Button>
+                            </Body>
+                            <Body>
                                 {this.props.comments.map((p) => {
                                     return (
                                         <Text style={{ fontFamily: 'SamsungSans_Thin', fontSize: 12, textAlign: 'left', textAlignVertical: 'auto' }}>
@@ -271,7 +281,6 @@ class CardComponent extends Component {
                                         </Text>
                                     )
                                 })}
-
                             </Body>
                         </CardItem>
                     }
@@ -304,7 +313,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffffff'
     },
     textInput: {
-        width: 9 * width / 10,
+        width: 4.4 * width / 5,
         borderBottomColor: '#cccccc',
         borderBottomWidth: 0.5,
         backgroundColor: '#ffffff',

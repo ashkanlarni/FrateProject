@@ -6,7 +6,20 @@ import axios from 'axios';
 
 import CardComponent from '../Components/CardComponent';
 
-var posts = []
+var posts = [
+    {
+        "postid": 1,
+        "name": 'Ashkan',
+        "date": 'July 20, 2020',
+        "profilePic": require('../../assets/images/profile/Ashkan.jpg'),
+        "image": require('../../assets/images/feed/2.jpg'),
+        "category": 0,
+        "rate": ['1.0', '2.0', '3.0', '4.0'],
+        "rateCount": 50,
+        "caption": 'Nothing',
+        "comments": [['Ali', 'Hi'], ['Shay', 'Hello']]
+    }
+]
 var user = 'Ashkan';
 var userid = 1;
 var dbReady = false;
