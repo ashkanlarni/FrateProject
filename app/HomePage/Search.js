@@ -27,6 +27,8 @@ export default function Search({ navigation }) {
 
         this.result = []
 
+    onSearchButtonPressed() {
+
         axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/followers/'
         )
         var followers = []
@@ -57,10 +59,15 @@ export default function Search({ navigation }) {
                                 console.log('small', this.result);
                             }
                         }
+
                     })
             })
+
+    }
+
         wait(1000).then(() => setRefreshing(false));
     }, [refreshing]);
+
 
     return (
         <Container style={styles.container}>
