@@ -24,7 +24,11 @@ export default function Search({ navigation }) {
     onRefresh = React.useCallback(() => {
         setRefreshing(true);
 
+<<<<<<< HEAD
         result = []
+=======
+        this.result = []
+>>>>>>> master
 
         axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/followers/'
         )
@@ -57,6 +61,10 @@ export default function Search({ navigation }) {
 
                     })
             })
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
         wait(1000).then(() => setRefreshing(false));
     }, [refreshing]);
 
