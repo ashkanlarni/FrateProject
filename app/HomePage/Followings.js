@@ -72,7 +72,6 @@ export default function Followings({ navigation }) {
                     <Content>
                         {
                             following.map((p) => {
-                                console.log('asd', following)
                                 return (<SearchComponent
                                     username={username}
                                     userid={userid}

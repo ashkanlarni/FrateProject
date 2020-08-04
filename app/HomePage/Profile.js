@@ -33,7 +33,8 @@ function Profile({ route }) {
 
     onRefresh = React.useCallback(() => {
         setRefreshing(true);
-
+        averageRates = [0, 0, 0]
+        numofposts = [0, 0, 0]
         axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/login/'
         )
             .then(res => {
@@ -77,7 +78,7 @@ function Profile({ route }) {
                                 for (var i = 0; i < r.length; i++) {
                                     sum += parseFloat(r[i])
                                 }
-                                averageRates += sum / 4
+                                averageRates[post.category] += sum / 4
 
                                 var com = []
                                 axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/comments/'
@@ -86,7 +87,7 @@ function Profile({ route }) {
                                         var comusers = []
                                         var combody = []
                                         for (var c in res.data) {
-                                            var comment = res.data[u]
+                                            var comment = res.data[c]
                                             if (comment.post == post.id) {
                                                 comusers.push(comment.username)
                                                 combody.push(comment.comment)

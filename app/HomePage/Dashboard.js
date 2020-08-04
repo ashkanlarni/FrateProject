@@ -58,6 +58,7 @@ export default function Dashboard({ navigation }) {
             .then(res => {
                 for (var p in res.data) {
                     var post = res.data[p]
+                    console.log(post)
                     if (post.username == userid) {
                         numofposts[post.category] += 1
 
