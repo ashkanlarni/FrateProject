@@ -8,10 +8,6 @@ import SearchComponent from '../Components/SearchComponent';
 
 const { width, height } = Dimensions.get('window');
 
-var result = [];
-var search = "Ashkan";
-var user = 'Ashkan';
-
 function wait(timeout) {
     return new Promise(resolve => {
         setTimeout(resolve, timeout);
@@ -21,11 +17,15 @@ function wait(timeout) {
 export default function Search({ navigation }) {
     const [refreshing, setRefreshing] = React.useState(false);
 
+    this.result = []
+    this.search = "Ashkan"
+    this.user = 'Ashkan'
+
     onRefresh = React.useCallback(() => {
-        console.log('ajab', search)
+        console.log('ajab2', this.search)
         setRefreshing(true);
 
-        result = []
+        this.result = []
 
         axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/followers/'
         )
@@ -33,7 +33,7 @@ export default function Search({ navigation }) {
             .then(res => {
                 for (var u in res.data) {
                     var obj = res.data[u]
-                    if (obj.follower == user) {
+                    if (obj.follower == this.user) {
                         followers.push(obj.following)
                     }
                 }
@@ -42,7 +42,7 @@ export default function Search({ navigation }) {
                     .then(res => {
                         for (var u in res.data) {
                             var obj = res.data[u]
-                            if (obj.username.startsWith(search)) {
+                            if (obj.username.startsWith(this.search)) {
                                 var isF = false
                                 if (followers.includes(obj.username))
                                     isF = true
@@ -52,9 +52,9 @@ export default function Search({ navigation }) {
                                     profilePic: require('../../assets/images/profile/Ashkan.jpg'),
                                     isFollowing: isF
                                 }
-                                result.push(p);
+                                this.result.push(p);
                                 console.log('big', p);
-                                console.log('small', result);
+                                console.log('small', this.result);
                             }
                         }
                     })
@@ -84,8 +84,8 @@ export default function Search({ navigation }) {
             <Header style={{ backgroundColor: 'white', height: 50 }} noShadow={true}>
                 <View style={{ justifyContent: 'center', width: width, height: 14 }}>
                     <TextInput
-                        onChangeText={(text) => search = text, console.log('ok', search, 'ko')}
-                        onEndEditing={(text) => search = text, console.log('ok2', search, 'ko2')}
+                        onChangeText={(text) => this.search = text, console.log('ok', this.search, 'ko')}
+                        onEndEditing={(text) => this.search = text, console.log('ok2', this.search, 'ko2')}
                         placeholder='Username'
                         style={{ ...styles.textInput, width: width, left: 50 }}
                         placeholderTextColor='rgba(0, 0, 0, 0.3)'
@@ -111,10 +111,10 @@ export default function Search({ navigation }) {
                 >
                     <Content>
                         {
-                            result.map((p) => {
-                                console.log('ajab', result);
+                            this.result.map((p) => {
+                                console.log('ajab', this.result);
                                 return (<SearchComponent
-                                    username={user}
+                                    username={this.user}
                                     name={p.username}
                                     profilePicSource={p.profilePic}
                                     following={p.isFollowing}
