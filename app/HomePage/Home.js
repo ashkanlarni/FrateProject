@@ -73,12 +73,15 @@ export default function Home({ navigation }) {
                                         axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/login/'
                                         )
                                             .then(res => {
+                                                var name = ''
                                                 for (var u in res.data) {
                                                     var use = res.data[u]
                                                     if (comusers.includes(use.id)) {
                                                         var index = comusers.indexOf(use.id)
                                                         com.push([use.username, combody[index]])
                                                     }
+                                                    if (use.id == post.username)
+                                                        name = use.username
                                                 }
 
                                                 var rc = 0
@@ -88,7 +91,7 @@ export default function Home({ navigation }) {
 
                                                 var newpost = {
                                                     "postid": post.id,
-                                                    "name": post.username,
+                                                    "name": name,
                                                     "date": post.date,
                                                     "profilePic": require('../../assets/images/profile/Ashkan.jpg'),
                                                     "image": post.filename,

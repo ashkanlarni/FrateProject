@@ -23,6 +23,8 @@ export default function Followers({ navigation }) {
     onRefresh = React.useCallback(() => {
         setRefreshing(true);
 
+        followers = []
+
         axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/followers/'
         )
             .then(res => {

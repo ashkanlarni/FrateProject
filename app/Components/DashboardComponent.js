@@ -106,11 +106,11 @@ class DashboardComponent extends Component {
                                     <View style={{ flexDirection: 'row', width: width, alignItems: 'center', justifyContent: 'center' }}>
                                         <Button transparent style={{ width: width / 2, justifyContent: 'center', flexDirection: 'column' }} onPress={() => this.props.navigation.navigate('Follow')}>
                                             <Text style={styles.samsungSans}>{'Followers'}</Text>
-                                            <Text style={{ fontFamily: 'SamsungSans_Regular', fontSize: 16 }}>{this.props.followers.length}</Text>
+                                            <Text style={{ fontFamily: 'SamsungSans_Regular', fontSize: 16 }}>{this.props.followers}</Text>
                                         </Button>
                                         <Button transparent style={{ width: width / 2, justifyContent: 'center', flexDirection: 'column' }} onPress={() => this.props.navigation.navigate('Follow')}>
                                             <Text style={styles.samsungSans}>{'Followings'}</Text>
-                                            <Text style={{ fontFamily: 'SamsungSans_Regular', fontSize: 16 }}>{this.props.followings.length}</Text>
+                                            <Text style={{ fontFamily: 'SamsungSans_Regular', fontSize: 16 }}>{this.props.followings}</Text>
                                         </Button>
                                     </View>
                                 </CardItem>
@@ -176,6 +176,7 @@ class DashboardComponent extends Component {
                                     {
                                         this.props.posts.map((p) => {
                                             return (<CardComponent
+                                                userid={this.props.userid}
                                                 postid={p.postid}
                                                 name={p.name}
                                                 date={p.date}
