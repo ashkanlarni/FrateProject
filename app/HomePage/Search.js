@@ -1,8 +1,9 @@
 //import liraries
 import React from 'react';
 import { RefreshControl, View, SafeAreaView, ScrollView, Text, StyleSheet, Dimensions, TextInput } from 'react-native';
-import { Container, Content, Header, Title, Button } from 'native-base';
+import { Container, Content, Header, Title } from 'native-base';
 import axios from 'axios';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import SearchComponent from '../Components/SearchComponent';
 
@@ -24,6 +25,7 @@ export default function Search({ navigation }) {
 
     onRefresh = React.useCallback(() => {
         setRefreshing(true);
+
         result = []
 
         axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/followers/'
@@ -59,7 +61,6 @@ export default function Search({ navigation }) {
 
                     })
             })
-
         wait(1000).then(() => setRefreshing(false));
     }, [refreshing]);
 
@@ -83,12 +84,12 @@ export default function Search({ navigation }) {
                     E
                     </Title>
             </Header>
-            <Header style={{ backgroundColor: 'white', height: 50 }} noShadow={true}>
-                <View style={{ justifyContent: 'center', width: width, height: 14 }}>
+            <Header style={{ backgroundColor: 'white', justifyContent: 'flex-start', alignItems: 'flex-start', height: 55 }} noShadow={true}>
+                <View style={{ justifyContent: 'center', width: width }}>
                     <TextInput
                         onChangeText={(text) => search = text}
                         placeholder='Username'
-                        style={{ ...styles.textInput, width: width, left: 50 }}
+                        style={{ ...styles.textInput, width: width }}
                         placeholderTextColor='rgba(0, 0, 0, 0.3)'
                         autoCorrect={false}
                         spellCheck={false}
@@ -96,12 +97,13 @@ export default function Search({ navigation }) {
                         clearButtonMode={'while-editing'}
                         returnKeyType={'search'}
                     />
+                    <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', top: 8 }}>
+                        <Text style={{ fontFamily: 'SamsungSans_Regular', fontSize: 14, color: 'grey' }}>
+                            {'Pull down to search'}
+                        </Text>
+                        <MaterialCommunityIcons name="arrow-down" color={'grey'} size={20} style={{ marginHorizontal: 10 }} />
+                    </View>
                 </View>
-                <Button transparent style={styles.searchButton}>
-                    <Text style={{ fontFamily: 'SamsungSans_Bold', fontSize: 18, color: '#0080ff' }}>
-                        {'Search'}
-                    </Text>
-                </Button>
             </Header>
             <SafeAreaView style={{ flex: 1 }}>
                 <ScrollView
@@ -120,6 +122,7 @@ export default function Search({ navigation }) {
                                     name={p.username}
                                     profilePicSource={p.profilePic}
                                     following={p.isFollowing}
+                                    navigation={navigation}
                                 />)
                             })
                         }
@@ -148,14 +151,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#fafafa',
         paddingLeft: 20,
         fontFamily: 'SamsungSans_Medium'
-    },
-    searchButton: {
-        height: 50,
-        width: 100,
-        justifyContent: 'center',
-        alignItems: 'center',
-        right: width / 6.5,
-        bottom: 10
     }
 });
 
