@@ -1,8 +1,7 @@
 //import liraries
-import React, { Component } from 'react';
-import { RefreshControl, Text, SafeAreaView, ScrollView, StyleSheet, AsyncStorage, Dimensions } from 'react-native';
-import { Container, Content, Header, Title, Button, Icon, Card, CardItem, Thumbnail, Body, Left, Right, View } from 'native-base';
-import ProgressCircle from 'react-native-progress-circle';
+import React from 'react';
+import { RefreshControl, SafeAreaView, ScrollView, StyleSheet, AsyncStorage, Dimensions } from 'react-native';
+import { Container, Content, Header, Title } from 'native-base';
 
 import DashboardComponent from '../Components/DashboardComponent';
 

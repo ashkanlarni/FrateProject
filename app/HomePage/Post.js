@@ -5,7 +5,7 @@ import { Container } from 'native-base';
 
 import CardComponent from '../Components/CardComponent';
 
-function Post({ route, navigation }) {
+export default function Post({ route, navigation }) {
     /* 2. Get the param */
     const { userid, name, date, profilePicSource, imageSource, category, rate, rateCount, postid, caption, comments, fullPagePost, goIntoAnotherPage } = route.params;
 
@@ -26,8 +26,7 @@ function Post({ route, navigation }) {
                         caption={caption}
                         comments={comments}
                         fullPagePost={true}
-                        goIntoAnotherPage={false}
-                        canRate={true}
+                        navigation={navigation}
                     />
                 </View>
             </ScrollView>
@@ -44,6 +43,3 @@ const styles = StyleSheet.create({
         backgroundColor: '#fefefe',
     },
 });
-
-//make this component available to the app
-export default Post;

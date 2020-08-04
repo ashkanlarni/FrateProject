@@ -187,9 +187,8 @@ class DashboardComponent extends Component {
                                                 rateCount={p.rateCount}
                                                 caption={p.caption}
                                                 comments={p.comments}
+                                                navigation={this.props.navigation}
                                                 fullPagePost={false}
-                                                goIntoAnotherPage={true}
-                                                canRate={false}
                                             />)
                                         })
                                     }
