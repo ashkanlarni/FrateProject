@@ -27,8 +27,23 @@ var posts = [{
 var followers = ['Ashkan', 'Ali', 'Shayesteh']
 var followings = ['Soroush', 'Mazyar', 'Amin', 'Sina', 'Shahryar']
 
+function wait(timeout) {
+    return new Promise(resolve => {
+        setTimeout(resolve, timeout);
+    });
+}
+
 // create a component
 export default function Dashboard({ navigation }) {
+
+    const [refreshing, setRefreshing] = React.useState(false);
+
+    onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+
+
+        wait(1000).then(() => setRefreshing(false));
+    }, [refreshing]);
 
     return (
         <Container>
