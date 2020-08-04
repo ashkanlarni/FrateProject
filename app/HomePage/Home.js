@@ -6,7 +6,7 @@ import axios from 'axios';
 
 import CardComponent from '../Components/CardComponent';
 
-var posts = []
+var posts = [];
 var user = 'Alil';
 var dbReady = false;
 
@@ -65,7 +65,6 @@ export default function Home({ navigation }) {
                                     "caption": obj.caption,
                                     "comments": com
                                 }
-
                                 posts.unshift(p)
                             }
                         }
