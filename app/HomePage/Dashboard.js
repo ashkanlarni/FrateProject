@@ -178,6 +178,7 @@ export default function Dashboard({ navigation }) {
                     <DashboardComponent
                         userid={userid}
                         username={username}
+                        nameid={userid}
                         name={username}
                         profilePicture={require('../../assets/images/profile/Ashkan.jpg')}
                         isFollowing={true}

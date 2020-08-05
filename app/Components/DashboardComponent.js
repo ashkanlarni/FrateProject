@@ -16,6 +16,20 @@ const colors = {
     "Lifestyle": '#50c878'
 }
 
+function goToFollowers(props) {
+    props.navigation.navigate('Followers', {
+        name: props.name,
+        nameid: props.nameid
+    });
+}
+
+function goToFollowings(props) {
+    props.navigation.navigate('Followings', {
+        name: props.name,
+        nameid: props.nameid
+    });
+}
+
 // create a component
 class DashboardComponent extends Component {
     constructor(props) {
@@ -101,11 +115,11 @@ class DashboardComponent extends Component {
                     </CardItem>
                     <CardItem style={styles.cardItem}>
                         <View style={{ flexDirection: 'row', width: width, alignItems: 'center', justifyContent: 'center' }}>
-                            <Button transparent style={{ width: width / 2, justifyContent: 'center', flexDirection: 'column' }} onPress={() => this.props.navigation.navigate('Followers')}>
+                            <Button transparent style={{ width: width / 2, justifyContent: 'center', flexDirection: 'column' }} onPress={() => goToFollowers(this.props)}>
                                 <Text style={styles.samsungSans}>{'Followers'}</Text>
                                 <Text style={{ fontFamily: 'SamsungSans_Regular', fontSize: 16 }}>{this.props.followers}</Text>
                             </Button>
-                            <Button transparent style={{ width: width / 2, justifyContent: 'center', flexDirection: 'column' }} onPress={() => this.props.navigation.navigate('Followings')}>
+                            <Button transparent style={{ width: width / 2, justifyContent: 'center', flexDirection: 'column' }} onPress={() => goToFollowings(this.props)}>
                                 <Text style={styles.samsungSans}>{'Followings'}</Text>
                                 <Text style={{ fontFamily: 'SamsungSans_Regular', fontSize: 16 }}>{this.props.followings}</Text>
                             </Button>

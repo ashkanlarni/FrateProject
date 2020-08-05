@@ -56,71 +56,72 @@ export default function Home({ navigation }) {
                         for (var p in res1.data) {
                             var post = res1.data[p]
                             if (post.username == userid || followers.includes(post.username)) {
-                                
+
                                 tempposts.push(post)
                                 temppostid.push(post.id)
-                            
-                                var com = []
-                                axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/comments/'
-                                )
-                                    .then(res2 => {
-                                        var combody = []
-                                        for (var c in res2.data) {
-                                            var comment = res2.data[u]
-                                            if (temppostid.includes(comment.post)) {
-                                                combody.push(comment)
-                                            }
-                                        }
-
-                                        axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/login/'
-                                        )
-                                            .then(res3 => {
-                                                var userids = []
-                                                var usernames = []
-                                                for (var u in res3.data) {
-                                                    var use = res3.data[u]
-                                                    userids.push(use.id)
-                                                    usernames.push(use.username)
-                                                }
-
-                                                posts = []
-
-                                                for (var i = 0; i < tempposts.length; i++) {
-                                                    var p = tempposts[i]
-                                                    var com = []
-                                                    for (var j = 0; j < combody.length; j++) {
-                                                        var c = combody[j]
-                                                        if (c.post == p.id) {
-                                                            var ind = userids.indexOf(c.username)
-                                                            var n = usernames[ind]
-                                                            com.push([n, c.comment])
-                                                        }
-                                                    }
-                                                    var r = post.ratings.split('-')
-                                                    var index = userids.indexOf(p.username)
-                                                    var name = usernames[index]
-                                                    var newpost = {
-                                                        'postid': p.id,
-                                                        'name': name,
-                                                        'date': p.date,
-                                                        'profilePic': require('../../assets/images/profile/Ashkan.jpg'),
-                                                        'image': p.filename,
-                                                        'category': p.category,
-                                                        'rate': r,
-                                                        'rateCount': p.rateCount,
-                                                        'caption': p.caption,
-                                                        'comments': com,
-                                                    }
-
-                                                    posts.unshift(newpost)
-                                                }
-                                                
-
-                                                
-                                            })
-                                    })
                             }
                         }
+
+                        axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/comments/'
+                        )
+                            .then(res2 => {
+                                var combody = []
+                                for (var c in res2.data) {
+                                    var comment = res2.data[u]
+                                    if (temppostid.includes(comment.post)) {
+                                        combody.push(comment)
+                                    }
+                                }
+
+                                axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/login/'
+                                )
+                                    .then(res3 => {
+                                        var userids = []
+                                        var usernames = []
+                                        for (var u in res3.data) {
+                                            var use = res3.data[u]
+                                            userids.push(use.id)
+                                            usernames.push(use.username)
+                                        }
+
+                                        posts = []
+
+                                        for (var i = 0; i < tempposts.length; i++) {
+                                            var p = tempposts[i]
+                                            var com = []
+                                            for (var j = 0; j < combody.length; j++) {
+                                                var c = combody[j]
+                                                if (c.post == p.id) {
+                                                    var ind = userids.indexOf(c.username)
+                                                    var n = usernames[ind]
+                                                    com.push([n, c.comment])
+                                                }
+                                            }
+                                            var r = post.ratings.split('-')
+                                            var index = userids.indexOf(p.username)
+                                            var name = usernames[index]
+                                            var newpost = {
+                                                'postid': p.id,
+                                                'name': name,
+                                                'date': p.date,
+                                                'profilePic': require('../../assets/images/profile/Ashkan.jpg'),
+                                                'image': p.filename,
+                                                'category': p.category,
+                                                'rate': r,
+                                                'rateCount': p.rateCount,
+                                                'caption': p.caption,
+                                                'comments': com,
+                                            }
+
+                                            posts.unshift(newpost)
+                                        }
+
+
+
+                                    })
+                            })
+
+
                     })
             })
         wait(1000).then(() => setRefreshing(false));

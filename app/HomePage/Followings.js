@@ -6,9 +6,6 @@ import axios from 'axios';
 
 import SearchComponent from '../Components/SearchComponent';
 
-var username = 'Ashkan'
-var userid = 1
-
 var following = []
 
 // create a component
@@ -18,7 +15,12 @@ function wait(timeout) {
     });
 }
 
-export default function Followings({ navigation }) {
+export default function Followings({ route, navigation }) {
+    const { name, nameid } = route.params;
+
+    var username = name
+    var userid = nameid
+
     const [refreshing, setRefreshing] = React.useState(false);
 
     onRefresh = React.useCallback(() => {
