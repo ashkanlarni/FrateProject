@@ -6,7 +6,7 @@ import { Container } from 'native-base';
 import CardComponent from '../Components/CardComponent';
 
 export default function Post({ route, navigation }) {
-    /* 2. Get the param */
+
     const { userid, name, date, profilePicSource, imageSource, category, rate, rateCount, postid, caption, comments, fullPagePost, goIntoAnotherPage } = route.params;
 
     return (
