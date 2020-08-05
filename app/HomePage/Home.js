@@ -11,6 +11,18 @@ var user = 'Ashkan';
 var userid = 1;
 var dbReady = false;
 
+var newpostid;
+var newname;
+var newdate;
+var newprofilePic = require('../../assets/images/profile/Ashkan.jpg')
+var newimage;
+var newcategory
+var newrate
+var newrateCount
+var newcaption
+var newcomments = []
+
+
 function wait(timeout) {
     return new Promise(resolve => {
         setTimeout(resolve, timeout);
@@ -24,6 +36,9 @@ export default function Home({ navigation }) {
         setRefreshing(true);
 
         posts = []
+        var tempposts = []
+        var temppostid = []
+
 
         axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/followers/'
         )
@@ -41,57 +56,67 @@ export default function Home({ navigation }) {
                         for (var p in res1.data) {
                             var post = res1.data[p]
                             if (post.username == userid || followers.includes(post.username)) {
-                                var r = post.ratings.split('-')
-
+                                
+                                tempposts.push(post)
+                                temppostid.push(post.id)
+                            
                                 var com = []
                                 axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/comments/'
                                 )
                                     .then(res2 => {
-                                        console.log('jh', post)
-                                        var comusers = []
                                         var combody = []
                                         for (var c in res2.data) {
                                             var comment = res2.data[u]
-                                            if (comment.post == post.id) {
-                                                comusers.push(comment.username)
-                                                combody.push(comment.comment)
+                                            if (temppostid.includes(comment.post)) {
+                                                combody.push(comment)
                                             }
                                         }
 
                                         axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/login/'
                                         )
                                             .then(res3 => {
-                                                var name = ''
+                                                var userids = []
+                                                var usernames = []
                                                 for (var u in res3.data) {
                                                     var use = res3.data[u]
-                                                    if (comusers.includes(use.id)) {
-                                                        var index = comusers.indexOf(use.id)
-                                                        com.push([use.username, combody[index]])
+                                                    userids.push(use.id)
+                                                    usernames.push(use.username)
+                                                }
+
+                                                posts = []
+
+                                                for (var i = 0; i < tempposts.length; i++) {
+                                                    var p = tempposts[i]
+                                                    var com = []
+                                                    for (var j = 0; j < combody.length; j++) {
+                                                        var c = combody[j]
+                                                        if (c.post == p.id) {
+                                                            var ind = userids.indexOf(c.username)
+                                                            var n = usernames[ind]
+                                                            com.push([n, c.comment])
+                                                        }
                                                     }
-                                                    if (use.id == post.username)
-                                                        name = use.username
+                                                    var r = post.ratings.split('-')
+                                                    var index = userids.indexOf(p.username)
+                                                    var name = usernames[index]
+                                                    var newpost = {
+                                                        'postid': p.id,
+                                                        'name': name,
+                                                        'date': p.date,
+                                                        'profilePic': require('../../assets/images/profile/Ashkan.jpg'),
+                                                        'image': p.filename,
+                                                        'category': p.category,
+                                                        'rate': r,
+                                                        'rateCount': p.rateCount,
+                                                        'caption': p.caption,
+                                                        'comments': com,
+                                                    }
+
+                                                    posts.unshift(newpost)
                                                 }
+                                                
 
-
-                                                var rc = 0
-                                                if (post.rateCount.length != 0)
-                                                    rc = parseInt(post.rateCount)
-                                                var count = post.rateCount.split('-')
-
-                                                var newpost = {
-                                                    "postid": post.id,
-                                                    "name": name,
-                                                    "date": post.date,
-                                                    "profilePic": require('../../assets/images/profile/Ashkan.jpg'),
-                                                    "image": post.filename,
-                                                    "category": post.category,
-                                                    "rate": r,
-                                                    "rateCount": post.rateCount,
-                                                    "caption": post.caption,
-                                                    "comments": com
-                                                }
-
-                                                posts.unshift(newpost)
+                                                
                                             })
                                     })
                             }
@@ -130,7 +155,7 @@ export default function Home({ navigation }) {
                     <Content>
                         {
                             posts.map((p) => {
-                                console.log('pos', posts)
+                                console.log(posts)
                                 return (<CardComponent
                                     userid={userid}
                                     postid={p.postid}

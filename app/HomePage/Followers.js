@@ -1,7 +1,7 @@
 //import liraries
-import React, { Component } from 'react';
-import { RefreshControl, SafeAreaView, ScrollView, StyleSheet, AsyncStorage } from 'react-native';
-import { Container, Content, Header, Title } from 'native-base';
+import React from 'react';
+import { RefreshControl, SafeAreaView, ScrollView, StyleSheet } from 'react-native';
+import { Container, Content } from 'native-base';
 import axios from 'axios';
 
 import SearchComponent from '../Components/SearchComponent';
@@ -53,17 +53,15 @@ export default function Followers({ navigation }) {
                                 var f = {
                                     "id": obj.id,
                                     "name": obj.username,
-                                    "profilePicSource": require('../../assets/images/profile/Ali.jpg'),
+                                    "profilePicSource": require('../../assets/images/profile/Ashkan.jpg'),
                                     "following": bool
                                 }
                                 followers.push(f)
                             }
+                            console.log('follow', followers)
+
                         }
-
-
-
                     })
-
             })
 
 
@@ -103,8 +101,6 @@ export default function Followers({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
         backgroundColor: '#ffffff',
     },
 });

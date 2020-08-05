@@ -66,130 +66,134 @@ class DashboardComponent extends Component {
 
     render() {
         return (
-            <Card noShadow={true} transparent={true}>
-                <CardItem style={styles.cardItem}>
-                    <View style={{ width: width / 3, alignItems: 'flex-start' }}>
-                        <Text style={{ fontFamily: 'SamsungSans_Bold', fontSize: 18, left: 15 }}>{this.props.name}</Text>
-                    </View>
-                    <View style={{ width: width / 3, alignItems: 'center' }}>
-                        <Thumbnail
-                            large={true}
-                            source={this.props.profilePicture}
-                        />
-                    </View>
-                    <View style={{ width: width / 3, alignItems: 'flex-end' }}>
+            <>
+                <Card noShadow={true} transparent={true}>
+                    <CardItem style={styles.cardItem}>
+                        <View style={{ width: width / 3, alignItems: 'flex-start' }}>
+                            <Text style={{ fontFamily: 'SamsungSans_Bold', fontSize: 18, left: 15 }}>{this.props.name}</Text>
+                        </View>
+                        <View style={{ width: width / 3, alignItems: 'center' }}>
+                            <Thumbnail
+                                large={true}
+                                source={this.props.profilePicture}
+                            />
+                        </View>
+                        <View style={{ width: width / 3, alignItems: 'flex-end' }}>
+                            {
+                                this.isSelfProfile ?
+                                    (
+                                        <Button transparent onPress={() => this.props.navigation.navigate('Login', { screen: 'Login' })}>
+                                            <Text style={{ ...styles.samsungSans, color: '#0080ff', right: 15 }}>
+                                                {'Log Out'}
+                                            </Text>
+                                        </Button>
+                                    ) : (
+                                        <SimpleLineIcons
+                                            name={this.state.following ? 'check' : 'plus'}
+                                            color={this.state.following ? '#50c878' : '#0080ff'}
+                                            size={30}
+                                            onPress={this.state.following ? this.onPressUnFollowButton : this.onPressFollowButton}
+                                            style={{ right: 15 }}
+                                        />
+                                    )
+                            }
+                        </View>
+                    </CardItem>
+                    <CardItem style={styles.cardItem}>
+                        <View style={{ flexDirection: 'row', width: width, alignItems: 'center', justifyContent: 'center' }}>
+                            <Button transparent style={{ width: width / 2, justifyContent: 'center', flexDirection: 'column' }} onPress={() => this.props.navigation.navigate('Followers')}>
+                                <Text style={styles.samsungSans}>{'Followers'}</Text>
+                                <Text style={{ fontFamily: 'SamsungSans_Regular', fontSize: 16 }}>{this.props.followers}</Text>
+                            </Button>
+                            <Button transparent style={{ width: width / 2, justifyContent: 'center', flexDirection: 'column' }} onPress={() => this.props.navigation.navigate('Followings')}>
+                                <Text style={styles.samsungSans}>{'Followings'}</Text>
+                                <Text style={{ fontFamily: 'SamsungSans_Regular', fontSize: 16 }}>{this.props.followings}</Text>
+                            </Button>
+                        </View>
+                    </CardItem>
+                    <CardItem style={styles.cardItem}>
+                        <View style={{ flexDirection: 'row', flex: 1, width: width, justifyContent: 'space-around', backgroundColor: '#fbfbfb', borderRadius: 20 }}>
+                            <View style={styles.progressCircleView}>
+                                <Text style={{ ...styles.samsungSans, paddingBottom: 5 }}>{'Photography'}</Text>
+                                <Text style={{ fontFamily: 'SamsungSans_Regular', fontSize: 14, paddingBottom: 5 }}>
+                                    {this.props.numberOfPosts[0]}{(this.props.numberOfPosts[0] == 1) ? ' Post' : ' Posts'}
+                                </Text>
+                                <ProgressCircle
+                                    percent={this.props.averageRates[0] / 5 * 100}
+                                    radius={18}
+                                    borderWidth={4}
+                                    color={colors['Photography']}
+                                    shadowColor="#d3d3d3"
+                                    bgColor="#fbfbfb"
+                                >
+                                    <Text style={styles.progressCircleText}>
+                                        {this.props.averageRates[0]}
+                                    </Text>
+                                </ProgressCircle>
+                            </View>
+                            <View style={styles.progressCircleView}>
+                                <Text style={{ ...styles.samsungSans, paddingBottom: 5 }}>{'Art'}</Text>
+                                <Text style={{ fontFamily: 'SamsungSans_Regular', fontSize: 14, paddingBottom: 5 }}>
+                                    {this.props.numberOfPosts[1]}{(this.props.numberOfPosts[1] == 1) ? ' Post' : ' Posts'}
+                                </Text>
+                                <ProgressCircle
+                                    percent={this.props.averageRates[1] / 5 * 100}
+                                    radius={18}
+                                    borderWidth={4}
+                                    color={colors['Art']}
+                                    shadowColor="#d3d3d3"
+                                    bgColor="#fbfbfb"
+                                >
+                                    <Text style={styles.progressCircleText}>
+                                        {this.props.averageRates[1]}
+                                    </Text>
+                                </ProgressCircle>
+                            </View>
+                            <View style={styles.progressCircleView}>
+                                <Text style={{ ...styles.samsungSans, paddingBottom: 5 }}>{'Lifestyle'}</Text>
+                                <Text style={{ fontFamily: 'SamsungSans_Regular', fontSize: 14, paddingBottom: 5 }}>
+                                    {this.props.numberOfPosts[2]}{(this.props.numberOfPosts[2] == 1) ? ' Post' : ' Posts'}
+                                </Text>
+                                <ProgressCircle
+                                    percent={this.props.averageRates[2] / 5 * 100}
+                                    radius={18}
+                                    borderWidth={4}
+                                    color={colors['Lifestyle']}
+                                    shadowColor="#d3d3d3"
+                                    bgColor="#fbfbfb"
+                                >
+                                    <Text style={styles.progressCircleText}>
+                                        {this.props.averageRates[2]}
+                                    </Text>
+                                </ProgressCircle>
+                            </View>
+                        </View>
+                    </CardItem>
+                </Card>
+                <SafeAreaView style={{ flex: 1 }}>
+                    <ScrollView>
                         {
-                            this.isSelfProfile ?
-                                (
-                                    <Button transparent onPress={() => this.props.navigation.navigate('Login', { screen: 'Login' })}>
-                                        <Text style={{ ...styles.samsungSans, color: '#0080ff', right: 15 }}>
-                                            {'Log Out'}
-                                        </Text>
-                                    </Button>
-                                ) : (
-                                    <SimpleLineIcons
-                                        name={this.state.following ? 'check' : 'plus'}
-                                        color={this.state.following ? '#50c878' : '#0080ff'}
-                                        size={30}
-                                        onPress={this.state.following ? this.onPressUnFollowButton : this.onPressFollowButton}
-                                        style={{ right: 15 }}
-                                    />
-                                )
+                            this.props.posts.map((p) => {
+                                return (<CardComponent
+                                    userid={this.props.userid}
+                                    postid={p.postid}
+                                    name={p.name}
+                                    date={p.date}
+                                    profilePicSource={p.profilePicSource}
+                                    imageSource={p.imageSource}
+                                    category={p.category}
+                                    rate={p.rate}
+                                    rateCount={p.rateCount}
+                                    caption={p.caption}
+                                    comments={p.comments}
+                                    navigation={this.props.navigation}
+                                    fullPagePost={false}
+                                />)
+                            })
                         }
-                    </View>
-                </CardItem>
-                <CardItem style={styles.cardItem}>
-                    <View style={{ flexDirection: 'row', width: width, alignItems: 'center', justifyContent: 'center' }}>
-                        <Button transparent style={{ width: width / 2, justifyContent: 'center', flexDirection: 'column' }} onPress={() => this.props.navigation.navigate('Followers')}>
-                            <Text style={styles.samsungSans}>{'Followers'}</Text>
-                            <Text style={{ fontFamily: 'SamsungSans_Regular', fontSize: 16 }}>{this.props.followers}</Text>
-                        </Button>
-                        <Button transparent style={{ width: width / 2, justifyContent: 'center', flexDirection: 'column' }} onPress={() => this.props.navigation.navigate('Followings')}>
-                            <Text style={styles.samsungSans}>{'Followings'}</Text>
-                            <Text style={{ fontFamily: 'SamsungSans_Regular', fontSize: 16 }}>{this.props.followings}</Text>
-                        </Button>
-                    </View>
-                </CardItem>
-                <CardItem style={styles.cardItem}>
-                    <View style={{ flexDirection: 'row', flex: 1, width: width, justifyContent: 'space-around', backgroundColor: '#fbfbfb', borderRadius: 20 }}>
-                        <View style={styles.progressCircleView}>
-                            <Text style={{ ...styles.samsungSans, paddingBottom: 5 }}>{'Photography'}</Text>
-                            <Text style={{ fontFamily: 'SamsungSans_Regular', fontSize: 14, paddingBottom: 5 }}>
-                                {this.props.numberOfPosts[0]}{(this.props.numberOfPosts[0] == 1) ? ' Post' : ' Posts'}
-                            </Text>
-                            <ProgressCircle
-                                percent={this.props.averageRates[0] / 5 * 100}
-                                radius={18}
-                                borderWidth={4}
-                                color={colors['Photography']}
-                                shadowColor="#d3d3d3"
-                                bgColor="#fbfbfb"
-                            >
-                                <Text style={styles.progressCircleText}>
-                                    {this.props.averageRates[0]}
-                                </Text>
-                            </ProgressCircle>
-                        </View>
-                        <View style={styles.progressCircleView}>
-                            <Text style={{ ...styles.samsungSans, paddingBottom: 5 }}>{'Art'}</Text>
-                            <Text style={{ fontFamily: 'SamsungSans_Regular', fontSize: 14, paddingBottom: 5 }}>
-                                {this.props.numberOfPosts[1]}{(this.props.numberOfPosts[1] == 1) ? ' Post' : ' Posts'}
-                            </Text>
-                            <ProgressCircle
-                                percent={this.props.averageRates[1] / 5 * 100}
-                                radius={18}
-                                borderWidth={4}
-                                color={colors['Art']}
-                                shadowColor="#d3d3d3"
-                                bgColor="#fbfbfb"
-                            >
-                                <Text style={styles.progressCircleText}>
-                                    {this.props.averageRates[1]}
-                                </Text>
-                            </ProgressCircle>
-                        </View>
-                        <View style={styles.progressCircleView}>
-                            <Text style={{ ...styles.samsungSans, paddingBottom: 5 }}>{'Lifestyle'}</Text>
-                            <Text style={{ fontFamily: 'SamsungSans_Regular', fontSize: 14, paddingBottom: 5 }}>
-                                {this.props.numberOfPosts[2]}{(this.props.numberOfPosts[2] == 1) ? ' Post' : ' Posts'}
-                            </Text>
-                            <ProgressCircle
-                                percent={this.props.averageRates[2] / 5 * 100}
-                                radius={18}
-                                borderWidth={4}
-                                color={colors['Lifestyle']}
-                                shadowColor="#d3d3d3"
-                                bgColor="#fbfbfb"
-                            >
-                                <Text style={styles.progressCircleText}>
-                                    {this.props.averageRates[2]}
-                                </Text>
-                            </ProgressCircle>
-                        </View>
-                    </View>
-                </CardItem>
-                <>
-                    {
-                        this.props.posts.map((p) => {
-                            return (<CardComponent
-                                userid={this.props.userid}
-                                postid={p.postid}
-                                name={p.name}
-                                date={p.date}
-                                profilePicSource={p.profilePic}
-                                imageSource={p.image}
-                                category={p.category}
-                                rate={p.rate}
-                                rateCount={p.rateCount}
-                                caption={p.caption}
-                                comments={p.comments}
-                                navigation={this.props.navigation}
-                                fullPagePost={false}
-                            />)
-                        })
-                    }
-                </>
-            </Card>
+                    </ScrollView>
+                </SafeAreaView>
+            </>
         );
     }
 }

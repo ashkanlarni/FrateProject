@@ -16,7 +16,7 @@ var posts = [];
 var follower_length = 0
 var following_length = 0
 var numofposts = [0, 0, 0]
-var averageRates = [0, 0, 0]
+var averageRates = []
 
 function wait(timeout) {
     return new Promise(resolve => {
@@ -31,8 +31,7 @@ export default function Dashboard({ navigation }) {
 
     onRefresh = React.useCallback(() => {
         setRefreshing(true);
-        averageRates = [0, 0, 0]
-        numofposts = [0, 0, 0]
+        var average = [0.0, 0.0, 0.0]
         axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/followers/'
         )
             .then(res => {
@@ -51,15 +50,19 @@ export default function Dashboard({ navigation }) {
                 follower_length = followers.length
             })
 
-        posts = []
+        var tempposts = []
+        var temppostid = []
 
         axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/posts/'
         )
             .then(res => {
+                numofposts = [0, 0, 0]
                 for (var p in res.data) {
                     var post = res.data[p]
-                    console.log(post)
                     if (post.username == userid) {
+                        tempposts.push(post)
+                        temppostid.push(post.id)
+
                         numofposts[post.category] += 1
 
                         var r = post.ratings.split('-')
@@ -67,68 +70,79 @@ export default function Dashboard({ navigation }) {
                         for (var i = 0; i < r.length; i++) {
                             sum += parseFloat(r[i])
                         }
-                        averageRates[post.category] += sum / 4
-
-                        var com = []
-                        axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/comments/'
-                        )
-                            .then(res => {
-                                var comusers = []
-                                var combody = []
-                                for (var c in res.data) {
-                                    var comment = res.data[c]
-                                    if (comment.post == post.id) {
-                                        comusers.push(comment.username)
-                                        combody.push(comment.comment)
-                                    }
-                                }
-
-                                axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/login/'
-                                )
-                                    .then(res => {
-                                        var name = ''
-                                        for (var u in res.data) {
-                                            var use = res.data[u]
-                                            if (comusers.includes(use.id)) {
-                                                var index = comusers.indexOf(use.id)
-                                                com.push([use.username, combody[index]])
-                                            }
-                                            if (use.id == post.username)
-                                                name = use.username
-                                        }
-
-                                        var rc = 0
-                                        if (post.rateCount.length != 0)
-                                            rc = parseInt(post.rateCount)
-                                        var count = post.rateCount.split('-')
-
-                                        var newpost = {
-                                            'postid': post.id,
-                                            'name': name,
-                                            'date': post.date,
-                                            'profilePicSource': require('../../assets/images/profile/Ashkan.jpg'),
-                                            'imageSource': post.filename,
-                                            'category': post.category,
-                                            'rate': r,
-                                            'rateCount': post.rateCount,
-                                            'caption': post.caption,
-                                            'comments': com,
-                                            'fullPagePost': false,
-                                            'goIntoAnotherPage': true,
-                                            'canRate': false
-                                        }
-
-                                        posts.unshift(newpost)
-                                    })
-                            })
+                        average[post.category] += sum / 4
                     }
                 }
-                for (var i = 0; i < 3; i++) {
-                    if (numofposts[i] != 0)
-                        averageRates[i] = (averageRates[i] / numofposts[i])
-                    averageRates[i] = averageRates[i].toFixed(1).toString()
 
-                }
+                axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/comments/'
+                )
+                    .then(res => {
+                        var combody = []
+                        for (var c in res.data) {
+                            var comment = res.data[c]
+                            if (temppostid.includes(comment.post)) {
+                                combody.push(comment.comment)
+                            }
+                        }
+
+                        axios.get('https://nameless-tor-88964.herokuapp.com/api/fusers/login/'
+                        )
+                            .then(res => {
+                                var userids = []
+                                var usernames = []
+                                for (var u in res.data) {
+                                    var use = res.data[u]
+                                    userids.push(use.id)
+                                    usernames.push(use.username)
+                                }
+
+                                posts = []
+
+                                for (var i = 0; i < tempposts.length; i++) {
+                                    var p = tempposts[i]
+                                    var com = []
+                                    for (var j = 0; j < combody.length; j++) {
+                                        var c = combody[j]
+                                        if (c.post == p.id) {
+                                            var ind = userids.indexOf(c.username)
+                                            var n = usernames[ind]
+                                            com.push([n, c.comment])
+                                        }
+                                    }
+                                    var r = post.ratings.split('-')
+                                    var index = userids.indexOf(p.username)
+                                    var name = usernames[index]
+                                    var newpost = {
+                                        'postid': p.id,
+                                        'name': name,
+                                        'date': p.date,
+                                        'profilePicSource': require('../../assets/images/profile/Ashkan.jpg'),
+                                        'imageSource': p.filename,
+                                        'category': p.category,
+                                        'rate': r,
+                                        'rateCount': p.rateCount,
+                                        'caption': p.caption,
+                                        'comments': com,
+                                        'fullPagePost': false,
+                                        'goIntoAnotherPage': true,
+                                        'canRate': false
+                                    }
+                                    posts.unshift(newpost)
+                                }
+                                averageRates = []
+                                for (var i = 0; i < 3; i++) {
+                                    if (numofposts[i] != 0)
+                                        average[i] = (average[i] / numofposts[i])
+                                    average[i] = average[i].toFixed(1)
+                                    averageRates.push(average[i].toString())
+                                }
+                                console.log(averageRates)
+
+                            })
+                    })
+
+
+
             })
 
 
